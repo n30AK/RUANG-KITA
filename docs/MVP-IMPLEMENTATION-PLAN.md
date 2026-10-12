@@ -94,3 +94,8 @@ Use existing free tiers and local development. Avoid paid API calls, hosted medi
 - [ ] Add and test tenant-scoped server-side access checks; do not expose privileged database credentials to the browser.
 - [ ] Test the migration on a temporary/development branch before requesting production approval.
 - [ ] Verify invitation scope constraints and room/table capacity enforcement in application logic or database constraints.
+
+
+### H. Database validation status
+
+- [ ] **Current blocker (12 Oct 2026):** Neon `production` currently has no application tables in `public`; migration 0002 cannot be tested alone because `public.communities` and other base relations do not exist yet. A combined base+extension temporary-branch test was blocked by the database tool safety gate. Do not apply either migration to production; first create/use an isolated development branch and review the base schema, then test migrations sequentially.
