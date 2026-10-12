@@ -3,6 +3,11 @@
 ## Status and safety boundary
 This branch is `feat/ruang-silaturahmi-mvp`. The production Neon branch must remain untouched. No database migration is applied by this plan. UI prototype uses local demo data only and must label it as demo.
 
+### Latest validation
+- [x] GitHub Actions RUANG KITA CI #22 passed for commit `8b80a70` (podcast/audio-lounge UI preview).
+- [x] GitHub Actions RUANG KITA CI #23 passed for PR #1 synchronization.
+- CI success confirms automated typecheck, lint and build for the tested revision; it does not mean backend/auth/database or production deployment is complete.
+
 ## Workstreams
 
 ### A. Product interface
@@ -71,7 +76,7 @@ Use existing free tiers and local development. Avoid paid API calls, hosted medi
 - [x] Define Podcast Studio, episode library, live-audio roadmap, co-host/guest invitations and permission boundaries in the product blueprint.
 - [x] Define cross-community guest passes that grant session-scoped access only, not blanket community membership.
 - [x] Define healthy retention features: opted-in agenda reminders, weekly digest, saved episodes, learning activities, contribution recognition and notification controls.
-- [ ] Add podcast/episode demo cards to the product UI, explicitly labeled as prototype content.
+- [x] Add podcast/episode demo cards to the product UI, explicitly labeled as prototype content.
 - [ ] Implement show/episode metadata and public/private visibility after database review.
 - [ ] Implement invitation creation, accept, expire, revoke, role scope, and server-side authorization.
 - [ ] Add recording/transcription consent and copyright/reporting flow before any native media feature.
