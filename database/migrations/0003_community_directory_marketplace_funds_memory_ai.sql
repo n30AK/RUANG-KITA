@@ -15,6 +15,15 @@ ALTER TABLE public.communities
     CHECK (verification_policy IN ('admin_review', 'invite_only', 'external_verification', 'disabled')),
   ADD COLUMN IF NOT EXISTS history_intro text NOT NULL DEFAULT '';
 
+-- Verification is a membership state, not a UI-only badge.
+ALTER TABLE public.memberships
+  ADD COLUMN IF NOT EXISTS verification_status text NOT NULL DEFAULT 'unverified'
+    CHECK (verification_status IN ('unverified', 'pending', 'verified', 'rejected', 'expired')),
+  ADD COLUMN IF NOT EXISTS verified_at timestamptz,
+  ADD COLUMN IF NOT EXISTS verified_by text REFERENCES public.profiles(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS memberships_verification_idx
+  ON public.memberships (community_id, verification_status, status);
+
 -- Explicit officer assignments; membership role remains the source of authorization.
 CREATE TABLE IF NOT EXISTS public.community_officers (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -213,7 +222,7 @@ CREATE TABLE IF NOT EXISTS public.ai_knowledge_artifacts (
   structured_content jsonb NOT NULL DEFAULT '{}'::jsonb,
   model_provider text,
   model_name text,
-  consent_record_id uuid,
+  consent_record_id uuid REFERENCES public.podcast_recording_consents(id) ON DELETE SET NULL,
   generated_at timestamptz NOT NULL DEFAULT now(),
   reviewed_by text REFERENCES public.profiles(id) ON DELETE SET NULL,
   reviewed_at timestamptz,
