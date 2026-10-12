@@ -1,35 +1,29 @@
-# RUANG KITA
+# RUANG KITA — Ruang Silaturahmi Digital
 
-Platform komunitas digital yang melengkapi WhatsApp, bukan menggantikannya. Setiap komunitas memiliki ruang digital untuk agenda, pengumuman, pustaka, rapat eksternal, dan keanggotaan.
+RUANG KITA adalah ruang digital komunitas yang melengkapi WhatsApp, bukan menggantikannya. Pengguna dapat membuat ruang publik/privat, mengundang anggota, mengatur agenda, dan membagikan pengumuman.
 
-## Prinsip proyek
+## Status saat ini
 
-- Target biaya awal: Rp0 dengan batas paket gratis; tidak menjanjikan operasional tanpa batas.
-- GitHub adalah pusat source code dan CI/CD.
-- Neon adalah database PostgreSQL.
-- Jangan simpan password, connection string, API key, atau token di repository.
-- Jangan menyatakan aplikasi production-ready sebelum autentikasi, otorisasi multi-tenant, pengujian, backup/restore, dan deployment diverifikasi.
+- **Runtime publik:** https://ruang-kita.hatchable.site
+- **Hatchable deployment:** v7 (12 Oktober 2026)
+- **Fitur inti live:** autentikasi email OTP/passkey platform, pembuatan komunitas, pengaturan akses publik/privat/undangan, penemuan dan gabung komunitas publik, undangan berbatas waktu/penggunaan, agenda, RSVP, halaman detail komunitas, pengumuman.
+- **Source runtime Hatchable:** folder [hatchable-runtime/](hatchable-runtime/). Ini mirror untuk review/backup; belum ada deployment otomatis dari GitHub Actions ke Hatchable.
+- **UI Next.js prototype:** source prototype awal tetap ada pada root aplikasi untuk referensi visual dan pengembangan lebih lanjut.
 
-## MVP
+## Dokumen proyek
 
-1. Profil pengguna dan komunitas
-2. Keanggotaan dan undangan yang dapat dicabut/kedaluwarsa
-3. Pengumuman
-4. Agenda dan RSVP
-5. Pustaka komunitas (dokumen, FAQ, notulen, podcast/video via tautan)
-6. Link berbagi komunitas dan integrasi kalender
-7. Audit log dan pelaporan konten
+- [Blueprint RUANG KITA v2.0](docs/BLUEPRINT-RUANG-SILATURAHMI-V2.md)
+- [Rencana implementasi MVP](docs/MVP-IMPLEMENTATION-PLAN.md)
+- [Persyaratan delapan modul komunitas](docs/PRODUCT-REQUIREMENTS-EIGHT-COMMUNITY-MODULES.md)
 
-## Database
+## Prinsip biaya dan keamanan
 
-Migration awal: `database/migrations/0001_initial_schema.sql`.
+- Target awal Rp0 menggunakan free tiers; kuota gratis dapat berubah dan tidak berarti tanpa batas.
+- Jangan simpan token, password, connection string, atau file `.env` di repository.
+- Privasi ruang privat harus diperiksa pada server; menyembunyikan tombol di browser bukan kontrol keamanan.
+- Neon production belum diubah oleh deployment Hatchable ini.
+- Kebijakan Privasi dan Ketentuan Penggunaan pada runtime masih draf operasional; lengkapi kontak pengendali data dan tinjauan hukum sebelum penggunaan luas.
 
-Migration ini adalah rancangan skema awal dan **belum diterapkan** ke database Neon. Sebelum menerapkan:
-- Konfirmasi pemetaan ID pengguna ke Neon Auth.
-- Implementasikan pemeriksaan otorisasi di backend untuk setiap operasi berdasarkan membership/role dan community_id.
-- Tambahkan dan uji RLS jika akses database akan diberikan langsung ke role aplikasi.
-- Buat migration yang dapat diulang/ditinjau dan uji pada branch pengembangan sebelum production.
+## Belum aktif
 
-## Status
-
-Fondasi database dirancang. UI, backend API, auth flow, security tests, dan deployment masih harus dibangun dan diverifikasi.
+Podcast upload/live audio, direktori anggota opt-in, marketplace transaksi, asisten AI, dana sosial/pembayaran, konferensi video terintegrasi, dan sistem moderasi/pelaporan lengkap masih menjadi fase lanjutan. Kartu-kartu contoh pada landing page tetap ilustrasi, bukan komunitas nyata.
