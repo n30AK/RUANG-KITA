@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-type SceneId = "cafe" | "angkringan" | "pendopo" | "expo" | "karaoke" | "school" | "family" | "office" | "neighborhood" | "worship" | "sports" | "hobby" | "learning" | "umkm" | "volunteer" | "travel" | "health" | "alumni";
+type SceneId = "cafe" | "angkringan" | "pendopo" | "expo" | "karaoke" | "school" | "family" | "office" | "neighborhood" | "worship" | "sports" | "hobby" | "learning" | "umkm" | "volunteer" | "travel" | "health" | "alumni" | "podcast";
 
 const scenes: { id: SceneId; name: string; note: string; emoji: string }[] = [
   { id: "cafe", name: "Kafe komunitas", note: "Hangat & produktif", emoji: "☕" },
@@ -23,6 +23,7 @@ const scenes: { id: SceneId; name: string; note: string; emoji: string }[] = [
   { id: "travel", name: "Wisata & Perjalanan", note: "Itinerary, peserta & koordinasi", emoji: "🧭" },
   { id: "health", name: "Dukungan Komunitas", note: "Dukungan sebaya dengan privasi", emoji: "💚" },
   { id: "alumni", name: "Alumni & Reuni", note: "Jejaring, reuni & mentoring", emoji: "🎓" },
+  { id: "podcast", name: "Podcast & Audio Lounge", note: "Rekaman cerita, diskusi & tamu lintas komunitas", emoji: "🎙️" },
 ];
 
 const rooms = [
@@ -34,6 +35,7 @@ const rooms = [
   { name: "Orang Tua Murid Kelas 5B", kind: "Sekolah & keluarga", scene: "school", access: "Undangan", people: "Agenda dan pengumuman demo", emoji: "🎒", color: "sky" },
   { name: "Warga RW Harmoni", kind: "Warga & lingkungan", scene: "neighborhood", access: "Publik", people: "Kegiatan warga demo", emoji: "🏘️", color: "sage" },
   { name: "Pasar UMKM Bersama", kind: "UMKM & jual-beli", scene: "umkm", access: "Publik", people: "Katalog contoh", emoji: "🧺", color: "amber" },
+  { name: "Podcast Cerita Kita", kind: "Podcast lintas komunitas", scene: "podcast", access: "Publik", people: "Episode dan jadwal demo", emoji: "🎙️", color: "plum" },
 ];
 
 const tables = [
@@ -63,6 +65,7 @@ export default function Home() {
         <nav className="main-nav" aria-label="Navigasi utama">
           <a className="active" href="#jelajah">Jelajahi ruang</a>
           <a href="#cara-kerja">Cara kerja</a>
+          <a href="#podcast">Podcast</a>
           <a href="#pameran">Pameran</a>
         </nav>
         <div className="top-actions">
@@ -158,6 +161,28 @@ export default function Home() {
             {tables.map((table, index) => <div className="table-list-item" key={table.name}><span className="table-list-icon">{table.emoji}</span><div><b>{table.name}</b><small>{table.subtitle}</small><span className="table-status">{table.status}</span></div><span className="table-seats">{table.seats}</span><span className="table-index">0{index + 1}</span></div>)}
           </div>
         </div>
+      </section>
+
+      <section className="section rooms-section" id="podcast">
+        <div className="section-heading compact-heading">
+          <div><div className="eyebrow"><span className="eyebrow-line" /> PODCAST & AUDIO LOUNGE</div><h2>Cerita komunitas,<br /><em>didengar lebih luas.</em></h2></div>
+          <p>Bangun serial podcast, adakan diskusi audio, dan undang host atau anggota dari komunitas lain dengan izin yang jelas.</p>
+        </div>
+        <div className="room-grid">
+          <article className="room-card">
+            <div className="room-card-art art-plum"><span className="room-emoji">🎙️</span><span className="room-access">↗ Publik</span><span className="room-orbit" /></div>
+            <div className="room-card-body"><div className="room-kind">SERIAL KOMUNITAS</div><h3>Podcast Cerita Kita</h3><p>Episode, catatan acara, dan daftar putar komunitas.</p><div className="room-card-footer"><span>Demo konsep</span><button onClick={() => setNotice("Podcast Cerita Kita adalah pratinjau. Katalog dan pemutar audio akan diaktifkan setelah backend dan hak media siap.")}>Lihat podcast ↗</button></div></div>
+          </article>
+          <article className="room-card">
+            <div className="room-card-art art-sky"><span className="room-emoji">🎧</span><span className="room-access">♧ Terjadwal</span><span className="room-orbit" /></div>
+            <div className="room-card-body"><div className="room-kind">LIVE AUDIO LOUNGE</div><h3>Obrolan Lintas Komunitas</h3><p>Host, co-host, pembicara, pendengar, sesi tanya jawab dan polling.</p><div className="room-card-footer"><span>Audio langsung belum aktif</span><button onClick={() => setNotice("Live Audio Lounge masih konsep. MVP awal memakai jadwal dan tautan meeting eksternal; audio native perlu provider dan uji biaya.")}>Lihat format ↗</button></div></div>
+          </article>
+          <article className="room-card">
+            <div className="room-card-art art-amber"><span className="room-emoji">🤝</span><span className="room-access">♧ Undangan</span><span className="room-orbit" /></div>
+            <div className="room-card-body"><div className="room-kind">TAMU LINTAS KOMUNITAS</div><h3>Undang host atau tamu</h3><p>Undangan terbatas untuk satu episode atau sesi, tanpa membuka ruang privat lainnya.</p><div className="room-card-footer"><span>Persetujuan diperlukan</span><button onClick={() => setNotice("Undangan tamu lintas komunitas adalah konsep demo. Akses sesi harus memiliki batas peran, masa berlaku, dan dapat dicabut.")}>Pelajari akses ↗</button></div></div>
+          </article>
+        </div>
+        <p className="demo-disclaimer">Kartu podcast, jadwal, dan alur undangan di atas adalah prototipe; bukan episode atau siaran aktif. Unggahan, pemutaran native, live audio, rekaman, dan transkripsi belum diaktifkan. Audio harus memiliki izin penggunaan dan peserta harus menyetujui perekaman.</p>
       </section>
 
       <section className="section expo-section" id="pameran">
