@@ -144,3 +144,79 @@ Target awal untuk diuji bersama 5–10 komunitas pilot, bukan klaim pengguna akt
 - Generasi AI berbayar aktif secara default.
 
 Semua fitur ini memerlukan keputusan, biaya, izin, serta pengujian tambahan.
+
+
+## 15. Podcast & Audio Lounge — fitur inti lintas komunitas
+
+Podcast menjadi kanal konten dan acara tersendiri, bukan hanya tautan keluar. Produk harus membedakan kemampuan yang sudah benar-benar diimplementasikan dari konsep/demo.
+
+### Pengalaman pengguna
+- **Podcast Studio:** buat serial, episode, deskripsi, kategori, cover, host, tamu, bahasa, durasi, dan status publik/draf.
+- **Live Audio Lounge:** sesi audio terjadwal dengan host, co-host, pembicara, pendengar, permintaan naik panggung, mute, dan moderator. Untuk MVP awal, mulai dengan tautan audio/meeting eksternal dan agenda; live audio native memerlukan pemilihan provider dan pengujian biaya.
+- **Episode & arsip:** pemutar audio yang sah di-host atau disematkan, transkrip jika tersedia, bab/timestamp, catatan acara, sumber dan tautan terkait.
+- **Podcast lintas komunitas:** host dapat mengundang komunitas lain sebagai co-host/mitra dan mengundang individu yang bersedia berpartisipasi. Undangan mempunyai penerima, peran, masa berlaku, status persetujuan, dan dapat dicabut.
+- **Cross-community guest pass:** undangan dapat memberi akses hanya ke sesi/episode tertentu; tidak otomatis menjadikan tamu anggota komunitas atau membuka direktori, meja, dokumen, atau riwayat privat.
+- **Acara interaktif:** pertanyaan audiens, polling, daftar pembicara, Q&A yang dimoderasi, reaksi, RSVP, pengingat yang dapat dikontrol pengguna, dan formulir usulan topik.
+- **Discover & follow:** ikuti podcast/host/kategori, simpan episode untuk nanti, daftar putar, riwayat tontonan/dengaran yang dapat dihapus, dan rekomendasi berdasarkan minat yang dipilih.
+- **Podcast komunitas:** orang tua-sekolah, cerita warga, UMKM, alumni, kelas singkat, hobi, olahraga, budaya, literasi digital, dan diskusi antar-komunitas. Untuk komunitas sensitif, sediakan opsi tidak tercantum/tidak dapat dicari.
+- **Distribusi:** tautan episode dan kartu undangan yang siap dibagikan ke WhatsApp; RSS/feed atau ekspor hanya setelah kebijakan privasi, hak konten, dan kebutuhan teknis ditetapkan.
+- **Hak cipta & keselamatan:** hanya unggah audio yang dimiliki/dilisensikan; persetujuan tamu dan pemberitahuan sebelum rekaman/transkripsi; laporan, takedown, dan aturan retensi.
+
+### Fase pelaksanaan podcast
+- **P0 (hemat biaya):** katalog podcast/episode berbasis tautan yang diizinkan, jadwal acara, RSVP, undangan co-host/tamu, catatan acara, dan daftar putar sederhana.
+- **P1:** unggah/pemutaran audio sendiri dengan penyimpanan yang sesuai, progress playback, bookmark, metadata, moderasi, dan penghapusan.
+- **P2:** live audio native, rekaman, transkripsi/ringkasan berbantuan AI, dan distribusi RSS setelah evaluasi provider, biaya, consent, keamanan, dan lisensi.
+- Jangan menyebut live audio, upload, transkripsi, atau playback native sebagai fitur aktif sebelum kode, layanan, tes, dan batas kuota benar-benar tersedia.
+
+## 16. Alasan pengguna kembali — keterlibatan yang sehat
+
+Bangun kebiasaan melalui nilai yang konsisten, bukan manipulasi:
+- **Agenda personal:** satu tampilan agenda dari komunitas yang diikuti, dengan zona waktu, RSVP, dan pengingat yang opt-in.
+- **Ringkasan mingguan:** acara, keputusan, materi baru, dan tugas yang relevan; setiap sumber mengikuti izin komunitas.
+- **Belajar bersama:** tantangan mingguan opsional, kelas singkat, sesi tanya jawab, klub baca/dengar, dan arsip materi.
+- **Kontribusi dan pengakuan:** ucapan terima kasih, lencana berbasis kontribusi yang nyata, profil keahlian sukarela; tanpa leaderboard yang mempermalukan atau mendorong spam.
+- **Komunitas lintas minat:** rekomendasi acara/booth/podcast publik yang relevan, dengan alasan rekomendasi dan kontrol topik.
+- **Proyek nyata:** papan tugas, relawan, kolaborasi karya, mentoring, katalog UMKM, dan tindak lanjut setelah acara.
+- **Memory & continuity:** catatan keputusan, album/galeri yang disetujui, daftar sumber, dan arsip episode agar manfaat komunitas tidak hilang di arus chat.
+- **Kontrol perhatian:** ringkasan sebagai default yang masuk akal, pengaturan frekuensi notifikasi, mode senyap, jam tenang, jeda akun, berhenti mengikuti, ekspor/hapus data, dan tidak ada streak berisiko atau notifikasi rasa bersalah.
+- **Transparansi:** jelaskan mengapa konten direkomendasikan; jangan menjual data pribadi atau menggunakan data sensitif untuk engagement.
+
+## 17. Fitur tambahan yang membuat RUANG KITA berguna
+
+1. **Community Calendar:** agenda lintas ruang yang disatukan hanya dari komunitas yang dipilih pengguna.
+2. **Event & workshop kit:** RSVP, kapasitas, daftar tunggu, daftar tugas panitia, sertifikat kehadiran bila relevan, dan ekspor kalender.
+3. **Knowledge Commons:** FAQ, notulen, dokumen, materi belajar, dan pencarian yang menghormati izin tiap ruang.
+4. **Community Help Exchange:** anggota menawarkan/ meminta bantuan, barter keahlian, mentoring, atau relawan; data kontak dibuka dengan persetujuan.
+5. **Local discovery & Expo:** pameran lintas komunitas, karya, jasa, UMKM, dan acara publik tanpa mengungkap data anggota privat.
+6. **Polls & deliberation:** polling, usulan, komentar terstruktur, dan hasil musyawarah dengan identitas/kerahasiaan yang jelas.
+7. **Family/School safeguards:** ruang per kelas, akses wali/guru terpisah, pengumuman terverifikasi, dan minimisasi data anak.
+8. **Community wellbeing & safety:** laporan, blokir, mute, moderator, banding, dan catatan tindakan yang proporsional.
+9. **Import helper:** panduan menyalin tautan, dokumen, atau pengumuman yang dipilih secara manual; jangan mengasumsikan akses otomatis ke seluruh isi grup WhatsApp.
+10. **PWA-friendly experience:** navigasi mobile, simpan agenda/tautan yang diizinkan untuk akses cepat, dan penanganan koneksi lambat; offline penuh tidak dijanjikan tanpa implementasi.
+11. **Creator/knowledge monetization (fase lanjut):** tiket atau keanggotaan berbayar hanya setelah legal, pajak, payment provider, refund, dan biaya operasional dievaluasi; bukan fitur Rp0 yang diasumsikan aktif.
+12. **Community analytics:** statistik agregat untuk admin, dengan ambang privasi dan tanpa pengawasan individu yang tidak perlu.
+
+## 18. Model data tambahan untuk podcast dan undangan lintas komunitas
+
+Entitas yang perlu dirancang dan direview sebelum migrasi:
+- podcast_shows, podcast_episodes, podcast_hosts;
+- audio_sessions, audio_session_roles, speaker_requests;
+- cross_community_invitations (scope, inviter, invitee/community, assigned role, expiry, revoked_at, accepted_at);
+- episode_bookmarks, listening_progress, follows, playlists;
+- episode_transcripts (opsional, consent dan retensi), episode_reports, recording_consents;
+- notification_preferences, quiet_hours, user_topic_preferences;
+- activity_digest_preferences dan recommendation_feedback.
+
+Semua data harus punya pemilik/tenant yang jelas, constraint integritas, validasi server-side, kebijakan retensi, dan tes akses. Jangan menggabungkan tabel lintas komunitas tanpa pemeriksaan izin. Untuk media, gunakan URL bertanda tangan/akses terbatas jika diperlukan; jangan menganggap file privat sebagai publik.
+
+## 19. Prinsip keterlibatan bertanggung jawab dan metrik
+
+Keberhasilan bukan sekadar waktu layar. Ukur:
+- acara yang benar-benar dihadiri dan RSVP yang berhasil;
+- episode yang diselesaikan secara sukarela, bookmark, dan partisipasi Q&A;
+- kontribusi bermanfaat, tugas yang selesai, bantuan yang berhasil dipertemukan;
+- keberhasilan undangan lintas komunitas dan tingkat penerimaan yang disetujui;
+- retensi komunitas dengan survei manfaat dan kepuasan;
+- laporan spam/pelecehan, tingkat penyelesaian laporan, opt-out notifikasi, dan kontrol privasi.
+
+Jangan mengoptimalkan endless scroll, autoplay tanpa kontrol, streak yang menimbulkan rasa bersalah, dark patterns, atau notifikasi yang memanfaatkan kecemasan sosial.
