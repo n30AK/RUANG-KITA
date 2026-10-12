@@ -1,17 +1,131 @@
 <!doctype html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f7f2"><meta name="description" content="RUANG KITA — ruang silaturahmi digital untuk komunitas, agenda, pameran, dan cerita bersama."><title>RUANG KITA — Ruang Silaturahmi Digital</title><link rel="stylesheet" href="/styles.css"><script defer src="/app.js"></script></head>
-<body><div class="shell">
-<header class="topbar"><a class="brand" href="#beranda"><span class="mark">rk</span><span>RUANG<span class="light">KITA</span><small>RUANG SILATURAHMI DIGITAL</small></span></a><nav id="nav"><a href="#jelajah">Jelajahi ruang</a><a href="#cara">Cara kerja</a><a href="#podcast">Podcast</a><a href="#modul">Fitur komunitas</a><a href="#pameran">Pameran</a></nav><div class="actions"><span class="preview-pill">● MVP bertahap</span><a class="btn outline small" href="/login">Masuk</a><a class="btn dark small" href="/app">Ruang anggota ↗</a><button class="menu" aria-label="Buka navigasi" aria-expanded="false">☰</button></div></header>
-<main id="beranda">
-<section class="hero"><div><div class="eyebrow">— TEMPAT BERKUMPUL, DENGAN CARA BARU</div><h1>Grup punya meja.<br><em>Silaturahmi</em> punya ruang.</h1><p class="lead">Rumah digital untuk komunitasmu. Pilih suasana, ajak grup WhatsApp, lalu bertemu, berbagi cerita, dan menemukan komunitas lain.</p><div class="hero-buttons"><a class="btn dark" href="#jelajah">Jelajahi ruang ↗</a><a class="btn outline" href="#cara">Kenali cara kerja</a></div><p class="subtle">Komunitas yang berbeda, satu tempat untuk bertemu.</p></div><div class="hero-art"><div class="sun"></div><div class="window"><i></i><i></i><i></i><i></i></div><div class="plant">♧</div><div class="cord"></div><div class="sofa"></div><div class="roundtable">☕　✿</div><div class="chair one"></div><div class="chair two"></div><div class="chair three"></div><div class="float top">✦ <span><b>Meja Alumni</b><small>Contoh ruang komunitas</small></span></div><div class="float bottom">U <span><b>UMKM Bersama</b><small>Ilustrasi meja komunitas</small></span></div><small class="art-caption">KAFE KOMUNITAS · ILUSTRASI PRATINJAU</small></div></section>
-<section class="principles"><div><b>01　Ruang untuk semua</b><small>Publik atau privat, akses harus diatur.</small></div><div><b>02　Grup punya identitas</b><small>Setiap komunitas punya ruangnya sendiri.</small></div><div><b>03　Mulai sederhana</b><small>Ringan di ponsel, berkembang bertahap.</small></div></section>
-<section class="section" id="jelajah"><div class="heading"><div><div class="eyebrow">— TEMUKAN SUASANANYA</div><h2>Satu ruang, banyak <em>kemungkinan.</em></h2></div><p>Dari obrolan santai sampai pameran lintas komunitas. Pilih tempat yang cocok untuk cerita kalian.</p></div><div class="scene-picker" id="scene-picker"></div><div class="scene-preview" id="scene-preview"><div class="scene-top"><b id="scene-label">☕ SCENE PILIHAN</b><span>● Pratinjau visual</span></div><div class="scene-art"><div class="scene-window"></div><div class="scene-plant">♧</div><div class="scene-table">✿</div><div class="scene-seat s1"></div><div class="scene-seat s2"></div><div class="scene-seat s3"></div><span class="tag t1">Meja komunitas<br><b>4 kursi · contoh</b></span><span class="tag t2">Area bersama<br><b>Preset visual</b></span></div><div class="scene-foot"><div><small>SUASANA PILIHAN</small><h3 id="scene-title">Kafe komunitas</h3><p id="scene-note">Hangat & produktif.</p></div><button class="btn dark" data-notice="Fitur masuk ruang akan diaktifkan setelah akun, backend, dan izin akses selesai diuji.">Lihat ruang ↗</button></div></div></section>
-<section class="section rooms"><div class="heading"><div><div class="eyebrow">— RUANG CONTOH</div><h2>Tempat cerita <em>dimulai.</em></h2></div><div class="filters"><button class="active" data-filter="Semua">Semua</button><button data-filter="Publik">Publik</button><button data-filter="Undangan">Undangan</button></div></div><div class="room-grid" id="room-grid"></div><p class="disclaimer">Nama ruang, jumlah anggota, dan status akses adalah data ilustrasi. Belum ada komunitas atau keanggotaan nyata. Kontrol ruang privat harus diterapkan di backend, bukan hanya dengan menyembunyikan tombol.</p></section>
-<section class="section how" id="cara"><div class="heading"><div><div class="eyebrow">— MEJA MILIK KOMUNITAS</div><h2>Datang bersama.<br><em>Duduk di meja sendiri.</em></h2></div><p>Satu ruang dapat menampung beberapa grup. Setiap komunitas tetap memiliki anggota dan aturan akses sendiri.</p></div><div class="table-layout"><div class="table-stage"><div class="stage-window"></div><div class="stage-plant">♧</div><div class="community-table a">☕<b>Alumni 2004</b><small>Ilustrasi · 4 kursi</small></div><div class="community-table b">✿<b>UMKM Lokal</b><small>Ilustrasi · 6 kursi</small></div><small class="stage-caption">KAFE SENJA · RUANG BERSAMA</small></div><div class="table-info"><h3>Setiap meja punya ceritanya sendiri.</h3><p>Pengelola menentukan siapa yang boleh bergabung. Ilustrasi ini belum menjadi ruang interaktif.</p><article>🪑　<b>Meja Alumni 2004</b><small>Diskusi reuni & kabar teman</small></article><article>🛍️　<b>Meja UMKM Lokal</b><small>Berbagi produk dan peluang</small></article><article>🗓️　<b>Meja Panitia</b><small>Agenda dan persiapan acara</small></article></div></div></section>
-<section class="section rooms" id="podcast"><div class="heading"><div><div class="eyebrow">— PODCAST & AUDIO LOUNGE</div><h2>Cerita komunitas,<br><em>didengar lebih luas.</em></h2></div><p>Serial podcast dan diskusi lintas komunitas dengan izin yang jelas.</p></div><div class="room-grid"><article class="room-card"><div class="card-art plum">🎙️</div><div class="card-body"><small>SERIAL KOMUNITAS</small><h3>Podcast Cerita Kita</h3><p>Episode, catatan acara, dan daftar putar komunitas.</p><button data-notice="Podcast adalah konsep pratinjau. Audio belum diunggah atau diputar dari aplikasi.">Lihat konsep ↗</button></div></article><article class="room-card"><div class="card-art sky">🎧</div><div class="card-body"><small>LIVE AUDIO LOUNGE</small><h3>Obrolan Lintas Komunitas</h3><p>Host, pembicara, pendengar, dan sesi tanya jawab.</p><button data-notice="Audio live belum aktif. MVP awal menggunakan tautan rapat eksternal setelah backend tersedia.">Lihat format ↗</button></div></article><article class="room-card"><div class="card-art amber">🤝</div><div class="card-body"><small>TAMU LINTAS KOMUNITAS</small><h3>Undang host atau tamu</h3><p>Undangan terbatas tanpa membuka ruang privat lainnya.</p><button data-notice="Undangan nyata membutuhkan token aman, masa berlaku, dan pemeriksaan akses server-side.">Pelajari akses ↗</button></div></article></div><p class="disclaimer">Unggahan, pemutaran native, audio langsung, rekaman, dan transkripsi belum diaktifkan.</p></section>
-<section class="section rooms" id="modul"><div class="heading"><div><div class="eyebrow">— DELAPAN MODUL KOMUNITAS</div><h2>Bukan hanya ruang,<br><em>tapi rumah komunitas.</em></h2></div><p>Peta fitur target. Kartu ini belum terhubung ke akun atau database.</p></div><div class="room-grid module-grid" id="module-grid"></div></section>
-<section class="expo" id="pameran"><div><div class="eyebrow">— BERTEMU LEBIH JAUH</div><h2>Satu pintu.<br>Banyak <em>komunitas.</em></h2><p>Expo Hall mempertemukan kreator, UMKM, alumni, dan komunitas lain. Pengunjung dapat menjelajahi stan publik sesuai izin.</p><a class="btn cream" href="#jelajah">Jelajahi konsep ↗</a><p class="expo-note">✦ Ruang publik bisa dikunjungi. Meja privat tetap terlindungi.</p></div><div class="expo-art"><div class="expo-title">GALERI KOMUNITAS <span>OPEN HOUSE · DEMO</span></div><div class="booths"><div>🎨<b>Karya Kreatif</b><small>Portofolio & seni</small></div><div>🧺<b>Produk Lokal</b><small>UMKM bersama</small></div><div>📚<b>Ruang Belajar</b><small>Kelas & komunitas</small></div></div><small class="expo-caption">3 CONTOH STAN · 1 RUANG BERSAMA</small></div></section>
-<section class="section steps"><div class="heading"><div><div class="eyebrow">— MUDAH UNTUK DIMULAI</div><h2>Dari WhatsApp ke <em>ruang bersama.</em></h2></div><p>WhatsApp tetap untuk percakapan harian. RUANG KITA menambahkan tempat untuk agenda, acara, pustaka, dan pertemuan.</p></div><div class="step-grid"><article><small>01</small><b>🏡　Buat ruang</b><p>Pilih scene dan tentukan akses publik atau privat.</p></article><article><small>02</small><b>🔗　Bagikan undangan</b><p>Kirim tautan ke grup WhatsApp sesuai izin.</p></article><article><small>03</small><b>🪑　Pilih meja</b><p>Setiap komunitas punya meja dan aturan akses.</p></article><article><small>04</small><b>🎥　Mulai kegiatan</b><p>Atur agenda dan tautan rapat. Video terintegrasi menyusul.</p></article></div></section>
-<section class="closing"><div class="eyebrow">— MULAI DARI SATU MEJA</div><h2>Silaturahmi selalu<br>punya <em>tempat.</em></h2><p>Ruang yang hangat, komunitas yang terhubung, dan cerita yang terus berjalan.</p><a class="btn cream" href="#jelajah">Lihat pratinjau ↗</a></section></main>
-<footer><a class="brand" href="#beranda"><span class="mark">rk</span><span>RUANG<span class="light">KITA</span><small>RUANG SILATURAHMI DIGITAL</small></span></a><span>Tempat bertemu, bukan sekadar tempat online.</span><span>Pratinjau MVP · Data contoh</span><span><a href="/privasi.html">Privasi</a> · <a href="/ketentuan.html">Ketentuan</a></span></footer>
-<div class="toast" id="toast" role="status" aria-live="polite" hidden><span>✦</span><p></p><button aria-label="Tutup">×</button></div></div></body></html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#212529">
+<meta name="description" content="RUANG KITA — ruang silaturahmi digital untuk komunitas, agenda, undangan, dan cerita bersama.">
+<title>RUANG KITA — Silaturahmi Lebih Dekat</title>
+<link rel="icon" href="/assets/favicon.ico">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+<link href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" rel="stylesheet">
+<link href="/agency.css" rel="stylesheet">
+<style>
+:root{--bs-primary:#ffc800;--bs-primary-rgb:255,200,0}
+body{overflow-x:hidden}
+#mainNav .navbar-brand{font-family:Montserrat,sans-serif;font-size:1.35rem;font-weight:700;letter-spacing:.04em;color:#ffc800;text-decoration:none}
+#mainNav .navbar-brand span{color:#fff}
+#mainNav .nav-link{font-size:.78rem;letter-spacing:.04em}
+#mainNav .nav-link:hover,#mainNav .nav-link.active{color:#ffc800}
+.masthead{background-image:linear-gradient(90deg,rgba(18,23,27,.82),rgba(18,23,27,.52)),url('/assets/img/header-bg.jpg');background-position:center center}
+.masthead-subheading{font-family:'Roboto Slab',serif;font-style:normal}
+.masthead-heading{max-width:950px;margin-inline:auto}
+.btn-primary{--bs-btn-bg:#ffc800;--bs-btn-border-color:#ffc800;--bs-btn-hover-bg:#e5b400;--bs-btn-hover-border-color:#e5b400;--bs-btn-color:#212529;--bs-btn-hover-color:#212529}
+.section-subheading{max-width:740px;margin-inline:auto}
+.feature-icon{width:7rem;height:7rem;border-radius:50%;background:#ffc800;color:#212529;display:inline-grid;place-items:center;font-size:2.6rem;margin-bottom:1.4rem}
+#community-grid .portfolio-item{height:100%;background:#fff;box-shadow:0 5px 20px rgba(0,0,0,.07)}
+#community-grid .portfolio-link{display:block;overflow:hidden}
+#community-grid .portfolio-link img{width:100%;height:230px;object-fit:cover;transition:transform .35s}
+#community-grid .portfolio-link:hover img{transform:scale(1.045)}
+#community-grid .portfolio-caption{min-height:130px}
+.live-pill{display:inline-block;background:#e8f5e9;color:#1e6b3d;border-radius:30px;padding:.35rem .7rem;font-size:.72rem;font-weight:700}
+#community-grid .empty-state{grid-column:1/-1;padding:2rem;border:1px dashed #c9cdd1;border-radius:.5rem;color:#6c757d;text-align:center}
+#about .timeline-image{background:#ffc800}
+#about .timeline-image img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+#cta{background:#212529 url('/assets/img/header-bg.jpg') center/cover no-repeat;background-blend-mode:multiply}
+#cta h2{color:#fff}
+#cta p{color:#e6e6e6}
+footer .brand{font-family:Montserrat,sans-serif;font-weight:700;color:#212529;text-decoration:none}
+footer .brand span{color:#d4a600}
+footer .brand small{display:block;font-size:.58rem;letter-spacing:.08em;color:#6c757d;font-weight:400;margin-top:.25rem}
+.footer-links a{color:#212529;margin:0 .5rem}
+#community-grid .portfolio-caption-heading{font-size:1.1rem}
+#community-grid .portfolio-caption-subheading{line-height:1.6}
+@media(max-width:991.98px){#mainNav .navbar-brand{font-size:1.15rem}.masthead{padding-top:10rem;padding-bottom:7rem}}
+</style>
+</head>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<div class="container">
+<a class="navbar-brand" href="#page-top">RUANG <span>KITA</span></a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Buka menu">Menu <i class="fas fa-bars ms-1"></i></button>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+<li class="nav-item"><a class="nav-link" href="#manfaat">Manfaat</a></li>
+<li class="nav-item"><a class="nav-link" href="#komunitas">Komunitas</a></li>
+<li class="nav-item"><a class="nav-link" href="#cara-kerja">Cara kerja</a></li>
+<li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+<li class="nav-item"><a class="nav-link" href="/privasi.html">Privasi</a></li>
+<li class="nav-item"><a class="nav-link" href="/login">Masuk</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<header class="masthead">
+<div class="container">
+<div class="masthead-subheading">Tempat bertemu, bukan sekadar tempat online</div>
+<div class="masthead-heading text-uppercase">Silaturahmi lebih dekat.<br>Komunitas lebih terhubung.</div>
+<a class="btn btn-primary btn-xl text-uppercase me-2 mb-2" href="/login">Mulai bergabung <i class="fas fa-arrow-right ms-2"></i></a>
+<a class="btn btn-outline-light btn-xl text-uppercase mb-2" href="#komunitas">Jelajahi ruang</a>
+<p class="text-white-50 mt-4 mb-0 small">Pelengkap WhatsApp untuk agenda, undangan, ruang komunitas, dan cerita bersama.</p>
+</div>
+</header>
+<section class="page-section" id="manfaat">
+<div class="container">
+<div class="text-center">
+<h2 class="section-heading text-uppercase">Satu ruang untuk banyak cerita</h2>
+<h3 class="section-subheading text-muted">RUANG KITA membantu komunitas menjaga hubungan, mengatur kegiatan, dan bertemu dengan cara yang lebih terstruktur.</h3>
+</div>
+<div class="row text-center">
+<div class="col-md-4 mb-5 mb-md-0"><span class="feature-icon"><i class="fas fa-people-group"></i></span><h4 class="my-3">Ruang komunitas</h4><p class="text-muted">Buat komunitas publik, privat, atau berbasis undangan. Pengelola mengatur akses anggota.</p></div>
+<div class="col-md-4 mb-5 mb-md-0"><span class="feature-icon"><i class="fas fa-calendar-check"></i></span><h4 class="my-3">Agenda bersama</h4><p class="text-muted">Catat acara, bagikan tautan rapat, dan kelola konfirmasi kehadiran dari satu tempat.</p></div>
+<div class="col-md-4"><span class="feature-icon"><i class="fas fa-link"></i></span><h4 class="my-3">Undangan terkontrol</h4><p class="text-muted">Ajak anggota melalui tautan undangan dengan batas penggunaan dan masa berlaku.</p></div>
+</div>
+</div>
+</section>
+<section class="page-section bg-light" id="komunitas">
+<div class="container">
+<div class="text-center">
+<h2 class="section-heading text-uppercase">Ragam ruang komunitas</h2>
+<h3 class="section-subheading text-muted">Temukan komunitas publik yang tersedia, atau masuk untuk membuat ruang milik Anda sendiri.</h3>
+</div>
+<div class="row" id="community-grid">
+<div class="col-12"><div class="empty-state"><i class="fas fa-circle-notch fa-spin me-2"></i>Memuat komunitas publik…</div></div>
+</div>
+<p class="text-muted text-center small mt-4">Kartu yang muncul di sini berasal dari data komunitas yang tersedia. Gambar contoh pada bagian konsep tidak mewakili komunitas atau anggota nyata.</p>
+<div class="text-center mt-4"><a class="btn btn-primary btn-xl text-uppercase" href="/app">Buka ruang anggota <i class="fas fa-arrow-right ms-2"></i></a></div>
+</div>
+</section>
+<section class="page-section" id="cara-kerja">
+<div class="container">
+<div class="text-center"><h2 class="section-heading text-uppercase">Mulai dari satu meja</h2><h3 class="section-subheading text-muted">Langkah sederhana untuk membangun ruang silaturahmi yang lebih teratur.</h3></div>
+<ul class="timeline">
+<li><div class="timeline-image"><img class="rounded-circle img-fluid" src="/assets/img/about/1.jpg" alt="Ilustrasi komunitas"></div><div class="timeline-panel"><div class="timeline-heading"><h4>01 · Buat ruang</h4><h4 class="subheading">Tentukan identitas komunitas</h4></div><div class="timeline-body"><p class="text-muted">Pilih nama, kategori, deskripsi, dan jenis akses komunitas Anda.</p></div></div></li>
+<li class="timeline-inverted"><div class="timeline-image"><img class="rounded-circle img-fluid" src="/assets/img/portfolio/2.jpg" alt="Ilustrasi berbagi undangan"></div><div class="timeline-panel"><div class="timeline-heading"><h4>02 · Undang anggota</h4><h4 class="subheading">Tetap dekat dengan grup WhatsApp</h4></div><div class="timeline-body"><p class="text-muted">Bagikan undangan kepada orang yang tepat. WhatsApp tetap menjadi kanal percakapan harian Anda.</p></div></div></li>
+<li><div class="timeline-image"><img class="rounded-circle img-fluid" src="/assets/img/portfolio/3.jpg" alt="Ilustrasi agenda komunitas"></div><div class="timeline-panel"><div class="timeline-heading"><h4>03 · Susun kegiatan</h4><h4 class="subheading">Agenda, pengumuman, dan kehadiran</h4></div><div class="timeline-body"><p class="text-muted">Kelola acara komunitas dan bagikan informasi penting kepada anggota.</p></div></div></li>
+<li class="timeline-inverted"><div class="timeline-image"><img class="rounded-circle img-fluid" src="/assets/img/portfolio/4.jpg" alt="Ilustrasi cerita bersama"></div><div class="timeline-panel"><div class="timeline-heading"><h4>04 · Jaga cerita</h4><h4 class="subheading">Bangun kebiasaan berkumpul</h4></div><div class="timeline-body"><p class="text-muted">Kembangkan ruang komunitas secara bertahap, dengan memperhatikan privasi dan izin akses.</p></div></div></li>
+<li class="timeline-inverted"><div class="timeline-image"><h4>Ruang<br>untuk<br>semua</h4></div></li>
+</ul>
+</div>
+</section>
+<section class="page-section bg-light" id="tentang">
+<div class="container">
+<div class="text-center"><h2 class="section-heading text-uppercase">Dirancang untuk silaturahmi</h2><h3 class="section-subheading text-muted">Teknologi mendukung hubungan manusia, bukan menggantikannya.</h3></div>
+<div class="row justify-content-center"><div class="col-lg-8 text-center"><p class="large text-muted">RUANG KITA adalah platform komunitas digital yang melengkapi WhatsApp. MVP saat ini menyediakan pembuatan komunitas, penemuan ruang publik, undangan, agenda, RSVP, pengumuman, dan pemeriksaan akses server-side. Fitur media live, pembayaran, direktori anggota, dan AI masih dalam tahap berikutnya.</p><span class="live-pill"><i class="fas fa-check-circle me-1"></i> MVP inti tersedia online</span></div></div>
+</div>
+</section>
+<section class="page-section" id="cta">
+<div class="container text-center"><h2 class="section-heading text-uppercase">Komunitas Anda punya tempat</h2><h3 class="section-subheading text-white-50">Mulai dari satu ruang, lalu tumbuhkan cerita bersama.</h3><a class="btn btn-primary btn-xl text-uppercase" href="/login">Masuk atau bergabung <i class="fas fa-arrow-right ms-2"></i></a><div class="mt-4"><a class="text-white" href="/app">Buka ruang anggota</a></div></div>
+</section>
+<footer class="footer py-4">
+<div class="container"><div class="row align-items-center">
+<div class="col-lg-4 text-lg-start"><a class="brand" href="#page-top">RUANG <span>KITA</span><small>RUANG SILATURAHMI DIGITAL</small></a></div>
+<div class="col-lg-4 my-3 my-lg-0 text-center"><a class="btn btn-dark btn-social mx-2" href="#page-top" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></a><span class="text-muted small">Tempat bertemu, bukan sekadar tempat online.</span></div>
+<div class="col-lg-4 text-lg-end footer-links"><a href="/privasi.html">Privasi</a><a href="/ketentuan.html">Ketentuan</a></div>
+</div><div class="text-center text-muted small mt-3">© RUANG KITA · MVP bertahap</div></div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="/app.js"></script>
+</body>
+</html>
