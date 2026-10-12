@@ -8,7 +8,7 @@ This branch is `feat/ruang-silaturahmi-mvp`. The production Neon branch must rem
 ### A. Product interface
 - [x] Define hybrid 2D → 3D direction.
 - [x] Define external meeting links now and integrated video later.
-- [x] Define hybrid public/private room model.
+- [x] Define hybrid public/private room model.\n- [x] Add Karaoke Stage as a selectable scene concept for combined community rooms.
 - [ ] Build responsive room directory and room scene prototype.
 - [ ] Add keyboard navigation, reduced-motion handling, mobile layouts and empty/error/loading states.
 
@@ -33,7 +33,7 @@ This branch is `feat/ruang-silaturahmi-mvp`. The production Neon branch must rem
 - [ ] Scene/table layout with saved coordinates and responsive rearrangement.
 - [ ] Announcements, events, RSVP, content library and external meeting links.
 - [ ] WhatsApp-ready invite copy and QR/share URL.
-- [ ] Expo booths and cross-community public visiting rules.
+- [ ] Expo booths and cross-community public visiting rules.\n- [ ] Karaoke room flow: performer queue, moderator approval, audience reactions, and explicit demo-only labels until media is implemented.
 
 ### E. Release and hosting
 - [ ] Choose free-tier hosting after checking limits and required environment variables.
