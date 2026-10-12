@@ -1,27 +1,63 @@
-const scenes = [
-["cafe","Kafe komunitas","Hangat & produktif","☕"],["angkringan","Angkringan","Santai ala Nusantara","🏮"],["pendopo","Pendopo","Musyawarah bersama","🌿"],["expo","Expo hall","Pameran lintas grup","🖼️"],["karaoke","Panggung Karaoke","Tampil, bernyanyi & beri apresiasi","🎤"],["school","Orang Tua & Sekolah","Agenda kelas, pengumuman & relawan","🎒"],["family","Ruang Keluarga","Acara keluarga & kabar bersama","🏡"],["office","Kantor & Proyek","Rapat, tugas & keputusan tim","💼"],["neighborhood","Warga & Lingkungan","Iuran, ronda & kegiatan warga","🏘️"],["worship","Komunitas Ibadah","Jadwal kegiatan & layanan sosial","🕊️"],["sports","Klub Olahraga","Latihan, pertandingan & tim","⚽"],["hobby","Hobi & Kreator","Karya, tantangan & berbagi minat","🎨"],["learning","Kelas & Belajar","Materi, tugas & sesi belajar","📚"],["umkm","UMKM & Jual-Beli","Katalog, pesanan & bazar","🧺"],["volunteer","Relawan & Sosial","Aksi, donasi transparan & tugas","🤝"],["travel","Wisata & Perjalanan","Itinerary, peserta & koordinasi","🧭"],["health","Dukungan Komunitas","Dukungan sebaya dengan privasi","💚"],["alumni","Alumni & Reuni","Jejaring, reuni & mentoring","🎓"],["podcast","Podcast & Audio Lounge","Cerita, diskusi & tamu lintas komunitas","🎙️"]];
-const rooms = [
-["Kafe Senja","Silaturahmi","Publik","Contoh ruang","☕","peach"],["Angkringan Warga","Komunitas lokal","Undangan","Contoh ruang","🏮","amber"],["Pendopo Alumni","Alumni","Publik","Contoh ruang","🌿","sage"],["Galeri Karya Kita","Pameran","Publik","Stan ilustrasi","🖼️","lilac"],["Panggung Karaoke Bersama","Hiburan komunitas","Undangan","Konsep demo","🎤","plum"],["Orang Tua Murid Kelas 5B","Sekolah & keluarga","Undangan","Konsep demo","🎒","sky"],["Warga RW Harmoni","Warga & lingkungan","Publik","Konsep demo","🏘️","sage"],["Pasar UMKM Bersama","UMKM & jual-beli","Publik","Katalog contoh","🧺","amber"],["Podcast Cerita Kita","Podcast lintas komunitas","Publik","Episode contoh","🎙️","plum"]];
-const modules = [
-["🏡","01 · BERANDA KOMUNITAS","Profil & pengurus","Logo, visi-misi, pengurus, pengumuman, agenda, dan aktivitas.","Belum aktif"],
-["🎙️","02 · PODCAST & PENGETAHUAN","Cerita yang tersimpan","Episode, arsip, transkrip, dan ringkasan dengan persetujuan rekaman.","Media & AI belum aktif"],
-["🗓️","03 · KALENDER & AGENDA","Rencana bersama","RSVP, tautan rapat, dokumen, dan ekspor kalender.","Agenda demo"],
-["🧭","04 · DIREKTORI ANGGOTA","Temukan kolaborator","Keahlian dan minat sukarela dengan pilihan visibilitas.","Opt-in belum aktif"],
-["🧺","05 · PASAR KOMUNITAS","Peluang lintas grup","Produk, jasa, lowongan, kolaborasi, dan listing termoderasi.","Listing demo"],
-["✨","06 · ASISTEN AI","Jawaban berbasis sumber","Mencari agenda dan arsip sesuai izin, lalu membuat draf untuk ditinjau.","AI belum terhubung"],
-["🤝","07 · DANA SOSIAL","Transparan & diaudit","Catatan iuran, donasi, pengeluaran, bukti, dan persetujuan.","Tidak memproses pembayaran"],
-["📚","08 · MEMORI KOMUNITAS","Sejarah yang terjaga","Kronologi, album, kisah, pencapaian, dan arsip kegiatan.","Arsip demo"]];
-const picker = document.getElementById("scene-picker");
-const preview = document.getElementById("scene-preview");
-const toast = document.getElementById("toast");
-function notify(message){toast.querySelector("p").textContent=message;toast.hidden=false;}
-function renderScenes(){picker.innerHTML=scenes.map((s,i)=>`<button class="scene-option ${i===0?"selected":""}" data-scene="${s[0]}" aria-pressed="${i===0}"><span class="scene-icon">${s[3]}</span><span><b>${s[1]}</b><small>${s[2]}</small></span></button>`).join("");}
-function renderRooms(filter="Semua"){const list=rooms.filter(r=>filter==="Semua"||r[2]===filter);document.getElementById("room-grid").innerHTML=list.map(r=>`<article class="room-card"><div class="card-art ${r[5]}"><span>${r[4]}</span><small class="access">${r[2]==="Publik"?"↗ Publik":"♧ Undangan"}</small></div><div class="card-body"><small>${r[1].toUpperCase()}</small><h3>${r[0]}</h3><p>${r[3]} · data ilustrasi</p><button data-notice="${r[0]} adalah data demo. Fitur akses nyata belum diaktifkan.">Lihat konsep ↗</button></div></article>`).join("");}
-function renderModules(){document.getElementById("module-grid").innerHTML=modules.map(m=>`<article class="room-card"><div class="card-art sage"><span>${m[0]}</span></div><div class="card-body"><small>${m[1]}</small><h3>${m[2]}</h3><p>${m[3]}</p><button data-notice="${m[2]} belum aktif. Autentikasi, database, dan izin akses harus diselesaikan lebih dahulu.">${m[4]} ↗</button></div></article>`).join("");}
-renderScenes();renderRooms();renderModules();
-picker.addEventListener("click",event=>{const button=event.target.closest("[data-scene]");if(!button)return;const s=scenes.find(x=>x[0]===button.dataset.scene);if(!s)return;picker.querySelectorAll(".scene-option").forEach(el=>{const yes=el===button;el.classList.toggle("selected",yes);el.setAttribute("aria-pressed",String(yes));});document.getElementById("scene-title").textContent=s[1];document.getElementById("scene-note").textContent=s[2]+". Pilih meja dan undang anggota setelah fitur ruang tersedia.";document.getElementById("scene-label").textContent=s[3]+" SCENE PILIHAN";preview.style.background=s[0]==="angkringan"?"#e9d9bc":s[0]==="pendopo"?"#dfe6d5":s[0]==="expo"?"#e3ddeb":"#e8e7d9";preview.querySelector(".scene-table").style.background=s[0]==="expo"?"#a99abb":s[0]==="pendopo"?"#ad895e":s[0]==="angkringan"?"#9f6e48":"#bc865e";});
-document.querySelector(".filters").addEventListener("click",event=>{const button=event.target.closest("[data-filter]");if(!button)return;document.querySelectorAll("[data-filter]").forEach(el=>el.classList.toggle("active",el===button));renderRooms(button.dataset.filter);});
-document.addEventListener("click",event=>{const button=event.target.closest("[data-notice]");if(button)notify(button.dataset.notice);});
-toast.querySelector("button").addEventListener("click",()=>toast.hidden=true);
-const menu=document.querySelector(".menu");menu.addEventListener("click",()=>{const nav=document.getElementById("nav");const open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));});
-document.querySelectorAll("#nav a").forEach(link=>link.addEventListener("click",()=>{document.getElementById("nav").classList.remove("open");menu.setAttribute("aria-expanded","false");}));
+window.addEventListener('DOMContentLoaded', () => {
+  const mainNav = document.getElementById('mainNav');
+  const shrink = () => {
+    if (!mainNav) return;
+    mainNav.classList.toggle('navbar-shrink', window.scrollY > 0);
+  };
+  shrink();
+  document.addEventListener('scroll', shrink, { passive: true });
+
+  const toggler = document.querySelector('.navbar-toggler');
+  document.querySelectorAll('#navbarResponsive .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (toggler && window.getComputedStyle(toggler).display !== 'none') toggler.click();
+    });
+  });
+
+  const grid = document.getElementById('community-grid');
+  if (!grid) return;
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[ch]));
+  const categoryImages = [
+    '/assets/img/portfolio/1.jpg','/assets/img/portfolio/2.jpg',
+    '/assets/img/portfolio/3.jpg','/assets/img/portfolio/4.jpg',
+    '/assets/img/portfolio/5.jpg','/assets/img/portfolio/6.jpg'
+  ];
+  const iconFor = scene => ({
+    cafe:'fa-mug-hot',angkringan:'fa-store',pendopo:'fa-people-roof',expo:'fa-images',
+    karaoke:'fa-microphone',school:'fa-graduation-cap',family:'fa-house',
+    office:'fa-briefcase',neighborhood:'fa-house-user',worship:'fa-hands-praying',
+    sports:'fa-futbol',hobby:'fa-palette',learning:'fa-book-open',umkm:'fa-basket-shopping',
+    volunteer:'fa-handshake-angle',travel:'fa-compass',health:'fa-heart',
+    alumni:'fa-user-group',podcast:'fa-podcast'
+  }[scene] || 'fa-people-group');
+
+  fetch('/api/communities', { headers: { 'Accept': 'application/json' } })
+    .then(async response => {
+      if (!response.ok) throw new Error('Daftar komunitas belum dapat dimuat.');
+      return response.json();
+    })
+    .then(data => {
+      const communities = (data.communities || []).filter(c => c.visibility === 'public');
+      if (!communities.length) {
+        grid.innerHTML = '<div class="col-12"><div class="empty-state"><i class="fas fa-door-open fa-2x mb-3"></i><h5>Belum ada komunitas publik</h5><p class="mb-3">Jadilah yang pertama membuat ruang terbuka untuk komunitas Anda.</p><a class="btn btn-primary" href="/login">Buat komunitas</a></div></div>';
+        return;
+      }
+      grid.innerHTML = communities.map((c, index) => {
+        const image = categoryImages[index % categoryImages.length];
+        const href = '/komunitas/' + encodeURIComponent(c.id);
+        return '<div class="col-lg-4 col-sm-6 mb-4"><div class="portfolio-item">' +
+          '<a class="portfolio-link" href="' + href + '" aria-label="Buka komunitas ' + esc(c.name) + '">' +
+          '<div class="portfolio-hover"><div class="portfolio-hover-content"><i class="fas fa-arrow-up-right-from-square fa-2x"></i></div></div>' +
+          '<img class="img-fluid" src="' + image + '" alt="Ilustrasi kategori ' + esc(c.category || 'komunitas') + '" loading="lazy"></a>' +
+          '<div class="portfolio-caption"><div class="portfolio-caption-heading">' + esc(c.name) + '</div>' +
+          '<div class="portfolio-caption-subheading text-muted">' + esc(c.category || 'Umum') + ' · ' + Number(c.member_count || 0) + ' anggota</div>' +
+          '<p class="text-muted small mt-2 mb-3">' + esc(c.description || 'Ruang komunitas publik.') + '</p>' +
+          '<a class="btn btn-outline-dark btn-sm" href="' + href + '">Lihat ruang <i class="fas fa-arrow-right ms-1"></i></a></div></div></div>';
+      }).join('');
+    })
+    .catch(() => {
+      grid.innerHTML = '<div class="col-12"><div class="empty-state"><i class="fas fa-cloud-arrow-down fa-2x mb-3"></i><h5>Daftar komunitas belum tersedia</h5><p class="mb-3">Anda tetap dapat masuk untuk mengelola atau membuat ruang komunitas.</p><a class="btn btn-primary" href="/login">Masuk ke RUANG KITA</a></div></div>';
+    });
+});
