@@ -99,3 +99,21 @@ Use existing free tiers and local development. Avoid paid API calls, hosted medi
 ### H. Database validation status
 
 - [ ] **Current blocker (12 Oct 2026):** Neon `production` currently has no application tables in `public`; migration 0002 cannot be tested alone because `public.communities` and other base relations do not exist yet. A combined base+extension temporary-branch test was blocked by the database tool safety gate. Do not apply either migration to production; first create/use an isolated development branch and review the base schema, then test migrations sequentially.
+
+
+### I. Delapan modul komunitas — requirement resmi (12 Oct 2026)
+- [x] Formalize product requirements and acceptance criteria in `docs/PRODUCT-REQUIREMENTS-EIGHT-COMMUNITY-MODULES.md`.
+- [x] Draft migration `0003_community_directory_marketplace_funds_memory_ai.sql` for community vision/mission, officers, opt-in member directory, activity feed, moderated marketplace, social-fund ledger/approvals, community memory, and permission-scoped AI knowledge sources/artifacts.
+- [ ] Review migration 0003 against migrations 0001/0002, Neon PostgreSQL version, actual Auth identity mapping, and storage model.
+- [ ] Add explicit RLS/authorization policies for every tenant-owned table and negative tests for anonymous, unrelated tenant, unverified member, ordinary member, moderator, admin and owner.
+- [ ] Validate all three migrations sequentially on an isolated Neon development branch; test rollback/restore and inspect actual schema. None of the migrations is applied.
+- [ ] Implement community homepage: logo/cover, vision/mission, officers, agenda, announcements, recent activity, membership gates and verification workflow.
+- [ ] Implement RSVP/calendar export, opt-in directory/search, media/history archive and marketplace moderation workflows.
+- [ ] Implement social-fund ledger with separation of duties, approval records, audit trail, reconciliation and reports. No payment processing until a separate approved integration exists.
+- [ ] Implement podcast uploads/playback, consent capture, AI transcripts/summaries and deletion only after storage/provider/security review.
+- [ ] Implement retrieval-based community AI with source citations, tenant and visibility filtering, human approval, budget controls and prompt-injection tests.
+- [ ] Add functional end-to-end tests for all eight modules; replace demo actions/data or mark them unambiguously as demo.
+- [ ] Select and configure production hosting only after checking connected provider, environment secrets, deployment limits and owner approval for any potential costs.
+- [ ] Confirm deployed production URL, health check, authentication, database connectivity, access-denial tests, logs and rollback before calling any scope live.
+
+**Release gate:** documentation and SQL drafts are not deployed functionality. Do not merge the draft PR, change Neon production, or declare the product live until the checks above are met and the required production approval is recorded.
