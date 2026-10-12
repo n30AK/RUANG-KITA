@@ -27,8 +27,10 @@ This branch is `feat/ruang-silaturahmi-mvp`. The production Neon branch must rem
 
 ### C. Database migration
 - [ ] Create a development branch from Neon; never point local/app code to production while testing.
-- [ ] Review schema relationships for rooms, room_memberships, tables, room_invitations, sessions, scene_presets and expo booths.
+- [x] Draft schema relationships for community rooms, tables/seats, podcast shows/episodes, audio sessions, cross-community guest passes, recording consent and notification preferences in migration `0002_rooms_podcast_and_guest_access.sql`.
+- [ ] Review schema relationships for room memberships, scene presets, expo booths, role enforcement and identity mapping; migration 0002 is a draft and is not applied.
 - [ ] Confirm extension permissions and migration idempotency.
+- [ ] Validate migration 0002 on a temporary/development branch; inspect resulting schema and run positive/negative authorization tests.
 - [ ] Apply only to development branch using reviewed migration tooling.
 - [ ] Test foreign keys, unique constraints, public/private filtering, cross-tenant deny cases and rollback/restore.
 - [ ] Request explicit approval before any production migration.
@@ -79,7 +81,16 @@ Use existing free tiers and local development. Avoid paid API calls, hosted medi
 - [x] Add podcast/episode demo cards to the product UI, explicitly labeled as prototype content.
 - [ ] Implement show/episode metadata and public/private visibility after database review.
 - [ ] Implement invitation creation, accept, expire, revoke, role scope, and server-side authorization.
+- [ ] Validate token hashing, recipient binding, single-use acceptance and expiry/revocation race handling.
 - [ ] Add recording/transcription consent and copyright/reporting flow before any native media feature.
 - [ ] Add notification preferences, quiet hours, digest opt-in, mute/unfollow and delete/export controls.
 - [ ] Validate cross-tenant deny tests for podcast assets, private episodes, guest passes and transcripts.
 - [ ] Choose an audio/media provider only after cost, licensing, storage, bandwidth, privacy and Rp0 constraints are documented; no paid activation without approval.
+
+
+### G. Schema migration draft (not applied)
+- [x] Add a draft migration for room tables, podcast shows/episodes, audio sessions, cross-community invitations, recording consent, and notification preferences.
+- [ ] Review the draft against Neon Auth's actual user/session identity and application authorization model.
+- [ ] Add and test tenant-scoped server-side access checks; do not expose privileged database credentials to the browser.
+- [ ] Test the migration on a temporary/development branch before requesting production approval.
+- [ ] Verify invitation scope constraints and room/table capacity enforcement in application logic or database constraints.
