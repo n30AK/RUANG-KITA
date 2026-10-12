@@ -66,6 +66,7 @@ export default function Home() {
           <a className="active" href="#jelajah">Jelajahi ruang</a>
           <a href="#cara-kerja">Cara kerja</a>
           <a href="#podcast">Podcast</a>
+          <a href="#modul-komunitas">Fitur komunitas</a>
           <a href="#pameran">Pameran</a>
         </nav>
         <div className="top-actions">
@@ -183,6 +184,35 @@ export default function Home() {
           </article>
         </div>
         <p className="demo-disclaimer">Kartu podcast, jadwal, dan alur undangan di atas adalah prototipe; bukan episode atau siaran aktif. Unggahan, pemutaran native, live audio, rekaman, dan transkripsi belum diaktifkan. Audio harus memiliki izin penggunaan dan peserta harus menyetujui perekaman.</p>
+      </section>
+
+
+      <section className="section rooms-section" id="modul-komunitas">
+        <div className="section-heading compact-heading">
+          <div><div className="eyebrow"><span className="eyebrow-line" /> DELAPAN MODUL KOMUNITAS</div><h2>Bukan hanya ruang,<br /><em>tapi rumah komunitas.</em></h2></div>
+          <p>Beranda, agenda, direktori, pasar, arsip, dan alat bantu untuk menghidupkan komunitas. Kartu berikut adalah peta fitur MVP—belum terhubung ke akun atau database.</p>
+        </div>
+        <div className="room-grid">
+          {[
+            { icon: "🏡", label: "01 · BERANDA KOMUNITAS", title: "Profil & pengurus", desc: "Logo, visi-misi, pengurus, anggota, pengumuman, agenda, dan aktivitas.", status: "Backend belum aktif" },
+            { icon: "🎙️", label: "02 · PODCAST & PENGETAHUAN", title: "Cerita yang tersimpan", desc: "Episode, arsip, transkrip, topik, dan ringkasan dengan persetujuan rekaman.", status: "Media & AI belum aktif" },
+            { icon: "🗓️", label: "03 · KALENDER & AGENDA", title: "Rencana bersama", desc: "RSVP hadir/mungkin/tidak, tautan rapat, dokumen, dan ekspor kalender.", status: "Agenda demo" },
+            { icon: "🧭", label: "04 · DIREKTORI ANGGOTA", title: "Temukan kolaborator", desc: "Keahlian dan minat sukarela untuk mencari mentor atau mitra dengan privasi.", status: "Profil opt-in belum aktif" },
+            { icon: "🧺", label: "05 · PASAR KOMUNITAS", title: "Peluang lintas grup", desc: "Produk, jasa, lowongan, magang, kolaborasi, dan pengadaan yang dimoderasi.", status: "Listing demo" },
+            { icon: "✨", label: "06 · ASISTEN AI", title: "Jawaban berbasis sumber", desc: "Mencari agenda, notulen, dan arsip sesuai izin serta membuat draf untuk ditinjau.", status: "AI belum terhubung" },
+            { icon: "🤝", label: "07 · DANA SOSIAL", title: "Transparan & diaudit", desc: "Catatan iuran, donasi, pengeluaran, bukti, persetujuan, dan laporan.", status: "Tidak memproses pembayaran" },
+            { icon: "📚", label: "08 · MEMORI KOMUNITAS", title: "Sejarah yang terjaga", desc: "Kronologi, album, video, kisah, pencapaian, dan arsip kegiatan.", status: "Arsip demo" },
+          ].map((module) => (
+            <article className="room-card" key={module.title}>
+              <div className="room-card-art art-sage"><span className="room-emoji">{module.icon}</span><span className="room-access">Pratinjau</span><span className="room-orbit" /></div>
+              <div className="room-card-body">
+                <div className="room-kind">{module.label}</div><h3>{module.title}</h3><p>{module.desc}</p>
+                <div className="room-card-footer"><span>{module.status}</span><button onClick={() => setNotice(module.title + ": ini peta fitur pratinjau. Fitur aktif setelah autentikasi, database, izin akses, dan pengujian selesai.")}>Detail ↗</button></div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="demo-disclaimer">Seluruh kartu fitur di bagian ini adalah informasi rencana, bukan klaim fungsi aktif. Modul dana tidak memindahkan uang; asisten AI tidak membaca data privat; arsip dan podcast tidak menerima unggahan sampai akses dan persetujuan diterapkan.</p>
       </section>
 
       <section className="section expo-section" id="pameran">
