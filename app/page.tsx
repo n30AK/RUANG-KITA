@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-type SceneId = "cafe" | "angkringan" | "pendopo" | "expo" | "karaoke";
+type SceneId = "cafe" | "angkringan" | "pendopo" | "expo" | "karaoke" | "school" | "family" | "office" | "neighborhood" | "worship" | "sports" | "hobby" | "learning" | "umkm" | "volunteer" | "travel" | "health" | "alumni";
 
 const scenes: { id: SceneId; name: string; note: string; emoji: string }[] = [
   { id: "cafe", name: "Kafe komunitas", note: "Hangat & produktif", emoji: "☕" },
@@ -10,6 +10,19 @@ const scenes: { id: SceneId; name: string; note: string; emoji: string }[] = [
   { id: "pendopo", name: "Pendopo", note: "Musyawarah bersama", emoji: "🌿" },
   { id: "expo", name: "Expo hall", note: "Pameran lintas grup", emoji: "🖼️" },
   { id: "karaoke", name: "Panggung Karaoke", note: "Tampil, bernyanyi & beri apresiasi", emoji: "🎤" },
+  { id: "school", name: "Orang Tua & Sekolah", note: "Agenda kelas, pengumuman & relawan", emoji: "🎒" },
+  { id: "family", name: "Ruang Keluarga", note: "Acara keluarga & kabar bersama", emoji: "🏡" },
+  { id: "office", name: "Kantor & Proyek", note: "Rapat, tugas & keputusan tim", emoji: "💼" },
+  { id: "neighborhood", name: "Warga & Lingkungan", note: "Iuran, ronda & kegiatan warga", emoji: "🏘️" },
+  { id: "worship", name: "Komunitas Ibadah", note: "Jadwal kegiatan & layanan sosial", emoji: "🕊️" },
+  { id: "sports", name: "Klub Olahraga", note: "Latihan, pertandingan & tim", emoji: "⚽" },
+  { id: "hobby", name: "Hobi & Kreator", note: "Karya, tantangan & berbagi minat", emoji: "🎨" },
+  { id: "learning", name: "Kelas & Belajar", note: "Materi, tugas & sesi belajar", emoji: "📚" },
+  { id: "umkm", name: "UMKM & Jual-Beli", note: "Katalog, pesanan & bazar", emoji: "🧺" },
+  { id: "volunteer", name: "Relawan & Sosial", note: "Aksi, donasi transparan & tugas", emoji: "🤝" },
+  { id: "travel", name: "Wisata & Perjalanan", note: "Itinerary, peserta & koordinasi", emoji: "🧭" },
+  { id: "health", name: "Dukungan Komunitas", note: "Dukungan sebaya dengan privasi", emoji: "💚" },
+  { id: "alumni", name: "Alumni & Reuni", note: "Jejaring, reuni & mentoring", emoji: "🎓" },
 ];
 
 const rooms = [
@@ -18,6 +31,9 @@ const rooms = [
   { name: "Pendopo Alumni", kind: "Alumni", scene: "pendopo", access: "Publik", people: "24 anggota", emoji: "🌿", color: "sage" },
   { name: "Galeri Karya Kita", kind: "Pameran", scene: "expo", access: "Publik", people: "6 stan", emoji: "🖼️", color: "lilac" },
   { name: "Panggung Karaoke Bersama", kind: "Hiburan komunitas", scene: "karaoke", access: "Undangan", people: "Daftar tampil demo", emoji: "🎤", color: "plum" },
+  { name: "Orang Tua Murid Kelas 5B", kind: "Sekolah & keluarga", scene: "school", access: "Undangan", people: "Agenda dan pengumuman demo", emoji: "🎒", color: "sky" },
+  { name: "Warga RW Harmoni", kind: "Warga & lingkungan", scene: "neighborhood", access: "Publik", people: "Kegiatan warga demo", emoji: "🏘️", color: "sage" },
+  { name: "Pasar UMKM Bersama", kind: "UMKM & jual-beli", scene: "umkm", access: "Publik", people: "Katalog contoh", emoji: "🧺", color: "amber" },
 ];
 
 const tables = [
@@ -125,7 +141,7 @@ export default function Home() {
           </article>)}
         </div>
         {visibleRooms.length === 0 && <p className="empty-state">Belum ada ruang untuk filter ini.</p>}
-        <p className="demo-disclaimer">Ruang dan jumlah anggota pada pratinjau ini adalah data contoh, bukan komunitas aktif. Panggung karaoke juga masih berupa konsep visual; audio, sinkronisasi lagu, dan video belum diimplementasikan.</p>
+        <p className="demo-disclaimer">Ruang dan jumlah anggota pada pratinjau ini adalah data contoh, bukan komunitas aktif. Scene komunitas adalah preset visual; data sekolah, warga, transaksi, kesehatan, dan anggota tidak akan dibuka lintas komunitas. Fitur khusus harus diaktifkan sesuai peran dan izin.</p>
       </section>
 
       <section className="section table-section" id="cara-kerja">
@@ -151,7 +167,7 @@ export default function Home() {
 
       <section className="section how-section">
         <div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> MUDAH UNTUK DIMULAI</div><h2>Dari WhatsApp ke <em>ruang bersama.</em></h2></div><p>WhatsApp tetap menjadi tempat percakapan harian. RUANG KITA menambahkan rumah untuk agenda, acara, pustaka, dan pertemuan.</p></div>
-        <div className="steps-grid"><article><span className="step-no">01</span><span className="step-emoji">🏡</span><h3>Buat ruang</h3><p>Pilih scene, beri nama room, dan tentukan apakah publik atau privat.</p></article><article><span className="step-no">02</span><span className="step-emoji">🔗</span><h3>Bagikan undangan</h3><p>Kirim tautan atau QR ke grup WhatsApp. Anggota bergabung sesuai izin.</p></article><article><span className="step-no">03</span><span className="step-emoji">🪑</span><h3>Pilih meja</h3><p>Setiap komunitas punya meja. Room bersama dapat mengundang komunitas lain.</p></article><article><span className="step-no">04</span><span className="step-emoji">🎥</span><h3>Mulai kegiatan</h3><p>Atur agenda, RSVP, pustaka, tautan meeting, atau sesi hiburan seperti karaoke. Video terintegrasi menyusul.</p></article></div>
+        <div className="steps-grid"><article><span className="step-no">01</span><span className="step-emoji">🏡</span><h3>Buat ruang</h3><p>Pilih scene sesuai konteks—sekolah, keluarga, kantor, warga, hobi, olahraga, karaoke, dan lainnya—lalu tentukan akses publik atau privat.</p></article><article><span className="step-no">02</span><span className="step-emoji">🔗</span><h3>Bagikan undangan</h3><p>Kirim tautan atau QR ke grup WhatsApp. Anggota bergabung sesuai izin.</p></article><article><span className="step-no">03</span><span className="step-emoji">🪑</span><h3>Pilih meja</h3><p>Setiap komunitas punya meja. Room bersama dapat mengundang komunitas lain.</p></article><article><span className="step-no">04</span><span className="step-emoji">🎥</span><h3>Mulai kegiatan</h3><p>Atur agenda, RSVP, pustaka, tautan meeting, atau sesi hiburan seperti karaoke. Video terintegrasi menyusul.</p></article></div>
       </section>
 
       <section className="closing-cta"><div><div className="eyebrow"><span className="eyebrow-line" /> MULAI DARI SATU MEJA</div><h2>Silaturahmi selalu<br />punya <em>tempat.</em></h2><p>Ruang yang hangat, komunitas yang terhubung, dan cerita yang terus berjalan.</p></div><a className="button button-light" href="#jelajah">Lihat pratinjau ruang <span>↗</span></a></section>
