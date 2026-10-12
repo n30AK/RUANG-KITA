@@ -33,9 +33,9 @@ Room yang sama dapat menampung banyak meja dari komunitas berbeda. Satu komunita
 3. **Pendopo Nusantara** — musyawarah, keluarga, desa, alumni, kegiatan sosial.
 4. **Ruang Konferensi** — agenda rapat, presentasi, moderator, catatan keputusan.
 5. **Taman Silaturahmi** — ruang publik yang tenang untuk percakapan dan pertemuan.
-6. **Expo Hall / Galeri** — stan pameran yang bisa dikunjungi peserta dari berbagai komunitas.
+6. **Expo Hall / Galeri** — stan pameran yang bisa dikunjungi peserta dari berbagai komunitas.\n7. **Panggung Karaoke Komunitas** — panggung untuk anggota dari satu atau beberapa komunitas bergabung sebagai penampil atau penonton, dengan daftar tampil dan moderator.
 
-MVP menggunakan ilustrasi/layout 2D ringan, bukan dunia 3D penuh. Scene harus tetap usable di layar kecil, keyboard, koneksi lambat, dan perangkat berkemampuan rendah.
+MVP menggunakan ilustrasi/layout 2D ringan, bukan dunia 3D penuh. Scene harus tetap usable di layar kecil, keyboard, koneksi lambat, dan perangkat berkemampuan rendah.\n\n### Panggung Karaoke Komunitas\n- Room karaoke dapat menjadi room mandiri atau venue gabungan yang mengundang beberapa komunitas/grup WhatsApp; identitas, keanggotaan, dan konten privat tiap komunitas tetap terpisah.\n- Peran sesi: host/moderator, penampil yang mendaftar, dan penonton. Antrean tampil, judul lagu, urutan giliran, dan reaksi/apresiasi merupakan fitur produk yang direncanakan.\n- MVP boleh menampilkan scene dan alur daftar tampil sebagai prototipe; pemutaran lagu, sinkronisasi audio, mikrofon, live video, dan karaoke bersama belum dianggap tersedia sampai diimplementasikan dan diuji.\n- Gunakan audio/lagu yang berizin atau sumber yang pemakaiannya diperbolehkan. Jangan mengunggah atau menyiarkan ulang backing track, lirik, atau rekaman berhak cipta tanpa hak yang sesuai. Sediakan aturan komunitas, pelaporan, mute/kick, dan kontrol moderator.\n- Jika kelak memakai video/audio real-time, evaluasi penyedia, bandwidth, batas peserta, moderasi, consent, dan biaya terlebih dahulu; jangan mengaktifkan layanan berbayar tanpa persetujuan.
 
 ## 5. MVP — fitur prioritas
 
@@ -53,7 +53,7 @@ MVP menggunakan ilustrasi/layout 2D ringan, bukan dunia 3D penuh. Scene harus te
 
 ### P1: kolaborasi
 - Room lintas komunitas dengan daftar peserta dan aturan per meja.
-- Expo Hall dengan booth publik, item katalog/portofolio dan tautan kontak.
+- Expo Hall dengan booth publik, item katalog/portofolio dan tautan kontak.\n- Scene Panggung Karaoke: jadwal/antrean tampil, persetujuan moderator, penonton, serta reaksi sederhana; audio/video langsung tetap di luar lingkup sampai provider dipilih dan diuji.
 - Export kalender (.ics), pencarian konten dan pelaporan.
 - Audit event untuk tindakan penting.
 
@@ -125,7 +125,7 @@ Target awal untuk diuji bersama 5–10 komunitas pilot, bukan klaim pengguna akt
 ## 12. Di luar cakupan MVP
 
 - Membaca atau mengelola isi grup WhatsApp biasa secara otomatis.
-- Menjamin jumlah peserta video tanpa evaluasi layanan.
+- Menjamin jumlah peserta video tanpa evaluasi layanan.\n- Karaoke streaming/audio real-time, katalog lagu berlisensi, dan sinkronisasi lirik pada MVP awal.
 - Dunia 3D penuh atau audio spasial.
 - Marketplace pembayaran, dompet, dan transfer dana.
 - Generasi AI berbayar aktif secara default.
