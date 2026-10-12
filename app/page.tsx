@@ -2,13 +2,14 @@
 
 import { useMemo, useState } from "react";
 
-type SceneId = "cafe" | "angkringan" | "pendopo" | "expo";
+type SceneId = "cafe" | "angkringan" | "pendopo" | "expo" | "karaoke";
 
 const scenes: { id: SceneId; name: string; note: string; emoji: string }[] = [
   { id: "cafe", name: "Kafe komunitas", note: "Hangat & produktif", emoji: "☕" },
   { id: "angkringan", name: "Angkringan", note: "Santai ala Nusantara", emoji: "🏮" },
   { id: "pendopo", name: "Pendopo", note: "Musyawarah bersama", emoji: "🌿" },
   { id: "expo", name: "Expo hall", note: "Pameran lintas grup", emoji: "🖼️" },
+  { id: "karaoke", name: "Panggung Karaoke", note: "Tampil, bernyanyi & beri apresiasi", emoji: "🎤" },
 ];
 
 const rooms = [
@@ -16,12 +17,14 @@ const rooms = [
   { name: "Angkringan Warga", kind: "Komunitas lokal", scene: "angkringan", access: "Undangan", people: "8 anggota", emoji: "🏮", color: "amber" },
   { name: "Pendopo Alumni", kind: "Alumni", scene: "pendopo", access: "Publik", people: "24 anggota", emoji: "🌿", color: "sage" },
   { name: "Galeri Karya Kita", kind: "Pameran", scene: "expo", access: "Publik", people: "6 stan", emoji: "🖼️", color: "lilac" },
+  { name: "Panggung Karaoke Bersama", kind: "Hiburan komunitas", scene: "karaoke", access: "Undangan", people: "Daftar tampil demo", emoji: "🎤", color: "plum" },
 ];
 
 const tables = [
   { name: "Meja Alumni 2004", subtitle: "Diskusi reuni & kabar teman", seats: "4 kursi", emoji: "🪑", status: "Sedang berkumpul" },
   { name: "Meja UMKM Lokal", subtitle: "Berbagi produk dan peluang", seats: "6 kursi", emoji: "🛍️", status: "Terbuka untuk tamu" },
   { name: "Meja Panitia", subtitle: "Agenda dan persiapan acara", seats: "4 kursi", emoji: "🗓️", status: "Khusus anggota" },
+  { name: "Daftar Tampil Karaoke", subtitle: "Antrean penyanyi dan lagu pilihan", seats: "Slot tampil", emoji: "🎤", status: "Dikelola moderator" },
 ];
 
 export default function Home() {
@@ -56,7 +59,7 @@ export default function Home() {
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" /> TEMPAT BERKUMPUL, DENGAN CARA BARU</div>
           <h1>Grup punya meja.<br /><em>Silaturahmi</em> punya ruang.</h1>
-          <p className="hero-description">Rumah digital untuk komunitasmu. Pilih suasana, ajak grup WhatsApp, lalu bertemu, berbagi cerita, dan menemukan komunitas lain.</p>
+          <p className="hero-description">Rumah digital untuk komunitasmu. Pilih suasana, ajak grup WhatsApp, lalu bertemu, berbagi cerita, bernyanyi di panggung, dan menemukan komunitas lain.</p>
           <div className="hero-actions">
             <a className="button button-dark" href="#jelajah">Jelajahi ruang <span>↗</span></a>
             <a className="button button-outline" href="#cara-kerja">Kenali cara kerja</a>
@@ -107,7 +110,7 @@ export default function Home() {
             <div className="preview-seat-label seat-label-one">Meja komunitas <b>4 kursi</b></div>
             <div className="preview-seat-label seat-label-two">Area bersama <b>Terbuka</b></div>
           </div>
-          <div className="preview-bottom"><div><small>SUASANA SAAT INI</small><h3>{activeScene.name}</h3><p>{activeScene.note}. Pilih meja, undang anggota, mulai kegiatan.</p></div><button className="button button-dark" onClick={() => setNotice("Pratinjau " + activeScene.name + " dipilih. Fitur masuk room akan dihubungkan setelah autentikasi siap.")}>Lihat ruang <span>↗</span></button></div>
+          <div className="preview-bottom"><div><small>SUASANA SAAT INI</small><h3>{activeScene.name}</h3><p>{activeScene.note}. Pilih meja, undang anggota, mulai kegiatan.</p>{scene === "karaoke" && <small className="karaoke-note">🎶 Demo konsep: antrean tampil, moderator, dan apresiasi. Audio/video karaoke belum aktif.</small>}</div><button className="button button-dark" onClick={() => setNotice("Pratinjau " + activeScene.name + " dipilih. Fitur masuk room akan dihubungkan setelah autentikasi siap.")}>Lihat ruang <span>↗</span></button></div>
         </div>
       </section>
 
@@ -122,7 +125,7 @@ export default function Home() {
           </article>)}
         </div>
         {visibleRooms.length === 0 && <p className="empty-state">Belum ada ruang untuk filter ini.</p>}
-        <p className="demo-disclaimer">Ruang dan jumlah anggota pada pratinjau ini adalah data contoh, bukan komunitas aktif.</p>
+        <p className="demo-disclaimer">Ruang dan jumlah anggota pada pratinjau ini adalah data contoh, bukan komunitas aktif. Panggung karaoke juga masih berupa konsep visual; audio, sinkronisasi lagu, dan video belum diimplementasikan.</p>
       </section>
 
       <section className="section table-section" id="cara-kerja">
@@ -148,7 +151,7 @@ export default function Home() {
 
       <section className="section how-section">
         <div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> MUDAH UNTUK DIMULAI</div><h2>Dari WhatsApp ke <em>ruang bersama.</em></h2></div><p>WhatsApp tetap menjadi tempat percakapan harian. RUANG KITA menambahkan rumah untuk agenda, acara, pustaka, dan pertemuan.</p></div>
-        <div className="steps-grid"><article><span className="step-no">01</span><span className="step-emoji">🏡</span><h3>Buat ruang</h3><p>Pilih scene, beri nama room, dan tentukan apakah publik atau privat.</p></article><article><span className="step-no">02</span><span className="step-emoji">🔗</span><h3>Bagikan undangan</h3><p>Kirim tautan atau QR ke grup WhatsApp. Anggota bergabung sesuai izin.</p></article><article><span className="step-no">03</span><span className="step-emoji">🪑</span><h3>Pilih meja</h3><p>Setiap komunitas punya meja. Room bersama dapat mengundang komunitas lain.</p></article><article><span className="step-no">04</span><span className="step-emoji">🎥</span><h3>Mulai kegiatan</h3><p>Atur agenda, RSVP, pustaka, dan tautan meeting. Video terintegrasi menyusul.</p></article></div>
+        <div className="steps-grid"><article><span className="step-no">01</span><span className="step-emoji">🏡</span><h3>Buat ruang</h3><p>Pilih scene, beri nama room, dan tentukan apakah publik atau privat.</p></article><article><span className="step-no">02</span><span className="step-emoji">🔗</span><h3>Bagikan undangan</h3><p>Kirim tautan atau QR ke grup WhatsApp. Anggota bergabung sesuai izin.</p></article><article><span className="step-no">03</span><span className="step-emoji">🪑</span><h3>Pilih meja</h3><p>Setiap komunitas punya meja. Room bersama dapat mengundang komunitas lain.</p></article><article><span className="step-no">04</span><span className="step-emoji">🎥</span><h3>Mulai kegiatan</h3><p>Atur agenda, RSVP, pustaka, tautan meeting, atau sesi hiburan seperti karaoke. Video terintegrasi menyusul.</p></article></div>
       </section>
 
       <section className="closing-cta"><div><div className="eyebrow"><span className="eyebrow-line" /> MULAI DARI SATU MEJA</div><h2>Silaturahmi selalu<br />punya <em>tempat.</em></h2><p>Ruang yang hangat, komunitas yang terhubung, dan cerita yang terus berjalan.</p></div><a className="button button-light" href="#jelajah">Lihat pratinjau ruang <span>↗</span></a></section>
