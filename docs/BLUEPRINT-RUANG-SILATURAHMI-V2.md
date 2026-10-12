@@ -33,7 +33,20 @@ Room yang sama dapat menampung banyak meja dari komunitas berbeda. Satu komunita
 3. **Pendopo Nusantara** — musyawarah, keluarga, desa, alumni, kegiatan sosial.
 4. **Ruang Konferensi** — agenda rapat, presentasi, moderator, catatan keputusan.
 5. **Taman Silaturahmi** — ruang publik yang tenang untuk percakapan dan pertemuan.
-6. **Expo Hall / Galeri** — stan pameran yang bisa dikunjungi peserta dari berbagai komunitas.\n7. **Panggung Karaoke Komunitas** — panggung untuk anggota dari satu atau beberapa komunitas bergabung sebagai penampil atau penonton, dengan daftar tampil dan moderator.
+6. **Expo Hall / Galeri** — stan pameran yang bisa dikunjungi peserta dari berbagai komunitas.\n7. **Panggung Karaoke Komunitas** — panggung untuk penampil dan penonton lintas komunitas, dengan antrean dan moderator.
+8. **Orang Tua & Sekolah** — papan pengumuman, kalender kelas, tugas/berkas, RSVP pertemuan, relawan, dan kanal per kelas.
+9. **Ruang Keluarga** — agenda keluarga, acara, album/arsip berbagi yang aksesnya dibatasi, dan daftar kebutuhan.
+10. **Kantor & Proyek** — ruang rapat, daftar tugas, pemilik tugas, keputusan, tenggat, dan catatan rapat.
+11. **Warga & Lingkungan** — kalender ronda/kegiatan, laporan fasilitas, pengumuman warga, serta pencatatan iuran yang transparan bila diaktifkan.
+12. **Komunitas Ibadah** — agenda kegiatan, relawan, kelas, dan pengumuman dengan konfigurasi yang dipilih pengelola.
+13. **Klub Olahraga** — jadwal latihan/pertandingan, RSVP, roster, hasil, dan koordinasi transportasi.
+14. **Hobi & Kreator** — tantangan karya, galeri, sesi kritik, showcase, dan jadwal komunitas.
+15. **Kelas & Belajar** — materi, tugas, sesi belajar, daftar hadir, dan tanya jawab.
+16. **UMKM & Jual-Beli** — katalog, stan, formulir pesanan/permintaan, jadwal bazar, dan kontak penjual; transaksi tidak otomatis diproses.
+17. **Relawan & Sosial** — pendaftaran relawan, pembagian tugas, kebutuhan barang, dan pelaporan kegiatan; donasi memerlukan kontrol keuangan terpisah.
+18. **Wisata & Perjalanan** — itinerary, titik kumpul, checklist peserta, pengingat, dan kontak koordinator.
+19. **Dukungan Komunitas** — ruang dukungan sebaya dengan akses ketat, tanpa menganggap AI sebagai tenaga profesional dan tanpa membuka data sensitif.
+20. **Alumni & Reuni** — direktori sukarela, agenda reuni, mentoring, dan jejaring karier.
 
 MVP menggunakan ilustrasi/layout 2D ringan, bukan dunia 3D penuh. Scene harus tetap usable di layar kecil, keyboard, koneksi lambat, dan perangkat berkemampuan rendah.\n\n### Panggung Karaoke Komunitas\n- Room karaoke dapat menjadi room mandiri atau venue gabungan yang mengundang beberapa komunitas/grup WhatsApp; identitas, keanggotaan, dan konten privat tiap komunitas tetap terpisah.\n- Peran sesi: host/moderator, penampil yang mendaftar, dan penonton. Antrean tampil, judul lagu, urutan giliran, dan reaksi/apresiasi merupakan fitur produk yang direncanakan.\n- MVP boleh menampilkan scene dan alur daftar tampil sebagai prototipe; pemutaran lagu, sinkronisasi audio, mikrofon, live video, dan karaoke bersama belum dianggap tersedia sampai diimplementasikan dan diuji.\n- Gunakan audio/lagu yang berizin atau sumber yang pemakaiannya diperbolehkan. Jangan mengunggah atau menyiarkan ulang backing track, lirik, atau rekaman berhak cipta tanpa hak yang sesuai. Sediakan aturan komunitas, pelaporan, mute/kick, dan kontrol moderator.\n- Jika kelak memakai video/audio real-time, evaluasi penyedia, bandwidth, batas peserta, moderasi, consent, dan biaya terlebih dahulu; jangan mengaktifkan layanan berbayar tanpa persetujuan.
 
@@ -63,7 +76,7 @@ MVP menggunakan ilustrasi/layout 2D ringan, bukan dunia 3D penuh. Scene harus te
 - AI notulen/ringkasan hanya dengan pemberitahuan dan persetujuan peserta.
 - Eksperimen avatar, audio berbasis jarak dan renderer 3D setelah validasi performa serta biaya.
 
-## 6. Video meeting dan AI
+## 6. Fitur kontekstual berdasarkan jenis grup\n\nScene adalah preset pengalaman, bukan sekadar dekorasi. Pengelola dapat memilih modul yang relevan; modul yang tidak dipakai tidak perlu muncul. Contoh: sekolah mendapat kalender kelas, pengumuman dan relawan; warga mendapat agenda lingkungan dan pelaporan fasilitas; kantor mendapat tugas dan keputusan; UMKM mendapat katalog dan permintaan pesanan; olahraga mendapat jadwal dan RSVP. Setiap modul wajib memakai aturan akses per komunitas/room, pencatatan aktivitas penting, dan persetujuan sebelum notifikasi dikirim. Hindari mengumpulkan data anak, kesehatan, keuangan, atau data sensitif lebih dari yang diperlukan.\n\n## 7. Arsitektur multi-agent AI\n\nMulti-agent adalah asisten yang memiliki peran dan alat terbatas. Agent tidak otomatis mendapat akses ke semua data, tidak boleh meniru admin WhatsApp, dan tidak boleh mengirim pesan atau mengambil tindakan eksternal tanpa otorisasi. Untuk MVP, mulai dari rekomendasi/draf yang ditinjau manusia; konektor WhatsApp hanya jika kelak tersedia melalui API resmi yang sesuai kebijakan dan persetujuan pengguna.\n\n### Peran agent\n1. **Orchestrator / Koordinator** — menerima permintaan, menentukan agent yang relevan, menyusun hasil, menerapkan batas biaya dan meminta persetujuan untuk aksi berisiko.\n2. **Community Planner** — membantu pengelola memilih jenis komunitas, scene, modul, peran, dan aturan.\n3. **School & Family Agent** — membantu merancang kalender sekolah, agenda kelas, FAQ orang tua dan draf pengumuman; tidak membuat keputusan terkait anak.\n4. **Events & Scheduler Agent** — menyusun acara, RSVP, jadwal, pengingat, dan ekspor kalender; memeriksa benturan jadwal bila data tersedia.\n5. **Knowledge & Document Agent** — mengatur dokumen, FAQ, notulen dan pencarian berdasarkan izin akses; tidak membocorkan dokumen privat.\n6. **Task & Operations Agent** — membuat daftar tugas, penanggung jawab, tenggat dan ringkasan status untuk kantor, warga, relawan, atau panitia.\n7. **Marketplace & UMKM Agent** — membantu menyusun katalog, deskripsi produk dan draf respons calon pembeli; tidak memproses pembayaran tanpa sistem transaksi yang disetujui.\n8. **Engagement & Activity Agent** — menyarankan aktivitas yang sesuai seperti karaoke, olahraga, kelas, pameran, atau tantangan kreatif; rekomendasi tidak mengirim undangan otomatis.\n9. **Safety & Moderation Agent** — membantu menandai spam, pelecehan, penipuan atau pelanggaran aturan untuk ditinjau moderator; keputusan sanksi final tetap pada manusia.\n10. **Privacy & Access Agent** — memeriksa permintaan data, izin, retensi dan potensi kebocoran lintas komunitas; tidak menggantikan review keamanan.\n11. **Analytics Agent** — membuat ringkasan agregat tentang RSVP, kehadiran dan aktivitas yang memang diizinkan; hindari profiling sensitif.\n12. **WhatsApp Bridge Agent** — pada fase masa depan, menyiapkan pesan/tautan undangan dan mengelola integrasi resmi yang tersedia; tidak membaca chat pribadi atau semua grup secara diam-diam.\n\n### Aturan orkestrasi dan keamanan agent\n- Setiap agent memakai tool allowlist dan konteks minimum yang dibutuhkan; tenant/room ID dan role harus diverifikasi server-side.\n- Draf pesan, pengumuman, moderasi, publikasi, undangan massal, serta tindakan yang mengubah data memerlukan persetujuan manusia sesuai tingkat risikonya.\n- Catat siapa meminta, agent mana yang bekerja, data apa yang dipakai, keputusan dan hasil; jangan simpan chain-of-thought privat.\n- Data dari dokumen, pesan yang diimpor, dan konten pengguna dianggap input tak tepercaya, bukan instruksi sistem.\n- Dukung batas token/biaya, rate limit, fallback tanpa AI, penghapusan data, serta pengaturan untuk menonaktifkan agent per komunitas.\n- Jangan mengirim data anak, kesehatan, agama, atau data sensitif ke model eksternal tanpa dasar pemrosesan, pemberitahuan, dan persetujuan yang sesuai.\n\n## 8. Video meeting dan AI
 
 Tautan eksternal adalah jalur awal yang hemat biaya dan tidak mengharuskan RUANG KITA meng-host media. Validasi skema URL, batasi akses sesuai privasi, dan jangan mengklaim meeting berhasil jika hanya menampilkan tautan.
 
@@ -71,7 +84,7 @@ Video terintegrasi memerlukan evaluasi WebRTC/SFU atau layanan pihak ketiga, bia
 
 AI Scene Studio pada awalnya dapat menghasilkan konsep dan aset statis; sistem harus mengontrol ukuran, format, keamanan, hak penggunaan, moderasi, dan biaya. Jangan membuat pemanggilan model berbayar aktif tanpa persetujuan.
 
-## 7. Akses, privasi dan moderasi
+## 9. Akses, privasi dan moderasi
 
 - Room publik: dapat dilihat tanpa login hanya pada konten yang memang ditetapkan publik; aksi menulis/RSVP/mengikuti memerlukan autentikasi.
 - Room privat/invite-only: tidak boleh mengungkap nama anggota, agenda, konten, atau keberadaan meja privat kepada pengunjung yang tidak berwenang.
@@ -83,7 +96,7 @@ AI Scene Studio pada awalnya dapat menghasilkan konsep dan aset statis; sistem h
 - Uji akses allow/deny antar-tenant; jangan mengandalkan UUID yang sulit ditebak sebagai kontrol keamanan.
 - Jangan menyimpan data pribadi berlebihan. Evaluasi kepatuhan UU PDP Indonesia sebelum pilot publik.
 
-## 8. Arsitektur awal
+## 10. Arsitektur awal
 
 - Web: Next.js + TypeScript, responsive mobile-first, PWA-ready.
 - Data: Neon PostgreSQL; skema aplikasi hanya setelah migrasi diuji pada branch development.
@@ -93,7 +106,7 @@ AI Scene Studio pada awalnya dapat menghasilkan konsep dan aset statis; sistem h
 - CI: lint, typecheck, unit/security tests dan build di GitHub Actions.
 - Hosting: pilih opsi free tier setelah memeriksa kompatibilitas dan kuota; GitHub sendiri bukan host untuk aplikasi dinamis. Tidak ada klaim live sebelum deployment diuji.
 
-## 9. Entitas data yang dibutuhkan
+## 11. Entitas data yang dibutuhkan
 
 Entitas yang telah dirancang dalam migration awal: profiles, communities, memberships, invitations, announcements, events, event_rsvps, content_items, media_assets, audit_logs, reports, user_consents.
 
@@ -108,7 +121,7 @@ Entitas tambahan yang dibutuhkan untuk konsep ruang:
 
 Sebelum membuat migration berikutnya, review normalisasi dan aturan kepemilikan. Hindari duplikasi identitas anggota; foreign key ke profil hanya setelah mapping Auth diverifikasi. Terapkan migration di branch pengembangan terlebih dahulu dan uji rollback/restore.
 
-## 10. Tahapan dan kriteria selesai
+## 12. Tahapan dan kriteria selesai
 
 1. **Product/UI prototype:** scene 2D dan navigasi dapat dicoba dengan data contoh yang jelas berlabel demo.
 2. **Database/auth:** mapping identitas diverifikasi; migration diuji pada development branch; tidak ada perubahan production.
@@ -118,11 +131,11 @@ Sebelum membuat migration berikutnya, review normalisasi dan aturan kepemilikan.
 6. **Release candidate:** lint/typecheck/build, tes keamanan, aksesibilitas, responsif, backup/restore, kebijakan privasi, dan observabilitas.
 7. **Deployment:** hanya dinyatakan live setelah URL deployment nyata dan endpoint health diuji.
 
-## 11. Target pilot
+## 13. Target pilot
 
 Target awal untuk diuji bersama 5–10 komunitas pilot, bukan klaim pengguna aktif. Ukur keberhasilan dari waktu masuk room, keberhasilan menerima undangan, jumlah RSVP, kunjungan booth, stabilitas mobile, dan laporan pelanggaran. Angka target dapat direvisi berdasarkan hasil pilot.
 
-## 12. Di luar cakupan MVP
+## 14. Di luar cakupan MVP
 
 - Membaca atau mengelola isi grup WhatsApp biasa secara otomatis.
 - Menjamin jumlah peserta video tanpa evaluasi layanan.\n- Karaoke streaming/audio real-time, katalog lagu berlisensi, dan sinkronisasi lirik pada MVP awal.
