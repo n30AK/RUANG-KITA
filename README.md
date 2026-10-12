@@ -1,35 +1,62 @@
-# RUANG KITA
+# RUANG KITA — Ruang Silaturahmi Digital
 
-Platform komunitas digital yang melengkapi WhatsApp, bukan menggantikannya. Setiap komunitas memiliki ruang digital untuk agenda, pengumuman, pustaka, rapat eksternal, dan keanggotaan.
+RUANG KITA adalah rumah digital komunitas yang melengkapi WhatsApp, bukan menggantikannya. Pengguna dapat memilih suasana ruang, berkumpul pada meja komunitas, berbagi agenda/pustaka, mengikuti pertemuan, dan mengunjungi pameran lintas komunitas.
 
-## Prinsip proyek
+## Arah produk yang disepakati
 
-- Target biaya awal: Rp0 dengan batas paket gratis; tidak menjanjikan operasional tanpa batas.
-- GitHub adalah pusat source code dan CI/CD.
-- Neon adalah database PostgreSQL.
-- Jangan simpan password, connection string, API key, atau token di repository.
-- Jangan menyatakan aplikasi production-ready sebelum autentikasi, otorisasi multi-tenant, pengujian, backup/restore, dan deployment diverifikasi.
+- **Visual hybrid 2D → 3D:** MVP dimulai dari scene 2D interaktif yang ringan dan responsif; 3D adalah fase lanjutan.
+- **Video meeting dua jalur:** tautan eksternal terlebih dahulu; video terintegrasi menyusul setelah evaluasi teknis, biaya, kapasitas, dan privasi.
+- **Akses hybrid:** room publik dapat dikunjungi sesuai pengaturan; room privat membutuhkan undangan/keanggotaan. Privasi meja dan konten tetap ditegakkan.
+- **Target biaya awal Rp0:** gunakan free tiers dan data demo selama pengembangan. Kuota gratis dapat berubah; tidak ada janji layanan gratis tanpa batas.
+- **GitHub-first:** source code, review, dan CI/CD dikelola di GitHub; Neon PostgreSQL adalah database.
 
-## MVP
+## Prototype UI
 
-1. Profil pengguna dan komunitas
-2. Keanggotaan dan undangan yang dapat dicabut/kedaluwarsa
-3. Pengumuman
-4. Agenda dan RSVP
-5. Pustaka komunitas (dokumen, FAQ, notulen, podcast/video via tautan)
-6. Link berbagi komunitas dan integrasi kalender
-7. Audit log dan pelaporan konten
+Aplikasi Next.js pada branch `feat/ruang-silaturahmi-mvp` menampilkan:
+- pemilih scene Kafe, Angkringan, Pendopo, dan Expo Hall;
+- pratinjau room 2D dan meja komunitas;
+- katalog room dengan filter publik/undangan;
+- ilustrasi meja, expo hall, dan alur dari WhatsApp;
+- tata letak responsif dengan label jelas bahwa data adalah demo.
 
-## Database
+**Peringatan:** prototype UI menggunakan data statis. Belum ada autentikasi, database runtime, undangan nyata, video call, AI scene generation, atau deployment production. Tombol demo tidak membuat room/akun sungguhan.
 
-Migration awal: `database/migrations/0001_initial_schema.sql`.
+## Dokumen
 
-Migration ini adalah rancangan skema awal dan **belum diterapkan** ke database Neon. Sebelum menerapkan:
-- Konfirmasi pemetaan ID pengguna ke Neon Auth.
-- Implementasikan pemeriksaan otorisasi di backend untuk setiap operasi berdasarkan membership/role dan community_id.
-- Tambahkan dan uji RLS jika akses database akan diberikan langsung ke role aplikasi.
-- Buat migration yang dapat diulang/ditinjau dan uji pada branch pengembangan sebelum production.
+- [Blueprint Ruang Silaturahmi Digital v2.0](docs/BLUEPRINT-RUANG-SILATURAHMI-V2.md)
+- [Rencana implementasi MVP](docs/MVP-IMPLEMENTATION-PLAN.md)
+- [Migration skema awal (belum diterapkan)](database/migrations/0001_initial_schema.sql)
+
+## Database dan keamanan
+
+Migration awal **belum diterapkan** ke Neon. Database saat ini berisi tabel sistem Neon Auth; tabel aplikasi belum dibuat. Sebelum membuat migration berikutnya:
+1. Buat dan gunakan branch development terpisah.
+2. Verifikasi pemetaan ID/session Neon Auth ke profil aplikasi.
+3. Review model data room, room membership, tables, invitations, sessions dan scene presets.
+4. Terapkan migration hanya pada development branch; uji constraints, auth, privasi, tenant isolation dan restore.
+5. Minta persetujuan eksplisit sebelum migration production.
+
+Jangan simpan connection string, password, API key, token, atau file `.env` di repository. Setiap operasi data harus mendapat pemeriksaan otorisasi server-side; menyembunyikan tombol di UI bukan kontrol keamanan.
+
+## Cara menjalankan prototype lokal
+
+Persyaratan: Node.js yang kompatibel dengan Next.js dan npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Buka alamat lokal yang dicetak Next.js. Untuk pemeriksaan:
+
+```bash
+npm run typecheck
+npm run lint
+npm run build
+```
+
+Pemeriksaan tersebut belum dijalankan oleh commit ini. Jangan menganggap build atau deployment berhasil sebelum CI memberi hasil nyata.
 
 ## Status
 
-Fondasi database dirancang. UI, backend API, auth flow, security tests, dan deployment masih harus dibangun dan diverifikasi.
+Prototype UI dan blueprint ada di branch fitur; belum digabungkan ke `main`, belum terkoneksi ke Neon, dan belum live. GitHub Pages saja tidak dapat menjalankan backend dinamis Next.js; hosting harus dipilih dan diverifikasi sebelum go-live.
