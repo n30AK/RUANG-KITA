@@ -65,3 +65,16 @@ A feature is complete only when:
 
 ## Rp0 discipline
 Use existing free tiers and local development. Avoid paid API calls, hosted media/video, AI generation, custom domains, or production usage that may incur costs until the owner approves. Free-tier quotas may change and are not a permanent zero-cost guarantee.
+
+
+### F. Podcast & healthy community engagement
+- [x] Define Podcast Studio, episode library, live-audio roadmap, co-host/guest invitations and permission boundaries in the product blueprint.
+- [x] Define cross-community guest passes that grant session-scoped access only, not blanket community membership.
+- [x] Define healthy retention features: opted-in agenda reminders, weekly digest, saved episodes, learning activities, contribution recognition and notification controls.
+- [ ] Add podcast/episode demo cards to the product UI, explicitly labeled as prototype content.
+- [ ] Implement show/episode metadata and public/private visibility after database review.
+- [ ] Implement invitation creation, accept, expire, revoke, role scope, and server-side authorization.
+- [ ] Add recording/transcription consent and copyright/reporting flow before any native media feature.
+- [ ] Add notification preferences, quiet hours, digest opt-in, mute/unfollow and delete/export controls.
+- [ ] Validate cross-tenant deny tests for podcast assets, private episodes, guest passes and transcripts.
+- [ ] Choose an audio/media provider only after cost, licensing, storage, bandwidth, privacy and Rp0 constraints are documented; no paid activation without approval.
