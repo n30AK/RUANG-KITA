@@ -184,3 +184,26 @@ h1 em,h2 em{font-family:var(--serif);font-weight:400;color:#b66f4f;letter-spacin
 .art-plum{background:linear-gradient(145deg,#ead5e6,#c9a9ca)}.art-plum .room-emoji{filter:drop-shadow(0 10px 12px #633e6222)}
 .karaoke-note{display:block!important;color:#80547d!important;line-height:1.6;margin-top:8px;font-size:9px!important}
 @media(max-width:720px){.preview-karaoke .preview-center:after{font-size:8px;padding:7px 9px;top:14%}}
+
+/* Additional community scene palette presets; visual-only prototypes. */
+.scene-school{background:#dce8f0;color:#35536a}.scene-family{background:#f1e1ce;color:#855b3e}
+.scene-office{background:#dfe4e2;color:#40534d}.scene-neighborhood{background:#dce6d5;color:#45634a}
+.scene-worship{background:#e8e1f0;color:#67567f}.scene-sports{background:#d6e8d7;color:#386347}
+.scene-hobby{background:#f1d9ca;color:#8c5745}.scene-learning{background:#dce6f1;color:#405d83}
+.scene-umkm{background:#f1e1c4;color:#8a6031}.scene-volunteer{background:#dce8de;color:#3f6b50}
+.scene-travel{background:#d5e8e8;color:#3f6a6a}.scene-health{background:#e0ece4;color:#4b6d5a}
+.scene-alumni{background:#e7dfcf;color:#77664a}
+.preview-school{background:radial-gradient(ellipse at 50% 30%,#f7f7e8,#cddfe8)}
+.preview-family{background:radial-gradient(ellipse at 50% 30%,#fff0d8,#e5c6a9)}
+.preview-office{background:radial-gradient(ellipse at 50% 30%,#f5f4ed,#ccd8d2)}
+.preview-neighborhood{background:radial-gradient(ellipse at 50% 30%,#f0f4dd,#c9ddc2)}
+.preview-worship{background:radial-gradient(ellipse at 50% 30%,#f6effb,#d7c9e6)}
+.preview-sports{background:radial-gradient(ellipse at 50% 30%,#eff8e8,#c2ddc4)}
+.preview-hobby{background:radial-gradient(ellipse at 50% 30%,#fff0e6,#eac5b1)}
+.preview-learning{background:radial-gradient(ellipse at 50% 30%,#eff5ff,#c6d8ee)}
+.preview-umkm{background:radial-gradient(ellipse at 50% 30%,#fff3d8,#e6d0a8)}
+.preview-volunteer{background:radial-gradient(ellipse at 50% 30%,#f1f7e9,#c8ddcc)}
+.preview-travel{background:radial-gradient(ellipse at 50% 30%,#e9f8f5,#bddedc)}
+.preview-health{background:radial-gradient(ellipse at 50% 30%,#f0f8f1,#cde1d3)}
+.preview-alumni{background:radial-gradient(ellipse at 50% 30%,#faf0dc,#d9c9a9)}
+.art-sky{background:linear-gradient(145deg,#dce8f0,#a9c8d8)}
