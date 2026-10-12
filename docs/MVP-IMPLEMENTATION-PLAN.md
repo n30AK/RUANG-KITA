@@ -96,9 +96,14 @@ Use existing free tiers and local development. Avoid paid API calls, hosted medi
 - [ ] Verify invitation scope constraints and room/table capacity enforcement in application logic or database constraints.
 
 
-### H. Database validation status
+### H. Database validation status (updated 12 Oct 2026)
 
-- [ ] **Current blocker (12 Oct 2026):** Neon `production` currently has no application tables in `public`; migration 0002 cannot be tested alone because `public.communities` and other base relations do not exist yet. A combined base+extension temporary-branch test was blocked by the database tool safety gate. Do not apply either migration to production; first create/use an isolated development branch and review the base schema, then test migrations sequentially.
+- [x] Created isolated Neon development branch `dev-ruang-kita-schema-review` (`br-calm-sun-b3bzbabe`) from production branch `br-floral-cell-b3xvsbee`; low 0.25 CU compute requested.
+- [x] Applied migration 0001, then 0002, then 0003 sequentially to that development branch. Neon returned success for all 23 + 25 + 28 SQL statements; the expected application tables are visible in `public`.
+- [ ] Inspect every column, constraint, index, and foreign key and run positive/negative behavior tests with representative test data.
+- [ ] Implement and test RLS/server authorization after confirming Neon Auth identity/session mapping. **RLS is not yet enabled by these draft migrations.**
+- [ ] Confirm rollback/restore and retention strategy on the isolated branch.
+- [x] Confirmed no migration was applied to Neon production. Production still remains unchanged by this validation work.
 
 
 ### I. Delapan modul komunitas — requirement resmi (12 Oct 2026)
