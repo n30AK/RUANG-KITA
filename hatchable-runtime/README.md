@@ -1,6 +1,10 @@
 # RUANG KITA — Hatchable runtime source mirror
 
-This directory mirrors the source deployed to https://ruang-kita.hatchable.site (Hatchable deployment v7, 12 October 2026).
+This directory mirrors the source deployed to https://ruang-kita.hatchable.site (Hatchable deployment v8, 12 October 2026).
+
+## UI/UX migration — StartBootstrap Agency
+
+The public landing page was migrated from `startbootstrap-agency-gh-pages.zip` in the RUANG KITA Library folder. The live deployment uses the Agency Bootstrap 5 theme, wide photo hero, responsive navigation, feature sections, a community discovery grid, an Indonesian-language usage timeline, and calls to action. The live Hatchable project vendors theme CSS and visual assets under `public/agency.css` and `public/assets/`.
 
 ## Structure
 
@@ -23,4 +27,4 @@ Hatchable is the current runtime. This directory is a source mirror for review a
 
 ## Release limitations
 
-Podcast uploads/live audio, opt-in member directory, marketplace transactions, AI assistant, social funds/payments, integrated video, and full moderation/reporting are not enabled. Landing-page cards remain illustrative; the member dashboard is connected to the Hatchable app database.
+Podcast uploads/live audio, opt-in member directory, marketplace transactions, AI assistant, social funds/payments, integrated video, and full moderation/reporting are not enabled. Public community cards are loaded from the live API; when no public community exists, the UI shows an empty state rather than inventing community listings.
