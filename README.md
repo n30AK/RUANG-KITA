@@ -33,3 +33,14 @@ Migration ini adalah rancangan skema awal dan **belum diterapkan** ke database N
 ## Status
 
 Fondasi database dirancang. UI, backend API, auth flow, security tests, dan deployment masih harus dibangun dan diverifikasi.
+
+## Status deployment RUANG KITA (2026-10-14)
+
+- Aplikasi hosted: https://ruang-kita.hatchable.site
+- Ruang 3D: https://ruang-kita.hatchable.site/ruang-3d.html
+- Deployment hosted yang diverifikasi: Hatchable v56.
+- Source scene 3D yang disinkronkan ke repository: `public/ruang-3d.html`.
+- Laporan runtime, hasil smoke test, batasan, dan pekerjaan berikutnya: [docs/3d-runtime-status.md](docs/3d-runtime-status.md).
+
+**Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Saat ini route 3D masih menampilkan scene Kafe Komunitas; scene ANGKRINGAN KITA dan PANTAI KITA, uji GLB dengan model nyata, uji collision menyeluruh, serta sinkronisasi penuh backend ke GitHub masih menjadi pekerjaan berikutnya. Hatchable v56 tetap runtime deployment aktif.
+
