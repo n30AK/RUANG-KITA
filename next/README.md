@@ -3,7 +3,7 @@
 This directory mirrors the active Hatchable project `RUANG KITA Next` (project ID `proj_uCY4wAEQsDoi`) separately from the frozen legacy site at the repository root.
 
 - **Live deployment:** https://ruang-kita-next.hatchable.site
-- **Verified deployment:** v21 (2026-10-14), public visibility
+- **Verified deployment:** v24 (2026-10-14), public visibility
 - **Runtime:** Three.js r164; glTF 2.0 / GLB asset interoperability
 - **Scenes:** ANGKRINGAN KITA, CAFE KITA, PANTAI KITA
 - **Latest runtime report:** [../docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md](../docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md)
@@ -17,6 +17,7 @@ This directory mirrors the active Hatchable project `RUANG KITA Next` (project I
 - `lib/`: shared audit helpers
 - `migrations/`: versioned Hatchable PostgreSQL migrations
 - `hatchable.toml`: auth and database access declarations
+- `public/assets/LICENSES.md`: source, license, and checksum for the Cafe Avocado prop
 
 ## Source and deployment notes
 
