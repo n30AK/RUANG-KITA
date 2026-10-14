@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Ruang komunitas RUANG KITA"><title>Komunitas · RUANG KITA</title><link rel="stylesheet" href="/styles.css"><script src="/__hatchable/events.js"></script>
+<style>
+.community-main{padding:30px 0 55px}.community-hero{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:16px 0 24px}.community-hero h1{font:800 clamp(28px,4vw,38px) Manrope;letter-spacing:-.05em;margin:0}.community-hero p:not(.eyebrow){font-size:12px;color:#91a69a;line-height:1.7}.community-grid{display:grid;grid-template-columns:310px minmax(0,1fr);gap:17px}.community-panel{background:#121e1c;border:1px solid var(--line);border-radius:18px;padding:18px;min-width:0}.community-panel h2{font:700 16px Manrope;margin:0 0 14px}.community-input{width:100%;min-height:42px;border:1px solid #344b40;background:#0d1816;border-radius:10px;color:#eaf3eb;padding:10px 12px;font:12px 'DM Sans';outline:none;margin-bottom:9px}.community-input:focus{border-color:#9ed2a7}.community-btn{border:1px solid #b8e0bf;background:#b9e5bf;color:#122219;border-radius:10px;padding:11px 14px;font:700 11px 'DM Sans';cursor:pointer}.community-btn.secondary{background:#1d3028;border-color:#3b5746;color:#c5dec9}.community-btn:disabled{opacity:.5;cursor:wait}.community-room-list{display:flex;flex-direction:column;gap:7px;margin-top:14px}.room-item{display:flex;flex-direction:column;gap:5px;width:100%;text-align:left;padding:12px;border:1px solid transparent;border-radius:11px;background:#182724;color:#e5eee6;cursor:pointer}.room-item.active{border-color:#7eae86;background:#23372d}.room-item strong{font:700 11px Manrope}.room-item small{font-size:9px;color:#8fa69a}.community-chat-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}.community-chat-head h2{margin:0 0 5px}.community-chat-head p{margin:0;color:#91a69a;font-size:10px}.chat-log{height:340px;overflow:auto;display:flex;flex-direction:column;gap:11px;padding:16px 2px}.chat-empty{margin:auto;text-align:center;color:#81988a;font-size:11px;line-height:1.8;max-width:280px}.chat-message{padding:10px 12px;border-radius:12px;background:#1a2a25;max-width:88%;align-self:flex-start}.chat-message.mine{align-self:flex-end;background:#2c4536}.chat-message strong{font-size:10px;color:#bde0c0}.chat-message time{font-size:8px;color:#789183;margin-left:8px}.chat-message p{font-size:12px;line-height:1.6;margin:5px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}.chat-compose{display:flex;gap:8px;padding-top:12px;border-top:1px solid var(--line)}.chat-compose .community-input{margin:0;flex:1}.chat-compose .community-btn{white-space:nowrap}.community-message{min-height:17px;color:#9fcea7;font-size:10px;line-height:1.6;margin-top:10px}.community-message.error{color:#ffb2a1}.invite-row{display:flex;gap:7px;margin-top:15px}.invite-row .community-input{margin:0;min-width:0}.invite-code{padding:12px;margin-top:10px;background:#0e1916;border:1px dashed #56745e;border-radius:10px;word-break:break-all;font:11px monospace;color:#c2e8c8}.community-top-link{font-size:11px;color:#b9e5bf;text-decoration:none}.community-user{font-size:10px;color:#8fa69a}.community-panel [hidden]{display:none!important}
+@media(max-width:780px){.app-shell{padding:0 14px}.community-grid{grid-template-columns:1fr}.community-hero{align-items:flex-start;flex-direction:column}.chat-log{height:42vh;min-height:250px}.community-panel{padding:14px}.community-hero h1{font-size:29px}}
+</style></head>
+<body><main class="app-shell"><header class="topbar"><a class="brand" href="/"><span class="brand-mark"><span></span><span></span><span></span></span><span><strong>RUANG KITA</strong><small>DUNIA KITA, CERITA KITA</small></span></a><div class="topbar-right"><span class="community-user" id="signed-in-as">Memeriksa akun...</span><button class="icon-button" id="signout-button" title="Keluar">↪</button></div></header>
+<main class="community-main"><a href="/" class="community-top-link">← Kembali ke dunia 3D</a><section class="community-hero"><div><p class="eyebrow">KONEKSI ANTARANGGOTA</p><h1>Ruang untuk berkumpul<span style="color:#b9e5bf">.</span></h1><p>Buat ruang kecil, bergabung dalam percakapan, dan undang orang yang Anda kenal.</p></div><div class="status-pill"><i></i><span id="connection-status">Menyiapkan koneksi</span></div></section>
+<div class="community-grid"><aside class="community-panel"><h2>Jelajahi ruang</h2><form id="create-room-form"><input class="community-input" id="new-room-name" maxlength="64" placeholder="Nama ruang baru" required><input class="community-input" id="new-room-description" maxlength="240" placeholder="Deskripsi singkat (opsional)"><button class="community-btn" type="submit" style="width:100%">＋ Buat ruang</button></form><div id="room-list" class="community-room-list"><p class="chat-empty">Memuat daftar ruang...</p></div><div class="invite-row"><input class="community-input" id="invite-token" maxlength="48" placeholder="Kode undangan"><button class="community-btn secondary" id="accept-invite">Gabung</button></div><div class="community-message" id="room-message" role="status"></div></aside>
+<section class="community-panel"><div class="community-chat-head"><div><h2 id="chat-title">Pilih ruang komunitas</h2><p id="chat-subtitle">Pesan hanya terlihat oleh anggota ruang.</p></div><button class="community-btn secondary" id="invite-button" hidden>Undang anggota</button></div><div class="chat-log" id="chat-log"><p class="chat-empty">Pilih ruang untuk membaca dan mengirim pesan. Bergabunglah dengan ruang publik untuk memulai percakapan.</p></div><form class="chat-compose" id="chat-form"><input class="community-input" id="chat-input" maxlength="1200" placeholder="Tulis pesan..." disabled required><button class="community-btn" id="send-message" disabled>Kirim ↑</button></form><div class="community-message" id="chat-message" role="status"></div><div class="invite-code" id="invite-result" hidden></div></section></div>
+</main><footer class="footer"><span>© RUANG KITA <span id="year"></span></span><span>Hormati privasi dan kenyamanan sesama anggota.</span><span class="footer-version">COMMUNITY · MVP</span></footer></main>
+<script>
+(function(){
+const $=id=>document.getElementById(id),API=(window.__HATCHABLE__&&window.__HATCHABLE__.api)||"/api";
+let user=null,activeRoom=null,rooms=[],eventsClients=new Map(),subscribed=new Set(),busy=false;
+$("year").textContent=new Date().getFullYear();
+function say(id,text,error=false){const el=$(id);el.textContent=text||"";el.classList.toggle("error",!!error);}
+function escText(value){return String(value??"");}
+async function api(path,options={}){const r=await fetch(API+path,{...options,headers:{"Content-Type":"application/json",...(options.headers||{})},credentials:"same-origin"});let data={};try{data=await r.json();}catch(_){}if(!r.ok)throw new Error(data.error||"Permintaan gagal ("+r.status+")");return data;}
+function formatDate(value){try{return new Intl.DateTimeFormat("id-ID",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"short"}).format(new Date(value));}catch(_){return "";}}
+function renderRooms(){
+ const list=$("room-list");list.replaceChildren();
+ if(!rooms.length){const p=document.createElement("p");p.className="chat-empty";p.textContent="Belum ada ruang. Buat ruang pertama atau coba lagi nanti.";list.append(p);return;}
+ for(const room of rooms){
+  const b=document.createElement("button");b.className="room-item"+(activeRoom?.id===room.id?" active":"");b.type="button";
+  const title=document.createElement("strong");title.textContent=room.name;
+  const meta=document.createElement("small");meta.textContent=(room.member_count||0)+" anggota · "+(room.is_member?"Anda anggota":"Ruang publik");
+  b.append(title,meta);b.addEventListener("click",()=>selectRoom(room));list.append(b);
+ }
+}
+async function loadRooms(){const data=await api("/community/rooms");rooms=data.rooms||[];renderRooms();}
+async function selectRoom(room){
+ activeRoom=room;renderRooms();say("room-message","");
+ $("chat-title").textContent=room.name;$("chat-subtitle").textContent=room.description||"Ruang komunitas · "+(room.member_count||0)+" anggota";
+ $("invite-result").hidden=true;
+ try{
+  if(!room.is_member){await api("/community/join",{method:"POST",body:JSON.stringify({room_id:room.id})});room.is_member=true;room.member_count=(room.member_count||0)+1;await loadRooms();activeRoom=rooms.find(r=>r.id===room.id)||room;}
+  $("chat-input").disabled=false;$("send-message").disabled=false;
+  $("chat-log").replaceChildren();const data=await api("/community/messages?room_id="+encodeURIComponent(room.id));
+  renderMessages(data.messages||[]);
+  $("connection-status").textContent="Anggota · realtime";
+  $("invite-button").hidden=false;
+  subscribeRoom(room.id);
+ }catch(e){say("room-message",e.message,true);$("chat-input").disabled=true;$("send-message").disabled=true;}
+}
+function renderMessages(messages){
+ const log=$("chat-log");log.replaceChildren();
+ if(!messages.length){const p=document.createElement("p");p.className="chat-empty";p.textContent="Ruang ini masih sunyi. Sapa anggota lain untuk memulai.";log.append(p);return;}
+ for(const m of messages){const item=document.createElement("article");item.className="chat-message"+(m.user_id===user?.id?" mine":"");const head=document.createElement("div");const name=document.createElement("strong");name.textContent=m.user_id===user?.id?"Anda":m.display_name;const time=document.createElement("time");time.textContent=formatDate(m.created_at);head.append(name,time);const body=document.createElement("p");body.textContent=m.body;item.append(head,body);log.append(item);}
+ log.scrollTop=log.scrollHeight;
+}
+async function refreshMessages(roomId){if(!activeRoom||activeRoom.id!==roomId)return;try{const data=await api("/community/messages?room_id="+encodeURIComponent(roomId));renderMessages(data.messages||[]);}catch(e){say("chat-message",e.message,true);}}
+function subscribeRoom(roomId){
+ if(subscribed.has(roomId)||!window.hatchable?.events?.connect)return;
+ try{
+  const client=window.hatchable.events.connect({authUrl:API+"/events-token?room_id="+encodeURIComponent(roomId)});
+  eventsClients.set(roomId,client);
+  const channel=client.channel("room:"+roomId);
+  channel.on("message.created",()=>refreshMessages(roomId));
+  channel.on("$reset",()=>refreshMessages(roomId));
+  subscribed.add(roomId);
+ }catch(e){$("connection-status").textContent="Chat tersedia · realtime belum tersambung";console.error("Realtime komunitas:",e);}
+}
+$("create-room-form").addEventListener("submit",async e=>{e.preventDefault();const button=e.submitter;button.disabled=true;say("room-message","Membuat ruang...");try{const data=await api("/community/rooms",{method:"POST",body:JSON.stringify({name:$("new-room-name").value,description:$("new-room-description").value})});$("new-room-name").value="";$("new-room-description").value="";await loadRooms();const room=rooms.find(r=>r.id===data.room.id)||data.room;await selectRoom(room);say("room-message","Ruang berhasil dibuat.");}catch(err){say("room-message",err.message,true);}finally{button.disabled=false;}});
+$("chat-form").addEventListener("submit",async e=>{e.preventDefault();if(!activeRoom||busy)return;const body=$("chat-input").value.trim();if(!body)return;busy=true;$("send-message").disabled=true;try{await api("/community/messages",{method:"POST",body:JSON.stringify({room_id:activeRoom.id,body})});$("chat-input").value="";await refreshMessages(activeRoom.id);say("chat-message","Pesan terkirim.");}catch(err){say("chat-message",err.message,true);}finally{busy=false;$("send-message").disabled=!activeRoom;}});
+$("accept-invite").addEventListener("click",async()=>{const token=$("invite-token").value.trim();if(!token){say("room-message","Masukkan kode undangan.",true);return;}try{const data=await api("/community/invites/accept",{method:"POST",body:JSON.stringify({token})});$("invite-token").value="";await loadRooms();const room=rooms.find(r=>r.id===data.room_id);if(room)await selectRoom(room);say("room-message","Undangan diterima.");}catch(e){say("room-message",e.message,true);}});
+$("invite-button").addEventListener("click",async()=>{if(!activeRoom)return;try{const data=await api("/community/invites",{method:"POST",body:JSON.stringify({room_id:activeRoom.id})});const out=$("invite-result");out.hidden=false;out.textContent="Kode undangan (berlaku 7 hari, sekali pakai): "+data.invite.token+" — salin dan kirim secara pribadi kepada orang yang Anda undang.";}catch(e){say("chat-message",e.message,true);}});
+$("signout-button").addEventListener("click",async()=>{try{await window.hatchable.auth.signOut();location.replace("/");}catch(e){say("room-message","Belum dapat keluar. Coba lagi.",true);}});
+async function init(){
+ if(!window.hatchable?.auth){location.replace("/login?next=%2Fcommunity.html");return;}
+ const session=await window.hatchable.auth.getSession().catch(()=>null);
+ if(!session?.user){location.replace("/login?next=%2Fcommunity.html");return;}
+ user=session.user;$("signed-in-as").textContent=user.name||user.email||"Anggota";
+ try{await loadRooms();$("connection-status").textContent="Terhubung";}catch(e){say("room-message",e.message,true);$("connection-status").textContent="Perlu koneksi";}
+}
+init().catch(e=>{console.error(e);say("room-message","Komunitas belum dapat dimuat.",true);});
+})();
+</script></body></html>

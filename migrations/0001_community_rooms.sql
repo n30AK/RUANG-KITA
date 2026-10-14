@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS community_rooms (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL CHECK (char_length(name) BETWEEN 2 AND 64),
+  description TEXT NOT NULL DEFAULT '',
+  slug TEXT NOT NULL UNIQUE,
+  is_public BOOLEAN NOT NULL DEFAULT TRUE,
+  created_by TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+)

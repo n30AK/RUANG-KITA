@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Masuk · RUANG KITA</title><link rel="stylesheet" href="/styles.css">
+<style>
+body{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,#254337 0,transparent 52%),#0c1414}.auth-card{width:min(100%,430px);padding:34px;border:1px solid #47615270;background:#14211ff2;border-radius:24px;box-shadow:0 24px 100px #0006}.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:38px}.auth-brand strong{display:block;font:800 13px Manrope;letter-spacing:.14em}.auth-brand small{display:block;font-size:8px;color:#90a99a;letter-spacing:.17em;margin-top:4px}.auth-card h1{font:800 28px Manrope;letter-spacing:-.04em;margin:0 0 9px}.auth-sub{font-size:12px;color:#9cb0a3;line-height:1.7;margin:0 0 25px}.auth-card label{display:block;font-size:10px;color:#bdd0c2;margin-bottom:8px}.auth-card input{width:100%;height:47px;border:1px solid #40564a;background:#0e1917;color:#eff7ef;border-radius:11px;padding:0 14px;font:13px 'DM Sans';outline:none}.auth-card input:focus{border-color:#a3d4ab;box-shadow:0 0 0 3px #a3d4ab19}.auth-primary,.auth-secondary{width:100%;height:46px;border-radius:11px;margin-top:12px;cursor:pointer;font:700 12px 'DM Sans'}.auth-primary{border:1px solid #c4e5c8;background:#b9e5bf;color:#14221a}.auth-secondary{border:1px solid #40564a;background:#1a2a25;color:#c5d8c9}.auth-primary:disabled{opacity:.55;cursor:wait}.auth-message{min-height:19px;margin:14px 0 0;font-size:11px;color:#9ecba7;line-height:1.6}.auth-message.error{color:#ffb1a0}.auth-footer{border-top:1px solid #ffffff13;padding-top:17px;margin-top:24px;font-size:9px;line-height:1.8;color:#71877a}.auth-back{display:inline-block;margin-top:18px;color:#b9e5bf;text-decoration:none;font-size:11px}.auth-code{letter-spacing:.3em;font-size:18px!important;text-align:center}.auth-tag{font-size:9px;letter-spacing:.17em;color:#90b79a;margin-bottom:12px}.auth-card [hidden]{display:none!important}
+</style></head>
+<body><main class="auth-card">
+<a href="/" class="auth-brand" style="text-decoration:none;color:inherit"><span class="brand-mark"><span></span><span></span><span></span></span><span><strong>RUANG KITA</strong><small>DUNIA KITA, CERITA KITA</small></span></a>
+<p class="auth-tag">AKUN KOMUNITAS</p><h1 id="title">Selamat datang kembali.</h1><p class="auth-sub" id="subtitle">Masuk menggunakan kode sekali pakai yang dikirim ke email. Tidak perlu kata sandi.</p>
+<form id="auth-form">
+<div id="email-step"><label for="email">Alamat email</label><input id="email" type="email" name="email" autocomplete="username webauthn" autocapitalize="off" spellcheck="false" placeholder="nama@email.com" required><button class="auth-primary" id="send-code" type="submit">Kirim kode masuk <span aria-hidden="true">→</span></button></div>
+<div id="code-step" hidden><label for="code">Kode 6 digit</label><input class="auth-code" id="code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="000000" required><button class="auth-primary" id="verify-code" type="submit">Verifikasi dan masuk</button><button class="auth-secondary" id="change-email" type="button">Gunakan email lain</button></div>
+<div id="passkey-step" hidden><p class="auth-sub">Tambahkan passkey agar masuk berikutnya lebih mudah menggunakan sidik jari, wajah, atau kunci layar perangkat.</p><button class="auth-primary" id="add-passkey" type="button">Tambahkan passkey</button><button class="auth-secondary" id="skip-passkey" type="button">Lewati untuk sekarang</button></div>
+</form><p class="auth-message" id="message" role="status" aria-live="polite"></p>
+<div class="auth-footer">Dengan masuk, Anda setuju menggunakan ruang komunitas secara aman dan menghormati privasi anggota lain. Jangan membagikan kode masuk kepada siapa pun.</div><a class="auth-back" href="/">← Kembali ke dunia</a>
+</main>
+<script>
+(function(){
+const A=window.hatchable&&window.hatchable.auth;
+const $=id=>document.getElementById(id);
+const form=$("auth-form"),emailStep=$("email-step"),codeStep=$("code-step"),passkeyStep=$("passkey-step"),email=$("email"),code=$("code"),message=$("message"),title=$("title"),subtitle=$("subtitle"),send=$("send-code"),verify=$("verify-code");
+let step="email",emailValue="",hasPasskey=false;
+function safeNext(){const n=new URLSearchParams(location.search).get("next")||"/community.html";return n.startsWith("/")&&!n.startsWith("//")?n:"/community.html";}
+function say(t,error=false){message.textContent=t;message.className="auth-message"+(error?" error":"");}
+function go(){location.replace(safeNext());}
+function setBusy(b){send.disabled=b;verify.disabled=b;}
+if(!A){say("Layanan masuk belum siap. Muat ulang halaman beberapa saat lagi.",true);send.disabled=true;return;}
+A.getSession().then(s=>{if(s&&s.user)go();}).catch(()=>{});
+form.addEventListener("submit",async e=>{
+ e.preventDefault();if(step==="passkey")return;
+ if(step==="email"){
+  emailValue=email.value.trim().toLowerCase();if(!emailValue||!email.checkValidity()){say("Masukkan alamat email yang valid.",true);return;}
+  setBusy(true);say("Mengirim kode masuk...");
+  try{
+   const r=await A.startLogin({email:emailValue});hasPasskey=!!r?.has_passkey;
+   if(hasPasskey&&A.supportsPasskeys&&A.supportsPasskeys()){
+    try{const p=await A.signInWithPasskey({email:emailValue});if(p?.user){go();return;}}catch(_){}
+   }
+   step="code";emailStep.hidden=true;codeStep.hidden=false;title.textContent="Periksa email Anda.";subtitle.textContent="Masukkan kode 6 digit yang kami kirim ke "+emailValue+".";say("Kode telah diminta. Periksa kotak masuk dan folder spam.");code.focus();
+  }catch(err){say(err?.status===429?"Terlalu banyak percobaan. Coba lagi sebentar lagi.":(err?.message||"Kode belum dapat dikirim. Periksa alamat email."),true);}
+  finally{setBusy(false);}
+ }else if(step==="code"){
+  setBusy(true);say("Memverifikasi kode...");
+  try{
+   const r=await A.verifyCode({email:emailValue,code:code.value.trim()});
+   if(!r?.user)throw new Error("Kode tidak cocok. Coba lagi.");
+   let declined=false;try{declined=localStorage.getItem("ruangkita-passkey-declined")==="1";}catch(_){}
+   if(!hasPasskey&&!declined&&A.registerPasskey&&A.supportsPasskeys&&A.supportsPasskeys()){
+    step="passkey";emailStep.hidden=true;codeStep.hidden=true;passkeyStep.hidden=false;title.textContent="Anda berhasil masuk.";subtitle.textContent="Satu langkah opsional untuk melindungi akun.";say("");return;
+   }
+   go();
+  }catch(err){say(err?.message||"Kode tidak valid atau sudah kedaluwarsa.",true);}
+  finally{setBusy(false);}
+ }
+});
+$("change-email").addEventListener("click",()=>{step="email";emailStep.hidden=false;codeStep.hidden=true;title.textContent="Selamat datang kembali.";subtitle.textContent="Masuk menggunakan kode sekali pakai yang dikirim ke email. Tidak perlu kata sandi.";say("");email.focus();});
+$("add-passkey").addEventListener("click",async()=>{try{const r=await A.registerPasskey({name:"RUANG KITA"});if(!r){localStorage.setItem("ruangkita-passkey-declined","1");}go();}catch(err){say(err?.message||"Passkey tidak dapat disimpan. Anda tetap bisa melanjutkan.",true);}});
+$("skip-passkey").addEventListener("click",()=>{try{localStorage.setItem("ruangkita-passkey-declined","1");}catch(_){}go();});
+})();
+</script></body></html>

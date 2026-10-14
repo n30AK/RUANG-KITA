@@ -343,7 +343,7 @@ function bindControls() {
     catch{showToast("Layar penuh tidak didukung browser ini.");}
   });
   $("sound-toggle").addEventListener("click",()=>showToast("Audio ambient belum diaktifkan pada MVP."));
-  $("profile-button").addEventListener("click",()=>showToast("Akun dan profil akan hadir pada fase Community."));
+  $("profile-button").addEventListener("click",()=>{window.location.href="/community.html";});
   window.addEventListener("resize",onResize);
   if("ResizeObserver"in window)new ResizeObserver(onResize).observe(stage);
 }
