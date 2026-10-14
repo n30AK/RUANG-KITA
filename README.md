@@ -45,3 +45,13 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 
 **Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Saat ini route 3D masih menampilkan scene Kafe Komunitas; scene ANGKRINGAN KITA dan PANTAI KITA, uji GLB dengan model nyata, uji collision menyeluruh, serta sinkronisasi penuh backend ke GitHub masih menjadi pekerjaan berikutnya. Hatchable v56 tetap runtime deployment aktif.
 
+
+
+## Master build specification
+
+Dokumen kerja utama v3.0 mengintegrasikan spesifikasi produk asli dengan interoperabilitas Three.js/Babylon.js/Godot melalui glTF/GLB, simulasi collision dan navigasi, diagnostik rendering, multi-agent world intelligence, serta quality gates dan pelaporan berbasis bukti.
+
+- [RUANG KITA — Master Build Specification v3.0](docs/RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
+- Dunia 3D live: https://ruang-kita.hatchable.site/ruang-3d.html
+
+Catatan: aplikasi Hatchable saat ini berstatus **personal/private**. URL live memerlukan akses owner/kolaborator; akses publik permanen harus diaktifkan pemilik melalui pengaturan visibilitas platform. Preview link hanya untuk verifikasi sementara.
