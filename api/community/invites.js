@@ -1,4 +1,5 @@
 import { db } from "hatchable";
+import { recordAudit } from "lib/audit.js";
 
 export const access = "user";
 export const methods = ["POST"];
@@ -27,5 +28,6 @@ export default async function (req, res) {
     "INSERT INTO room_invites (room_id, token_hash, created_by, expires_at) VALUES ($1, $2, $3, NOW() + INTERVAL '7 days') RETURNING id, expires_at",
     [roomId, tokenHash, req.user.id]
   );
+  await recordAudit(req.user.id, "invite.created", "invite", rows[0].id, { room_id: roomId, expires_at: rows[0].expires_at });
   return res.status(201).json({ invite: { id: rows[0].id, token, expires_at: rows[0].expires_at } });
 }

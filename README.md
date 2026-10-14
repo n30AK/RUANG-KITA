@@ -5,9 +5,10 @@ Proyek baru berdasarkan `RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0`. Terpisah d
 ## Status implementasi
 - Fase berjalan: Phase 2 — Community foundation.
 - Phase 1: browser 3D, Three.js renderer, tiga scene konfigurasi, avatar prosedural, keyboard movement, kamera orbit, collision lokal dasar; browser smoke test lulus.
-- Phase 2: passwordless email auth dikonfigurasi; tabel rooms, members, messages, invites; API membuat ruang, join, kirim/baca pesan, undangan, dan token realtime.
+- Phase 2: passwordless email auth dikonfigurasi; tabel rooms, members, messages, invites, dan audit events; API mendukung ruang publik/privat, join, pesan tersimpan, undangan, dan token realtime.
+- Phase 3: row-access rules untuk membership, pesan, dan audit trail; audit minimal untuk room.created, room.joined, invite.created, dan invite.accepted; batas 20 pesan per menit.
 - Ruang publik awal: Angkringan Kita.
-- API diuji dengan test-user sintetis: akses anonim ditolak (401), create room, message write/read, invite creation, dan event token berhasil; data ruang QA dibersihkan setelah tes.
+- API diuji dengan test-user sintetis: akses anonim ditolak (401), create room publik/privat, message write/read, invite creation, event token, dan audit event berhasil; data ruang QA dibersihkan setelah tes.
 - **NOT TESTED:** pengiriman email/login pengguna nyata, chat realtime dua browser, penerimaan undangan dengan akun kedua, serta multiplayer avatar sync.
 - Antarmuka Bahasa Indonesia.
 - AI multi-agent, marketplace, pembayaran, physics engine penuh, dan integrasi runtime Babylon.js/Godot belum diaktifkan.
@@ -18,7 +19,7 @@ Static frontend disajikan dari `public/`. File `public/index.html` memuat import
 ## Batasan MVP
 - Lingkungan dibuat secara prosedural; belum menggunakan katalog model/tekstur eksternal.
 - Gerakan/collision adalah simulasi lokal sederhana, bukan physics engine penuh atau simulasi dunia nyata.
-- Belum ada persistensi posisi, akun, presence, chat, atau sinkronisasi antar-browser.
+- Belum ada persistensi posisi avatar, presence, atau sinkronisasi multiplayer antar-browser.
 - Tidak ada panggilan LLM per frame.
 - Aset dari Babylon.js/Godot belum diimpor. Interoperabilitas glTF/GLB akan dievaluasi setelah rendering dasar terverifikasi.
 

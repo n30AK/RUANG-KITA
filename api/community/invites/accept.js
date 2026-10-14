@@ -1,4 +1,5 @@
 import { db } from "hatchable";
+import { recordAudit } from "lib/audit.js";
 
 export const access = "user";
 export const methods = ["POST"];
@@ -33,6 +34,7 @@ export default async function (req, res) {
       return res.status(409).json({ error: "Keanggotaan sudah ada; undangan tidak digunakan." });
     }
     await db.query("UPDATE community_rooms SET member_count = member_count + 1 WHERE id = $1", [invite.room_id]);
+    await recordAudit(userId, "invite.accepted", "room", invite.room_id, { invite_id: invite.id });
     return res.json({ ok: true, room_id: invite.room_id });
   } catch (error) {
     await db.query("DELETE FROM room_members WHERE room_id = $1 AND user_id = $2", [invite.room_id, userId]).catch(() => {});

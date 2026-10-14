@@ -1,4 +1,5 @@
 import { db } from "hatchable";
+import { recordAudit } from "lib/audit.js";
 
 export const access = "user";
 export const methods = ["POST"];
@@ -12,6 +13,7 @@ export default async function (req, res) {
   );
   if (rows.length) {
     await db.query("UPDATE community_rooms SET member_count = member_count + 1 WHERE id = $1", [roomId]);
+    await recordAudit(req.user.id, "room.joined", "room", roomId, {});
     return res.json({ ok: true, joined: true });
   }
   const existing = await db.query(

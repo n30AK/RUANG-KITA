@@ -1,4 +1,5 @@
 import { db } from "hatchable";
+import { recordAudit } from "lib/audit.js";
 
 export const access = "user";
 export const methods = ["GET", "POST"];
@@ -48,5 +49,6 @@ export default async function (req, res) {
     console.error("Room creation failed:", error?.code || "membership");
     return res.status(500).json({ error: "Ruang belum dapat dibuat." });
   }
+  await recordAudit(userId, "room.created", "room", rows[0].id, { slug, is_public: isPublic });
   return res.status(201).json({ room: { ...rows[0], member_count: 1, is_member: true, my_role: "owner" } });
 }

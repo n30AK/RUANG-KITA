@@ -9,3 +9,8 @@ write = "own"
 [db.tables.room_messages]
 read = "public"
 write = "own"
+
+[db.tables.community_audit_events]
+read = "own"
+write = "own"
+owner_column = "actor_id"
