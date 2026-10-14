@@ -51,6 +51,10 @@ const requiredMarkers = [
 for (const marker of requiredMarkers) {
   if (!moduleMatch[1].includes(marker)) fail(`Quality gate tidak menemukan fitur wajib: ${marker}`);
 }
+const requiredUiMarkers = ['id="world-ai-panel"', 'id="world-ai-toggle"', 'id="world-ai-selftest"'];
+for (const marker of requiredUiMarkers) {
+  if (!html.includes(marker)) fail(`Quality gate tidak menemukan kontrol UI wajib: ${marker}`);
+}
 if (process.exitCode) process.exit();
 
 const dir = await mkdtemp(path.join(tmpdir(), "ruang-kita-3d-"));
