@@ -4,7 +4,7 @@
 
 - Hatchable project: `proj_uCY4wAEQsDoi`
 - Project: RUANG KITA Next
-- Deployment: **v21 — live**
+- Deployment: **v24 — live**
 - Visibility: **public**
 - URL: https://ruang-kita-next.hatchable.site
 - 3D engine: Three.js r164
@@ -21,6 +21,10 @@ Three scenes were switched and rendered:
 - **PANTAI KITA:** about 6.9k triangles, WebGL active.
 
 After the v20 animation-lifecycle fix and v21 World Intelligence panel, each scene's on-demand self-test returned **PASS, 11 passed, 0 failed**. A further managed-browser observation ran each scene for about 3 seconds; all three maintained an active render loop, no render exception, zero detected anomaly issues, and 11/11 self-tests. The avatar moved about 1.5 world units during a 700 ms synthetic W-key input, with no anomaly reported. These are bounded smoke tests, not a proof that every possible collision or long-duration behavior is correct.
+
+## GPU resource lifecycle — v24
+
+The first repeated scene-switch test showed the GPU texture counter increasing by one after each transition. Investigation identified shadow render targets from removed directional lights as the leak. The teardown now disposes light shadow maps/mapPass as well as textures belonging to non-shared materials. After v24, the Cafe scene (with the persistent avocado asset) and Pantai scene were alternated four times; texture count remained at **4** throughout, geometry counts returned to the scene-specific baseline, the asset remained cached, and no browser/network errors were captured. This is a bounded browser test, not a physical-device memory profile.
 
 ## glTF animation lifecycle — v20
 
@@ -46,7 +50,7 @@ The fixture is generated for testing. It does **not** certify a production asset
 
 ## World Intelligence agents — v21
 
-The live interface now exposes seven role-separated local agents and their current state: Observer, Predictor, Behavior Planner, Scene Builder, Repair Agent, Anomaly Auditor, and Resource Guard. The cycle gathers scene metrics, predicts short-horizon vehicle conflicts, audits collider/NPC/vehicle conditions, chooses bounded recovery actions, reports repairs, and checks coarse GPU resource counts. The panel updates during the bounded local simulation loop.
+The v21+ live interface exposes seven role-separated local agents and their current state: Observer, Predictor, Behavior Planner, Scene Builder, Repair Agent, Anomaly Auditor, and Resource Guard. The cycle gathers scene metrics, predicts short-horizon vehicle conflicts, audits collider/NPC/vehicle conditions, chooses bounded recovery actions, reports repairs, and checks coarse GPU resource counts. The panel updates during the bounded local simulation loop.
 
 These roles are **deterministic local agents**, not seven separate LLM calls. No language model is invoked on every frame. On-demand generative planning is not configured as part of this deployment, and the interface explicitly says so.
 
@@ -56,6 +60,10 @@ These roles are **deterministic local agents**, not seven separate LLM calls. No
 - Self-tests check WebGL, render loop, rendered scene metrics, scene configuration, static collision, NPC separation, vehicle overlap safety, glTF adapter, animation-mixer registry, anomaly recovery, and anomaly severity.
 - The World Guard and vehicle prediction use local deterministic rules. They are not LLM inference every frame.
 - The project currently has three distinct procedural scene configurations using one shared World Engine and renderer.
+
+## Licensed real GLB asset — v22
+
+The official Khronos glTF-Sample-Assets **Avocado** model is loaded lazily as a decorative prop on the Cafe Kita table. The source identifies it as CC0 1.0 Universal. The deployed asset is about 8.1 MB, so it is not downloaded on initial page load; the first Cafe visit triggers the download, and it remains cached while switching scenes. Its source URL and SHA-256 are documented in `next/public/assets/LICENSES.md`. The binary itself is hosted in Hatchable and is **not** copied into the GitHub source mirror; restore it from the documented official URL when rebuilding the deployment elsewhere.
 
 ## Engine interoperability
 
