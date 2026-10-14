@@ -5,8 +5,8 @@ import { spawnSync } from "node:child_process";
 
 const htmlPath = path.resolve("public/ruang-3d.html");
 const html = await readFile(htmlPath, "utf8");
-const importMapMatch = html.match(/<script type="importmap">([\\s\\S]*?)<\\/script>/i);
-const moduleMatch = html.match(/<script type="module">([\\s\\S]*?)<\\/script>/i);
+const importMapMatch = html.match(/<script type="importmap">([\s\S]*?)<\/script>/i);
+const moduleMatch = html.match(/<script type="module">([\s\S]*?)<\/script>/i);
 
 function fail(message) {
   console.error(`FAIL: ${message}`);
@@ -53,7 +53,7 @@ try {
   await writeFile(tempModule, moduleMatch[1], "utf8");
   const check = spawnSync(process.execPath, ["--check", tempModule], { encoding: "utf8" });
   if (check.error) fail(`Node syntax check gagal dijalankan: ${check.error.message}`);
-  else if (check.status !== 0) fail(`Sintaks module 3D tidak valid:\\n${check.stderr || check.stdout}`);
+  else if (check.status !== 0) fail(`Sintaks module 3D tidak valid:\n${check.stderr || check.stdout}`);
   else console.log("PASS: sintaks module 3D valid.");
 } finally {
   await rm(dir, { recursive: true, force: true });
