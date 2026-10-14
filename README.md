@@ -37,14 +37,14 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 ## Status deployment aktif — RUANG KITA Next (2026-10-14)
 
 - **Aplikasi aktif:** https://ruang-kita-next.hatchable.site
-- **Deployment:** Hatchable v21 — live, visibilitas public.
+- **Deployment:** Hatchable v24 — live, visibilitas public.
 - **3D engine:** Three.js r164, satu World Engine dengan scene ANGKRINGAN KITA, CAFE KITA, dan PANTAI KITA.
-- **Pengujian v21:** 11/11 self-test lulus pada ketiga scene; model glTF animasi sintetis berhasil dimuat, diputar, dan dibersihkan; gerak keyboard berhasil diuji; panel tujuh agen World Intelligence aktif; tidak ada error browser pada sesi penerimaan.
+- **Pengujian v24:** 11/11 self-test lulus pada ketiga scene; animasi glTF sintetis berjalan; model Avocado CC0 dimuat di Cafe; panel tujuh agen World Intelligence aktif; empat siklus Cafe/Pantai menjaga penghitung tekstur GPU stabil di 4; tidak ada error browser pada sesi penerimaan.
 - **Laporan bukti dan batasan:** [RUANG KITA Next Runtime Verification](docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md).
 - **Mirror source code Next:** [next/README.md](next/README.md) — frontend, API handlers, migrations, dan konfigurasi tanpa secret; perubahan GitHub belum otomatis men-deploy ke Hatchable.
-- **CI:** [RUANG KITA Next static quality gate](https://github.com/n30AK/RUANG-KITA/actions/runs/38523448020/job/115718226296) lulus setelah pemeriksaan route access diperbaiki.
+- **CI:** [RUANG KITA Next static quality gate](https://github.com/n30AK/RUANG-KITA/actions/runs/38524305909/job/115720918713) lulus setelah pemeriksaan route access diperbaiki.
 
-RUANG KITA Next adalah target pengembangan aktif. Runtime AI dan collision saat ini mengandalkan logika lokal deterministik; integrasi Babylon.js/Godot dilakukan melalui aset glTF/GLB, bukan penggabungan runtime penuh. Uji aset produksi berlisensi, stress test jangka panjang, perangkat mobile fisik, dan multiplayer masih menjadi pekerjaan lanjutan.
+RUANG KITA Next adalah target pengembangan aktif. Runtime AI dan collision saat ini mengandalkan logika lokal deterministik; integrasi Babylon.js/Godot dilakukan melalui aset glTF/GLB, bukan penggabungan runtime penuh. Uji aset produksi tambahan, stress test jangka panjang, perangkat mobile fisik, dan multiplayer masih menjadi pekerjaan lanjutan. Biner Avocado 8,1 MB disimpan di hosting Hatchable dan tidak disalin ke mirror GitHub; URL sumber, lisensi CC0, dan checksum dicatat pada `next/public/assets/LICENSES.md`.
 
 ## Status deployment RUANG KITA Legacy — FROZEN (2026-10-14)
 
