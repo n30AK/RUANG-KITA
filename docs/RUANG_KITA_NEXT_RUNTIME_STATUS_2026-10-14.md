@@ -4,7 +4,7 @@
 
 - Hatchable project: `proj_uCY4wAEQsDoi`
 - Project: RUANG KITA Next
-- Deployment: **v20 — live**
+- Deployment: **v21 — live**
 - Visibility: **public**
 - URL: https://ruang-kita-next.hatchable.site
 - 3D engine: Three.js r164
@@ -20,11 +20,11 @@ Three scenes were switched and rendered:
 - **CAFE KITA:** about 9.7k triangles, WebGL active.
 - **PANTAI KITA:** about 6.9k triangles, WebGL active.
 
-After the v20 animation-lifecycle fix, each scene's on-demand self-test returned **PASS, 11 passed, 0 failed**. A further managed-browser observation ran each scene for about 3 seconds; all three maintained an active render loop, no render exception, zero detected anomaly issues, and 11/11 self-tests. The avatar moved about 1.5 world units during a 700 ms synthetic W-key input, with no anomaly reported. These are bounded smoke tests, not a proof that every possible collision or long-duration behavior is correct.
+After the v20 animation-lifecycle fix and v21 World Intelligence panel, each scene's on-demand self-test returned **PASS, 11 passed, 0 failed**. A further managed-browser observation ran each scene for about 3 seconds; all three maintained an active render loop, no render exception, zero detected anomaly issues, and 11/11 self-tests. The avatar moved about 1.5 world units during a 700 ms synthetic W-key input, with no anomaly reported. These are bounded smoke tests, not a proof that every possible collision or long-duration behavior is correct.
 
 ## glTF animation lifecycle — v20
 
-The previous adapter loaded and removed models but did not advance glTF animation clips. v20 adds:
+The previous adapter loaded and removed models but did not advance glTF animation clips. v20 added:
 - a registry of `THREE.AnimationMixer` instances;
 - default playback of the first clip, optional selection by animation name, or `animation: "all"`;
 - frame updates using the bounded simulation delta;
@@ -43,6 +43,12 @@ A synthetic glTF 2.0 animated-triangle fixture passed in the browser:
 - no runtime or network errors were captured.
 
 The fixture is generated for testing. It does **not** certify a production asset exported from Babylon.js or Godot.
+
+## World Intelligence agents — v21
+
+The live interface now exposes seven role-separated local agents and their current state: Observer, Predictor, Behavior Planner, Scene Builder, Repair Agent, Anomaly Auditor, and Resource Guard. The cycle gathers scene metrics, predicts short-horizon vehicle conflicts, audits collider/NPC/vehicle conditions, chooses bounded recovery actions, reports repairs, and checks coarse GPU resource counts. The panel updates during the bounded local simulation loop.
+
+These roles are **deterministic local agents**, not seven separate LLM calls. No language model is invoked on every frame. On-demand generative planning is not configured as part of this deployment, and the interface explicitly says so.
 
 ## Movement and simulation checks
 
