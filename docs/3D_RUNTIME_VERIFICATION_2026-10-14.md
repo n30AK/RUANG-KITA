@@ -3,33 +3,34 @@
 ## Deployment snapshot
 
 - Hatchable project: proj_LP8pjixd4YxJ
-- Live deployment verified: **v65**
+- Latest live deployment verified: **v68**
 - Route tested: /ruang-3d.html
 - Source mirror: n30AK/RUANG-KITA, default branch main
 - Master specification: [RUANG KITA Master Build Specification v3.0](RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
 
 ## Browser evidence
 
-Browser checks used the platform's temporary preview access because the Hatchable project visibility is currently **personal/private**. This is not a permanent public visitor test.
+Browser checks used the platform's temporary preview access because Hatchable project visibility is currently **personal/private**. This is not a permanent public visitor test.
 
 | Check | Result |
 |---|---|
 | Page route | HTTP 200 through temporary preview |
-| JavaScript runtime errors | 0 captured in smoke tests |
+| JavaScript runtime errors | 0 captured in the latest clean smoke test |
 | WebGL context | Active |
 | Renderer | Three.js r164 |
 | Initial stage / drawing buffer | 800 × 536 |
 | Scene children | 335 |
-| Render draw calls | approximately 330–350 in Kafe |
-| Rendered triangles | approximately 32k–35k in Kafe |
-| Last successful frame | typically under 300 ms old in clean browser tests |
-| Kafe self-test | **11/11 passed**, 0 failed, 0 skipped |
-| World switching | Kafe, Angkringan, and Pantai each switched and rendered with WebGL active |
-| Keyboard movement | Synthetic W keydown/up changed follow-camera position |
+| Render draw calls | approximately 350 in Kafe |
+| Rendered triangles | approximately 35k in Kafe |
+| Last render duration | 7 ms, then 3 ms in two samples |
+| Last successful frame age | 244–245 ms in two samples |
+| Kafe self-test on v68 | **12/12 passed**, 0 failed, 0 skipped |
+| World switching | Kafe, Angkringan, and Pantai were switched and rendered with WebGL active in browser smoke tests |
+| Keyboard movement | Synthetic W keydown/up changed follow-camera position in a browser smoke test |
 | World selector | Changed to Angkringan and the active world followed |
-| Browser console/page errors | 0 captured in the verified smoke tests |
+| Browser console/page errors | 0 captured in the latest clean smoke test |
 
-The visual browser capture showed the café scene, avatar, furniture, and environment rather than an empty canvas.
+A visual browser capture showed the café scene, avatar, furniture, and environment rather than an empty canvas. Render duration and page visibility are now exposed in runtime diagnostics. The stale-frame audit avoids treating intentionally throttled hidden tabs as active render failures.
 
 ## glTF / GLB interoperability checks
 
@@ -43,18 +44,16 @@ The visual browser capture showed the café scene, avatar, furniture, and enviro
 
 ## Collision and world behavior
 
-The Kafe self-test currently checks:
+The Kafe self-test checks:
 - WebGL context, active render loop, and rendered scene metrics
 - availability of the asset adapter
 - player versus table
-- NPC target separation
-- player versus NPC
-- vehicle versus vehicle
-- vehicle versus player
-- vehicle versus NPC
+- NPC target separation and player versus NPC
+- vehicle versus vehicle, player, and NPC
+- non-destructive vehicle deadlock recovery when a clear retreat path exists
 - current anomaly audit
 
-Result: **11 passed, 0 failed, 0 skipped** in the clean Kafe browser run. The current audit reported zero anomalies at the time of that snapshot. NPC greeting logic was also changed to target a personal-space offset rather than the player's exact coordinates.
+Result on v68: **12 passed, 0 failed, 0 skipped**. The current anomaly audit reported zero issues at the time of the clean snapshot. NPC greeting logic targets a personal-space offset rather than the player's exact coordinates. Ambient vehicles now track how long they are blocked and only reverse direction when a retreat position is free of collision.
 
 This is a predicate/self-test suite and a short browser smoke test, not proof that every collision geometry or every long-duration simulation case is perfect. Dedicated tests for narrow corridors, high-speed swept collision, long stress sessions, mobile hardware, and real multiplayer contention remain outstanding.
 
