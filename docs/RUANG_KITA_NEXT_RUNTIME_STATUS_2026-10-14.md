@@ -20,7 +20,7 @@ Three scenes were switched and rendered:
 - **CAFE KITA:** about 9.7k triangles, WebGL active.
 - **PANTAI KITA:** about 6.9k triangles, WebGL active.
 
-After the v20 animation-lifecycle fix, each scene's on-demand self-test returned **PASS, 11 passed, 0 failed**. The audit reported severity `clear` and zero issues during the short observation window. These are bounded smoke tests, not a proof that every possible collision or long-duration behavior is correct.
+After the v20 animation-lifecycle fix, each scene's on-demand self-test returned **PASS, 11 passed, 0 failed**. A further managed-browser observation ran each scene for about 3 seconds; all three maintained an active render loop, no render exception, zero detected anomaly issues, and 11/11 self-tests. The avatar moved about 1.5 world units during a 700 ms synthetic W-key input, with no anomaly reported. These are bounded smoke tests, not a proof that every possible collision or long-duration behavior is correct.
 
 ## glTF animation lifecycle — v20
 
@@ -39,6 +39,7 @@ A synthetic glTF 2.0 animated-triangle fixture passed in the browser:
 - child-node Y position changed from 0 to 0.4 during a 650 ms observation;
 - active mixer count rose to 1 while loaded and returned to 0 after removal;
 - the asset was removed from the registry and GPU geometry count returned to baseline;
+- an asset requested for Pantai stayed hidden in Angkringan, became visible in Pantai, and was cleaned up when leaving Pantai;
 - no runtime or network errors were captured.
 
 The fixture is generated for testing. It does **not** certify a production asset exported from Babylon.js or Godot.
