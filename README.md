@@ -38,12 +38,12 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 
 - Aplikasi hosted: https://ruang-kita.hatchable.site
 - Ruang 3D: https://ruang-kita.hatchable.site/ruang-3d.html
-- Deployment hosted yang diverifikasi: Hatchable v56.
+- Deployment hosted yang diverifikasi: Hatchable v69 (runtime aktif per 14 Oktober 2026).
 - Source scene 3D yang disinkronkan ke repository: `public/ruang-3d.html`.
 - Laporan runtime, hasil smoke test, batasan, dan pekerjaan berikutnya: [docs/3d-runtime-status.md](docs/3d-runtime-status.md).
 - Keputusan arsitektur engine 3D: [ADR-0001](docs/adr/0001-3d-engine-interoperability.md).
 
-**Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Saat ini route 3D masih menampilkan scene Kafe Komunitas; scene ANGKRINGAN KITA dan PANTAI KITA, uji GLB dengan model nyata, uji collision menyeluruh, serta sinkronisasi penuh backend ke GitHub masih menjadi pekerjaan berikutnya. Hatchable v56 tetap runtime deployment aktif.
+**Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Route 3D menyediakan konfigurasi scene Kafe Komunitas, Angkringan Kita, dan Pantai Kita. Pada v69, self-test Kafe lulus 12/12; uji browser tambahan memuat model glTF segitiga sintetis, dan seluruh tiga scene berhasil diaktifkan dengan WebGL. Ini belum membuktikan semua collider, perangkat mobile fisik, aset produksi, atau multiplayer. Source `public/ruang-3d.html` pada GitHub cocok dengan source Hatchable saat audit. Hatchable v69 tetap runtime deployment aktif. Aplikasi masih berstatus personal/private sehingga URL langsung menampilkan sign-in wall kepada pengunjung anonim; pemilik harus mengubah visibilitas di Console Settings untuk akses publik permanen.
 
 
 
