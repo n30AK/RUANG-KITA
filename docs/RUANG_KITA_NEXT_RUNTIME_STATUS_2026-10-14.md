@@ -9,7 +9,7 @@
 - URL: https://ruang-kita-next.hatchable.site
 - 3D engine: Three.js r164
 - Asset interchange: glTF 2.0 / GLB
-- Build/deploy validator before v20: passed, zero errors and zero warnings.
+- Build/deploy validator before v24: passed, zero errors and zero warnings.
 
 ## Browser verification
 
