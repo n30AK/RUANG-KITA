@@ -37,9 +37,9 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 ## Status deployment aktif — RUANG KITA Next (2026-10-14)
 
 - **Aplikasi aktif:** https://ruang-kita-next.hatchable.site
-- **Deployment:** Hatchable v20 — live, visibilitas public.
+- **Deployment:** Hatchable v21 — live, visibilitas public.
 - **3D engine:** Three.js r164, satu World Engine dengan scene ANGKRINGAN KITA, CAFE KITA, dan PANTAI KITA.
-- **Pengujian v20:** 11/11 self-test lulus pada ketiga scene; model glTF animasi sintetis berhasil dimuat, diputar, dan dibersihkan; gerak keyboard berhasil diuji; tidak ada error browser pada sesi penerimaan.
+- **Pengujian v21:** 11/11 self-test lulus pada ketiga scene; model glTF animasi sintetis berhasil dimuat, diputar, dan dibersihkan; gerak keyboard berhasil diuji; panel tujuh agen World Intelligence aktif; tidak ada error browser pada sesi penerimaan.
 - **Laporan bukti dan batasan:** [RUANG KITA Next Runtime Verification](docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md).
 - **Mirror source code Next:** [next/README.md](next/README.md) — frontend, API handlers, migrations, dan konfigurasi tanpa secret; perubahan GitHub belum otomatis men-deploy ke Hatchable.
 - **CI:** [RUANG KITA Next static quality gate](https://github.com/n30AK/RUANG-KITA/actions/runs/38522860524/job/115716335335) lulus setelah pemeriksaan route access diperbaiki.
