@@ -32,6 +32,32 @@ const worldAssetFailures = [];
 let worldAiLastAt = 0, worldLastAuditAt = 0, worldAuditSnapshot = {severity:"clear",issueCount:0,issues:[],counts:{}};
 let worldRenderFrames = 0, worldLastFrameAt = 0, worldLastRenderError = null, worldLastWarningAt = 0, worldLastGreetingAt = 0, worldRepairCount = 0, worldLastRepairAt = null;
 const worldRepairEvents = [];
+const worldAgentState = [
+  {id:"observer",name:"Observer",status:"MEMULAI",detail:"Menyiapkan observasi dunia",updatedAt:null},
+  {id:"predictor",name:"Prediktor",status:"MEMULAI",detail:"Menyiapkan prediksi lintasan",updatedAt:null},
+  {id:"planner",name:"Behavior Planner",status:"MEMULAI",detail:"Menyiapkan rencana gerak",updatedAt:null},
+  {id:"sceneBuilder",name:"Scene Builder",status:"MEMULAI",detail:"Menyiapkan konfigurasi scene",updatedAt:null},
+  {id:"repair",name:"Repair Agent",status:"MEMULAI",detail:"Menyiapkan pemulihan aman",updatedAt:null},
+  {id:"auditor",name:"Anomaly Auditor",status:"MEMULAI",detail:"Menyiapkan pemeriksaan anomali",updatedAt:null},
+  {id:"resource",name:"Resource Guard",status:"MEMULAI",detail:"Menyiapkan batas resource",updatedAt:null}
+];
+function setWorldAgentState(id,status,detail){
+  const agent=worldAgentState.find(item=>item.id===id);if(!agent)return;
+  agent.status=status;agent.detail=String(detail||"").slice(0,180);agent.updatedAt=new Date().toISOString();
+}
+function getWorldAgentSnapshot(){return worldAgentState.map(agent=>({...agent}));}
+function refreshWorldAgentPanel(){
+  const list=$("world-agent-list"),summary=$("world-agent-summary");if(!list||!summary)return;
+  const warning=worldAgentState.filter(agent=>agent.status==="WASPADA"||agent.status==="MEMULIHKAN").length;
+  summary.textContent=warning?warning+" agen sedang menangani temuan · mode lokal":worldAgentState.length+" agen lokal berjalan · tanpa LLM tiap frame";
+  const rows=worldAgentState.map(agent=>{
+    const row=document.createElement("div");row.className="world-agent-row"+(["WASPADA","MEMULIHKAN"].includes(agent.status)?" warning":"");row.title=agent.detail;
+    const name=document.createElement("strong");name.textContent=agent.name;
+    const status=document.createElement("span");status.className="world-agent-state";status.textContent=agent.status;
+    row.append(name,status);return row;
+  });
+  list.replaceChildren(...rows);
+}
 
 const mat = (color, roughness=.85, metalness=0) => {
   const key = [color,roughness,metalness].join("-");
@@ -326,8 +352,33 @@ function repairWorldAnomalies(now){
 }
 function worldAiPredict(now){
   if(now-worldAiLastAt<180)return;worldAiLastAt=now;
-  for(const vehicle of vehicles){const u=vehicle.userData;if(now<(u.safetyHoldUntil||0))continue;const nz=THREE.MathUtils.clamp(vehicle.position.z+u.direction*u.speed*.55,u.minZ,u.maxZ);if(!vehicleCanMove(vehicle,vehicle.position.x,nz))u.safetyHoldUntil=now+300;else u.safetyHoldUntil=0;}
-  if(now-worldLastAuditAt>1200){worldLastAuditAt=now;let audit=worldAiAudit();const repaired=repairWorldAnomalies(now);if(repaired){audit=worldAiAudit();audit.repairedThisCycle=repaired;}audit.totalRepairs=worldRepairCount;worldAuditSnapshot=audit;if(worldAuditSnapshot.severity==="high"){statusLabel.textContent="Perlu perhatian";stateLabel.textContent="World Guard mendeteksi konflik gerak";if(now-worldLastWarningAt>4000){showToast("World Guard: gerak dihentikan untuk mencegah tabrakan.");worldLastWarningAt=now;}}else if(worldAuditSnapshot.severity==="clear"){statusLabel.textContent="Dunia aktif";stateLabel.textContent=SCENES[activeSceneId].mood+" · World Guard normal";}else{statusLabel.textContent="Memantau";stateLabel.textContent="World Guard · "+worldAuditSnapshot.issueCount+" anomali";}}
+  let predictedConflicts=0;
+  for(const vehicle of vehicles){
+    const u=vehicle.userData;
+    if(now<(u.safetyHoldUntil||0)){predictedConflicts++;continue;}
+    const nz=THREE.MathUtils.clamp(vehicle.position.z+u.direction*u.speed*.55,u.minZ,u.maxZ);
+    if(!vehicleCanMove(vehicle,vehicle.position.x,nz)){u.safetyHoldUntil=now+300;predictedConflicts++;}else u.safetyHoldUntil=0;
+  }
+  setWorldAgentState("predictor",predictedConflicts?"WASPADA":"NORMAL",predictedConflicts+" konflik lintasan jangka pendek terdeteksi.",now);
+  if(now-worldLastAuditAt>1200){
+    worldLastAuditAt=now;
+    setWorldAgentState("observer","AKTIF",npcs.length+" NPC, "+vehicles.length+" kendaraan, "+colliders.length+" collider dipantau.",now);
+    let audit=worldAiAudit();
+    setWorldAgentState("planner",audit.issueCount?"MERENCANAKAN":"SIAP",audit.issueCount?"Memilih tindakan aman untuk "+audit.issueCount+" temuan.":"Tidak ada konflik yang membutuhkan rencana koreksi.",now);
+    const repaired=repairWorldAnomalies(now);
+    if(repaired){audit=worldAiAudit();audit.repairedThisCycle=repaired;}
+    audit.totalRepairs=worldRepairCount;worldAuditSnapshot=audit;
+    setWorldAgentState("auditor",audit.severity==="clear"?"NORMAL":"WASPADA",audit.issueCount+" temuan; severity "+audit.severity+".",now);
+    setWorldAgentState("repair",repaired?"MEMULIHKAN":"SIAP",repaired?repaired+" posisi dipulihkan ke lokasi aman.":"Menunggu temuan yang membutuhkan pemulihan.",now);
+    const memory=renderer?.info?.memory||{geometries:0,textures:0};
+    const resourceWarning=memory.geometries>1800||memory.textures>160;
+    setWorldAgentState("resource",resourceWarning?"WASPADA":"NORMAL","GPU: "+memory.geometries+" geometri, "+memory.textures+" tekstur.",now);
+    setWorldAgentState("observer","AKTIF","Scene "+SCENES[activeSceneId].title+"; "+npcs.length+" NPC dan "+vehicles.length+" kendaraan dipantau.",now);
+    refreshWorldAgentPanel();
+    if(worldAuditSnapshot.severity==="high"){statusLabel.textContent="Perlu perhatian";stateLabel.textContent="World Guard mendeteksi konflik gerak";if(now-worldLastWarningAt>4000){showToast("World Guard: gerak dihentikan untuk mencegah tabrakan.");worldLastWarningAt=now;}}
+    else if(worldAuditSnapshot.severity==="clear"){statusLabel.textContent="Dunia aktif";stateLabel.textContent=SCENES[activeSceneId].mood+" · World Guard normal";}
+    else{statusLabel.textContent="Memantau";stateLabel.textContent="World Guard · "+worldAuditSnapshot.issueCount+" anomali";}
+  }
 }
 function updateWorldAgents(dt,now){
   for(const npc of npcs){const u=npc.userData,nearAvatar=Math.hypot(npc.position.x-avatarRoot.position.x,npc.position.z-avatarRoot.position.z);if(u.socialUntil>now){npc.rotation.y=Math.atan2(avatarRoot.position.x-npc.position.x,avatarRoot.position.z-npc.position.z);u.leftLeg.rotation.x=THREE.MathUtils.damp(u.leftLeg.rotation.x,0,8,dt);u.rightLeg.rotation.x=THREE.MathUtils.damp(u.rightLeg.rotation.x,0,8,dt);continue;}if(nearAvatar<1.35&&now>(u.socialCooldown||0)){u.socialUntil=now+950;u.socialCooldown=now+9500;u.goal=null;npc.rotation.y=Math.atan2(avatarRoot.position.x-npc.position.x,avatarRoot.position.z-npc.position.z);if(now-worldLastGreetingAt>3000){showToast(u.name+" menyapa Anda.");worldLastGreetingAt=now;}continue;}if(u.goal&&isPositionBlocked(u.goal.x,u.goal.z,u.radius,{ignoreNpc:npc})){u.goal=null;u.nextThinkAt=now;}if(!u.goal||now>=u.nextThinkAt||Math.hypot(u.goal.x-npc.position.x,u.goal.z-npc.position.z)<.45){let goal=null;for(let attempt=0;attempt<12&&!goal;attempt++){const x=THREE.MathUtils.clamp(npc.position.x+(Math.random()-.5)*8,-7.1,7.1),z=THREE.MathUtils.clamp(npc.position.z+(Math.random()-.5)*7,-7.2,7.2);if(!isPositionBlocked(x,z,u.radius,{ignoreNpc:npc}))goal={x,z};}u.goal=goal||{x:npc.position.x,z:npc.position.z};u.nextThinkAt=now+1800+Math.random()*1800;}
@@ -415,7 +466,9 @@ function buildScene(sceneId) {
     button.classList.toggle("active",active);button.setAttribute("aria-pressed",String(active));
   });
   stateLabel.textContent=config.mood+" · simulasi lokal";
-  setProgress(100,"World Engine aktif","Tiga scene memakai satu renderer dan satu kontrak konfigurasi.");
+  setProgress(100,"World Engine + World Guard aktif","Tiga scene, tujuh agen lokal, collision guard, prediksi, dan pemulihan terkontrol.");
+  setWorldAgentState("sceneBuilder","SIAP","Scene "+config.title+" berhasil dibangun.");
+  refreshWorldAgentPanel();
   updateCamera(1);
 }
 function collides(x,z) {
@@ -488,7 +541,7 @@ function animate(now) {
 function getWorldDiagnostics(){
   const size=renderer?renderer.getSize(new THREE.Vector2()):new THREE.Vector2(),rect=stage.getBoundingClientRect();
   let webgl=false;try{webgl=!!renderer&&!renderer.getContext().isContextLost();}catch{}
-  return {engine:"Three.js r164",assetInterop:"glTF 2.0 / GLB",simulation:WORLD_RULES.simulation,webgl,activeScene:activeSceneId,stage:{width:Math.round(rect.width),height:Math.round(rect.height)},drawingBuffer:renderer?{width:renderer.domElement.width,height:renderer.domElement.height}:null,renderFrames:worldRenderFrames,lastFrameAgeMs:worldLastFrameAt?Math.round(performance.now()-worldLastFrameAt):null,lastRenderError:worldLastRenderError,sceneObjects:scene?.children?.length||0,worldObjects:worldGroup?.children?.length||0,drawCalls:renderer?.info?.render?.calls||0,triangles:renderer?.info?.render?.triangles||0,player:avatarRoot?{x:+avatarRoot.position.x.toFixed(2),z:+avatarRoot.position.z.toFixed(2)}:null,gpuMemory:{geometries:renderer?.info?.memory?.geometries||0,textures:renderer?.info?.memory?.textures||0},npcs:npcs.map(n=>({id:n.userData.id,name:n.userData.name,x:+n.position.x.toFixed(2),z:+n.position.z.toFixed(2),blockedFor:+n.userData.blockedFor.toFixed(1)})),vehicles:vehicles.map(v=>({id:v.userData.id,kind:v.userData.kind,x:+v.position.x.toFixed(2),z:+v.position.z.toFixed(2),held:performance.now()<(v.userData.safetyHoldUntil||0)})),loadedAssets:[...loadedWorldAssets.entries()].map(([id,e])=>({id,sceneId:e.sceneId,sourceUrl:e.sourceUrl,license:e.license,attribution:e.attribution,animationClips:e.animationNames||[]})),loadingAssets:[...loadingWorldAssets.keys()],assetMixers:worldAssetMixers.size,assetFailures:worldAssetFailures.slice(-8),repairs:{total:worldRepairCount,lastAt:worldLastRepairAt,recent:worldRepairEvents.slice(-8)},anomalyAudit:worldAuditSnapshot};
+  return {engine:"Three.js r164",assetInterop:"glTF 2.0 / GLB",simulation:WORLD_RULES.simulation,webgl,activeScene:activeSceneId,stage:{width:Math.round(rect.width),height:Math.round(rect.height)},drawingBuffer:renderer?{width:renderer.domElement.width,height:renderer.domElement.height}:null,renderFrames:worldRenderFrames,lastFrameAgeMs:worldLastFrameAt?Math.round(performance.now()-worldLastFrameAt):null,lastRenderError:worldLastRenderError,sceneObjects:scene?.children?.length||0,worldObjects:worldGroup?.children?.length||0,drawCalls:renderer?.info?.render?.calls||0,triangles:renderer?.info?.render?.triangles||0,player:avatarRoot?{x:+avatarRoot.position.x.toFixed(2),z:+avatarRoot.position.z.toFixed(2)}:null,gpuMemory:{geometries:renderer?.info?.memory?.geometries||0,textures:renderer?.info?.memory?.textures||0},npcs:npcs.map(n=>({id:n.userData.id,name:n.userData.name,x:+n.position.x.toFixed(2),z:+n.position.z.toFixed(2),blockedFor:+n.userData.blockedFor.toFixed(1)})),vehicles:vehicles.map(v=>({id:v.userData.id,kind:v.userData.kind,x:+v.position.x.toFixed(2),z:+v.position.z.toFixed(2),held:performance.now()<(v.userData.safetyHoldUntil||0)})),loadedAssets:[...loadedWorldAssets.entries()].map(([id,e])=>({id,sceneId:e.sceneId,sourceUrl:e.sourceUrl,license:e.license,attribution:e.attribution,animationClips:e.animationNames||[]})),loadingAssets:[...loadingWorldAssets.keys()],assetMixers:worldAssetMixers.size,assetFailures:worldAssetFailures.slice(-8),repairs:{total:worldRepairCount,lastAt:worldLastRepairAt,recent:worldRepairEvents.slice(-8)},agents:getWorldAgentSnapshot(),anomalyAudit:worldAuditSnapshot};
 }
 function verifyRecoverySelfTest(){
   if(!npcs.length||!colliders.length)return {passed:false,detail:"NPC atau collider tidak tersedia"};
@@ -577,7 +630,8 @@ async function start() {
     stateLabel.textContent="Dunia 3D berjalan · lokal";
     loading.classList.add("hidden");
     window.setTimeout(()=>loading.remove(),700);
-    setProgress(100,"Siap dijelajahi","Renderer aktif. Tiga scene tersedia; akun dan multiplayer belum diaktifkan.");
+    setProgress(100,"Siap dijelajahi","Renderer aktif. Tiga scene dan tujuh agen lokal tersedia; akun dan multiplayer belum diaktifkan.");
+    refreshWorldAgentPanel();
   }catch(error){reportFatal(error);}
 }
 window.addEventListener("unhandledrejection",e=>console.error("Promise gagal:",e.reason));
@@ -592,6 +646,7 @@ window.RUANG_KITA_NEXT=Object.freeze({
   loadModel:loadWorldGltf,
   removeModel:removeWorldGltf,
   loadedAssets:()=>[...loadedWorldAssets.keys()],
+  agents:getWorldAgentSnapshot,
   diagnostics:getWorldDiagnostics,
   auditWorld:worldAiAudit,
   runSelfTest:runWorldSelfTest
