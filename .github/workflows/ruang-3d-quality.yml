@@ -1,0 +1,33 @@
+name: RUANG KITA 3D quality gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/ruang-3d.html"
+      - "scripts/check-ruang-3d.mjs"
+      - ".github/workflows/ruang-3d-quality.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "public/ruang-3d.html"
+      - "scripts/check-ruang-3d.mjs"
+      - ".github/workflows/ruang-3d-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-3d-quality:
+    name: Static 3D quality checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate 3D module, import map, and required safeguards
+        run: node scripts/check-ruang-3d.mjs
