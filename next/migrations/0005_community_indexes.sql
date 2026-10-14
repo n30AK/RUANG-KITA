@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_room_messages_room_created ON room_messages (room_id, created_at DESC)
