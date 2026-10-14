@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_room_members_user ON room_members (user_id, room_id)
