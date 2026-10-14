@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS idx_community_audit_actor_created ON community_audit_events (actor_id, created_at DESC)
