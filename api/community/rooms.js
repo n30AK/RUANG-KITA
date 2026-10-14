@@ -31,10 +31,21 @@ export default async function (req, res) {
   const suffix = Array.from(crypto.getRandomValues(new Uint8Array(3))).map(n => n.toString(16).padStart(2,"0")).join("");
   const slug = base + "-" + suffix;
   const { rows } = await db.query(
-    "WITH created AS (INSERT INTO community_rooms (name, description, slug, created_by) VALUES ($1, $2, $3, $4) RETURNING id, name, description, slug, is_public, created_at), joined AS (INSERT INTO room_members (room_id, user_id, role) SELECT id, $4, 'owner' FROM created RETURNING room_id) SELECT created.* FROM created JOIN joined ON joined.room_id = created.id",
+    "INSERT INTO community_rooms (name, description, slug, created_by) VALUES ($1, $2, $3, $4) RETURNING id, name, description, slug, is_public, created_at",
     [name, description, slug, userId]
   );
   if (!rows.length) return res.status(500).json({ error: "Ruang belum dapat dibuat." });
-  await db.query("UPDATE community_rooms SET member_count = 1 WHERE id = $1", [rows[0].id]);
+  try {
+    const member = await db.query(
+      "INSERT INTO room_members (room_id, user_id, role) VALUES ($1, $2, 'owner') ON CONFLICT (room_id, user_id) DO NOTHING RETURNING room_id",
+      [rows[0].id, userId]
+    );
+    if (!member.rows.length) throw new Error("Membership pemilik tidak dibuat.");
+    await db.query("UPDATE community_rooms SET member_count = 1 WHERE id = $1", [rows[0].id]);
+  } catch (error) {
+    await db.query("DELETE FROM community_rooms WHERE id = $1", [rows[0].id]).catch(() => {});
+    console.error("Room creation failed:", error?.code || "membership");
+    return res.status(500).json({ error: "Ruang belum dapat dibuat." });
+  }
   return res.status(201).json({ room: { ...rows[0], member_count: 1, is_member: true } });
 }
