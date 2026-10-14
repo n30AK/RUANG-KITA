@@ -44,6 +44,8 @@ const requiredMarkers = [
   "recoverBlockedVehicle",
   "vehicleBlockedTooLong",
   "vehicleRecovery",
+  "lastRenderDurationMs",
+  "visibilityState",
   "greetingTarget",
 ];
 for (const marker of requiredMarkers) {
