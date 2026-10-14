@@ -3,12 +3,14 @@
 Proyek baru berdasarkan `RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0`. Terpisah dari **RUANG KITA LEGACY — FROZEN**.
 
 ## Status implementasi
-- Fase: Phase 1 — Browser 3D MVP.
-- World engine: Three.js, satu renderer.
-- Scene konfigurasi: Angkringan Kita, Cafe Kita, Pantai Kita.
-- Avatar 3D prosedural, kontrol keyboard, kamera orbit sederhana, dan collision lokal dasar.
+- Fase berjalan: Phase 2 — Community foundation.
+- Phase 1: browser 3D, Three.js renderer, tiga scene konfigurasi, avatar prosedural, keyboard movement, kamera orbit, collision lokal dasar; browser smoke test lulus.
+- Phase 2: passwordless email auth dikonfigurasi; tabel rooms, members, messages, invites; API membuat ruang, join, kirim/baca pesan, undangan, dan token realtime.
+- Ruang publik awal: Angkringan Kita.
+- API diuji dengan test-user sintetis: akses anonim ditolak (401), create room, message write/read, invite creation, dan event token berhasil; data ruang QA dibersihkan setelah tes.
+- **NOT TESTED:** pengiriman email/login pengguna nyata, chat realtime dua browser, penerimaan undangan dengan akun kedua, serta multiplayer avatar sync.
 - Antarmuka Bahasa Indonesia.
-- Akun, chat, multiplayer, database komunitas, model AI, marketplace, dan pembayaran: belum diaktifkan.
+- AI multi-agent, marketplace, pembayaran, physics engine penuh, dan integrasi runtime Babylon.js/Godot belum diaktifkan.
 
 ## Menjalankan
 Static frontend disajikan dari `public/`. File `public/index.html` memuat import map dan `public/app.js`. Engine dimuat sebagai ES module dari CDN; akses internet dan WebGL diperlukan.

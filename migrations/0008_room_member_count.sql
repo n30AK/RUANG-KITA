@@ -1,0 +1,1 @@
+ALTER TABLE community_rooms ADD COLUMN IF NOT EXISTS member_count INTEGER NOT NULL DEFAULT 0 CHECK (member_count >= 0)

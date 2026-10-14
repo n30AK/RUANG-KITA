@@ -1,0 +1,1 @@
+UPDATE community_rooms r SET member_count = (SELECT COUNT(*)::int FROM room_members m WHERE m.room_id = r.id)

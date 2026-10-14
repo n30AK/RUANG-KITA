@@ -11,7 +11,7 @@ export default async function (req, res) {
   const userId = req.user.id;
   if (req.method === "GET") {
     const { rows } = await db.query(
-      "SELECT r.id, r.name, r.description, r.slug, r.is_public, r.created_at, COUNT(m.id)::int AS member_count, BOOL_OR(mine.user_id IS NOT NULL) AS is_member FROM community_rooms r LEFT JOIN room_members m ON m.room_id = r.id LEFT JOIN room_members mine ON mine.room_id = r.id AND mine.user_id = $1 WHERE r.is_public = TRUE OR mine.user_id IS NOT NULL GROUP BY r.id ORDER BY r.created_at DESC LIMIT 100",
+      "SELECT r.id, r.name, r.description, r.slug, r.is_public, r.created_at, r.member_count, EXISTS (SELECT 1 FROM room_members mine WHERE mine.room_id = r.id AND mine.user_id = $1) AS is_member FROM community_rooms r WHERE r.is_public = TRUE OR EXISTS (SELECT 1 FROM room_members mine WHERE mine.room_id = r.id AND mine.user_id = $1) ORDER BY r.created_at DESC LIMIT 100",
       [userId]
     );
     return res.json({ rooms: rows });
@@ -35,5 +35,6 @@ export default async function (req, res) {
     [name, description, slug, userId]
   );
   if (!rows.length) return res.status(500).json({ error: "Ruang belum dapat dibuat." });
+  await db.query("UPDATE community_rooms SET member_count = 1 WHERE id = $1", [rows[0].id]);
   return res.status(201).json({ room: { ...rows[0], member_count: 1, is_member: true } });
 }

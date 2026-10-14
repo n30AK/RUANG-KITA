@@ -1,0 +1,1 @@
+INSERT INTO community_rooms (name, description, slug, is_public, created_by) SELECT 'Angkringan Kita', 'Ruang perkenalan untuk menyapa, berbagi cerita, dan mulai membangun komunitas RUANG KITA.', 'angkringan-kita', TRUE, 'system:ruang-kita' WHERE NOT EXISTS (SELECT 1 FROM community_rooms WHERE slug = 'angkringan-kita')

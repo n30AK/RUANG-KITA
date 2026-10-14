@@ -10,7 +10,10 @@ export default async function (req, res) {
     "INSERT INTO room_members (room_id, user_id, role) SELECT id, $2, 'member' FROM community_rooms WHERE id = $1 AND is_public = TRUE ON CONFLICT (room_id, user_id) DO NOTHING RETURNING room_id",
     [roomId, req.user.id]
   );
-  if (rows.length) return res.json({ ok: true, joined: true });
+  if (rows.length) {
+    await db.query("UPDATE community_rooms SET member_count = member_count + 1 WHERE id = $1", [roomId]);
+    return res.json({ ok: true, joined: true });
+  }
   const existing = await db.query(
     "SELECT m.room_id FROM room_members m JOIN community_rooms r ON r.id = m.room_id WHERE m.room_id = $1 AND m.user_id = $2",
     [roomId, req.user.id]
