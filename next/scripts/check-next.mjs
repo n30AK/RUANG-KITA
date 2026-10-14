@@ -72,7 +72,7 @@ check(html.includes('id="stage"') && html.includes('id="runtime-status"'), "inde
 check(html.includes('id="world-agent-summary"') && html.includes('id="world-agent-list"'), "index exposes the live World Intelligence agent panel");
 
 const assetLicense = await readFile(path.join(root, "public/assets/LICENSES.md"), "utf8");
-check(assetLicense.includes("CC0-1.0") && assetLicense.includes("Avocado.glb") && assetLicense.includes("ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4"), "CC0 model license, source, and checksum are documented");
+check(assetLicense.includes("CC0 1.0 Universal") && assetLicense.includes("Avocado.glb") && assetLicense.includes("ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4"), "CC0 model license, source, and checksum are documented");
 
 const apiFiles = [
   "api/community/audit.js",
