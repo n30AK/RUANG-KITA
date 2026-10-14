@@ -47,6 +47,17 @@ for (const marker of [
   "mixer.stopAllAction()",
   "mixer.uncacheRoot(root)",
   "asset-animation-registry",
+  "worldAgentState",
+  "setWorldAgentState",
+  "getWorldAgentSnapshot",
+  "refreshWorldAgentPanel",
+  'id:"observer"',
+  'id:"predictor"',
+  'id:"planner"',
+  'id:"sceneBuilder"',
+  'id:"repair"',
+  'id:"auditor"',
+  'id:"resource"',
 ]) check(app.includes(marker), "app contains required runtime safeguard: " + marker);
 
 for (const id of ["angkringan", "cafe", "pantai"]) {
@@ -54,6 +65,7 @@ for (const id of ["angkringan", "cafe", "pantai"]) {
 }
 check(scenes.includes("local-deterministic-mvp"), "simulation mode is explicitly labeled");
 check(html.includes('id="stage"') && html.includes('id="runtime-status"'), "index includes stage and runtime status UI");
+check(html.includes('id="world-agent-summary"') && html.includes('id="world-agent-list"'), "index exposes the live World Intelligence agent panel");
 
 const apiFiles = [
   "api/community/audit.js",
