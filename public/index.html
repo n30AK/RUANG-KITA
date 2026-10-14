@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1717">
+  <meta name="description" content="RUANG KITA — ruang sosial 3D untuk berkumpul, menjelajah, dan membangun komunitas.">
+  <title>RUANG KITA — Dunia Kita, Cerita Kita</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js"}}</script>
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="RUANG KITA beranda">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span><strong>RUANG KITA</strong><small>DUNIA KITA, CERITA KITA</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="status-pill"><i></i><span id="runtime-status">Menyiapkan dunia</span></span>
+        <button class="icon-button" id="sound-toggle" aria-label="Aktifkan atau nonaktifkan suara" title="Suara">♫</button>
+        <button class="profile-chip" id="profile-button"><span class="profile-avatar">K</span><span>Pengunjung</span><span aria-hidden="true">⌄</span></button>
+      </div>
+    </header>
+
+    <section class="welcome-row">
+      <div>
+        <p class="eyebrow">RUANG SOSIAL VIRTUAL</p>
+        <h1>Temukan ruangmu<span>.</span></h1>
+        <p class="welcome-copy">Singgah sebentar, bertemu teman, atau jelajahi tempat baru.</p>
+      </div>
+      <div class="world-counter"><span class="counter-icon">✦</span><span><strong>3</strong><small>RUANG UNTUK DIJELAJAHI</small></span></div>
+    </section>
+
+    <section class="world-layout">
+      <div class="world-stage-wrap">
+        <div class="stage-topline">
+          <div class="scene-label"><span class="scene-live-dot"></span><div><strong id="scene-title">ANGKRINGAN KITA</strong><small id="scene-subtitle">Tempat singgah, obrolan hangat</small></div></div>
+          <div class="stage-tools"><span class="keyboard-hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> bergerak</span><button class="icon-button" id="fullscreen-button" aria-label="Layar penuh" title="Layar penuh">⛶</button></div>
+        </div>
+        <div id="stage" class="stage" aria-label="Dunia 3D interaktif">
+          <div class="loading-overlay" id="loading-overlay"><div class="loader-orbit"></div><strong>Membangun duniamu</strong><span>Menyiapkan cahaya, ruang, dan suasana...</span></div>
+          <div class="stage-vignette"></div>
+          <div class="scene-caption"><span id="caption-icon">☕</span><span><strong id="caption-title">Angkringan di sudut kota</strong><small id="caption-text">Ruang sederhana untuk percakapan yang berarti.</small></span></div>
+          <div class="stage-controls"><button class="control-round" id="camera-button" title="Atur sudut kamera" aria-label="Atur sudut kamera">↻</button><button class="control-round" id="help-button" title="Bantuan kontrol" aria-label="Bantuan kontrol">?</button></div>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+        <div class="stage-footer"><span><i class="footer-dot"></i><span id="world-state">Dunia lokal siap</span></span><span id="position-readout">Posisi 0 · 0</span></div>
+      </div>
+
+      <aside class="world-sidebar">
+        <div class="sidebar-heading"><div><p class="eyebrow">PILIH TEMPAT</p><h2>Ruang terbuka</h2></div><span class="place-count">03</span></div>
+        <button class="scene-card active" data-scene="angkringan" aria-pressed="true">
+          <span class="scene-art art-angkringan"><span class="art-moon"></span><span class="art-roof"></span><span class="art-counter"></span><span class="art-lamp"></span></span>
+          <span class="scene-card-copy"><span class="scene-card-top"><strong>Angkringan Kita</strong><span class="scene-arrow">↗</span></span><small>Hangat · Santai · Komunal</small><span class="scene-card-meta"><i></i> Ruang publik</span></span>
+        </button>
+        <button class="scene-card" data-scene="cafe" aria-pressed="false">
+          <span class="scene-art art-cafe"><span class="art-sun"></span><span class="art-window"></span><span class="art-cafe-table"></span><span class="art-leaf"></span></span>
+          <span class="scene-card-copy"><span class="scene-card-top"><strong>Cafe Kita</strong><span class="scene-arrow">↗</span></span><small>Tenang · Kreatif · Produktif</small><span class="scene-card-meta"><i></i> Ruang publik</span></span>
+        </button>
+        <button class="scene-card" data-scene="pantai" aria-pressed="false">
+          <span class="scene-art art-pantai"><span class="art-sun"></span><span class="art-wave wave-one"></span><span class="art-wave wave-two"></span><span class="art-palm"></span></span>
+          <span class="scene-card-copy"><span class="scene-card-top"><strong>Pantai Kita</strong><span class="scene-arrow">↗</span></span><small>Terbuka · Segar · Reflektif</small><span class="scene-card-meta"><i></i> Ruang publik</span></span>
+        </button>
+        <div class="sidebar-note"><span class="note-icon">✧</span><p><strong>Ruang untuk semua.</strong><br>Jelajahi dengan santai. Setiap tempat punya cerita.</p></div>
+      </aside>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="info-panel">
+        <div class="panel-icon">⌘</div><div><p class="eyebrow">KONTROL AVATAR</p><h3>Jelajahi dengan bebas</h3><p>Gunakan <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> atau tombol panah untuk bergerak. Geser layar untuk mengubah sudut pandang.</p></div>
+      </article>
+      <article class="info-panel">
+        <div class="panel-icon panel-icon-green">◉</div><div><p class="eyebrow">DUNIA INTERAKTIF</p><h3>Satu dunia, banyak suasana</h3><p>Pindah tempat tanpa meninggalkan pengalaman. Fondasi dunia dirancang agar dapat diperluas bertahap.</p></div>
+      </article>
+      <article class="build-status-panel"><div class="status-panel-head"><span class="status-orb"></span><p class="eyebrow">STATUS PENGEMBANGAN</p></div><h3>Fase 1 · 3D Browser</h3><p id="build-status-copy">Memuat mesin dunia dan konfigurasi scene.</p><div class="progress-track"><span id="progress-bar"></span></div><small id="build-status-label">Inisialisasi...</small></article>
+    </section>
+
+    <footer class="footer"><span>© RUANG KITA <span id="year"></span></span><span>Dibangun untuk kebersamaan, dirancang untuk berkembang.</span><span class="footer-version">NEXT · FASE 1</span></footer>
+  </main>
+
+  <dialog id="help-dialog" class="help-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Tutup">×</button></form>
+    <p class="eyebrow">PANDUAN SINGKAT</p><h2>Jelajahi dunia</h2>
+    <div class="help-row"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Bergerak maju, kiri, mundur, kanan</span></div>
+    <div class="help-row"><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd><span>Alternatif tombol gerak</span></div>
+    <div class="help-row"><span class="mouse-symbol">↔</span><span>Seret area 3D untuk mengubah sudut kamera</span></div>
+    <div class="help-row"><span class="mouse-symbol">⛶</span><span>Gunakan tombol layar penuh untuk pengalaman lebih luas</span></div>
+    <p class="dialog-note">Versi ini adalah MVP browser 3D lokal. Fitur akun, chat, dan multiplayer akan dibangun pada fase berikutnya setelah fondasi dan quality gate selesai.</p>
+  </dialog>
+</body>
+</html>

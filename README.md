@@ -1,47 +1,31 @@
-# RUANG KITA
+# RUANG KITA Next
 
-Platform komunitas digital yang melengkapi WhatsApp, bukan menggantikannya. Setiap komunitas memiliki ruang digital untuk agenda, pengumuman, pustaka, rapat eksternal, dan keanggotaan.
+Proyek baru berdasarkan `RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0`. Terpisah dari **RUANG KITA LEGACY — FROZEN**.
 
-## Prinsip proyek
+## Status implementasi
+- Fase: Phase 1 — Browser 3D MVP.
+- World engine: Three.js, satu renderer.
+- Scene konfigurasi: Angkringan Kita, Cafe Kita, Pantai Kita.
+- Avatar 3D prosedural, kontrol keyboard, kamera orbit sederhana, dan collision lokal dasar.
+- Antarmuka Bahasa Indonesia.
+- Akun, chat, multiplayer, database komunitas, model AI, marketplace, dan pembayaran: belum diaktifkan.
 
-- Target biaya awal: Rp0 dengan batas paket gratis; tidak menjanjikan operasional tanpa batas.
-- GitHub adalah pusat source code dan CI/CD.
-- Neon adalah database PostgreSQL.
-- Jangan simpan password, connection string, API key, atau token di repository.
-- Jangan menyatakan aplikasi production-ready sebelum autentikasi, otorisasi multi-tenant, pengujian, backup/restore, dan deployment diverifikasi.
+## Menjalankan
+Static frontend disajikan dari `public/`. File `public/index.html` memuat import map dan `public/app.js`. Engine dimuat sebagai ES module dari CDN; akses internet dan WebGL diperlukan.
 
-## MVP
+## Batasan MVP
+- Lingkungan dibuat secara prosedural; belum menggunakan katalog model/tekstur eksternal.
+- Gerakan/collision adalah simulasi lokal sederhana, bukan physics engine penuh atau simulasi dunia nyata.
+- Belum ada persistensi posisi, akun, presence, chat, atau sinkronisasi antar-browser.
+- Tidak ada panggilan LLM per frame.
+- Aset dari Babylon.js/Godot belum diimpor. Interoperabilitas glTF/GLB akan dievaluasi setelah rendering dasar terverifikasi.
 
-1. Profil pengguna dan komunitas
-2. Keanggotaan dan undangan yang dapat dicabut/kedaluwarsa
-3. Pengumuman
-4. Agenda dan RSVP
-5. Pustaka komunitas (dokumen, FAQ, notulen, podcast/video via tautan)
-6. Link berbagi komunitas dan integrasi kalender
-7. Audit log dan pelaporan konten
+## Quality gate
+1. Dry-run deploy tanpa error.
+2. Browser memuat halaman, modul Three.js, WebGL context, dan tiga scene.
+3. Console bebas error fatal saat startup dan perpindahan scene.
+4. Avatar bergerak dan collider statis menghentikan penetrasi dasar.
+5. Resize viewport tidak merusak canvas.
+6. Tes yang tidak dijalankan harus diberi label NOT TESTED.
 
-## Database
-
-Migration awal: `database/migrations/0001_initial_schema.sql`.
-
-Migration ini adalah rancangan skema awal dan **belum diterapkan** ke database Neon. Sebelum menerapkan:
-- Konfirmasi pemetaan ID pengguna ke Neon Auth.
-- Implementasikan pemeriksaan otorisasi di backend untuk setiap operasi berdasarkan membership/role dan community_id.
-- Tambahkan dan uji RLS jika akses database akan diberikan langsung ke role aplikasi.
-- Buat migration yang dapat diulang/ditinjau dan uji pada branch pengembangan sebelum production.
-
-## Status
-
-Fondasi database dirancang. UI, backend API, auth flow, security tests, dan deployment masih harus dibangun dan diverifikasi.
-
-## Status deployment RUANG KITA (2026-10-14)
-
-- Aplikasi hosted: https://ruang-kita.hatchable.site
-- Ruang 3D: https://ruang-kita.hatchable.site/ruang-3d.html
-- Deployment hosted yang diverifikasi: Hatchable v56.
-- Source scene 3D yang disinkronkan ke repository: `public/ruang-3d.html`.
-- Laporan runtime, hasil smoke test, batasan, dan pekerjaan berikutnya: [docs/3d-runtime-status.md](docs/3d-runtime-status.md).
-- Keputusan arsitektur engine 3D: [ADR-0001](docs/adr/0001-3d-engine-interoperability.md).
-
-**Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Saat ini route 3D masih menampilkan scene Kafe Komunitas; scene ANGKRINGAN KITA dan PANTAI KITA, uji GLB dengan model nyata, uji collision menyeluruh, serta sinkronisasi penuh backend ke GitHub masih menjadi pekerjaan berikutnya. Hatchable v56 tetap runtime deployment aktif.
-
+Lihat `/architecture.html` untuk keputusan arsitektur.
