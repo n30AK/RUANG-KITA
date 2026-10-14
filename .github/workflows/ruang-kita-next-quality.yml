@@ -1,0 +1,41 @@
+name: RUANG KITA Next quality gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "next/public/**"
+      - "next/api/**"
+      - "next/lib/**"
+      - "next/migrations/**"
+      - "next/hatchable.toml"
+      - "next/scripts/check-next.mjs"
+      - ".github/workflows/ruang-kita-next-quality.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "next/public/**"
+      - "next/api/**"
+      - "next/lib/**"
+      - "next/migrations/**"
+      - "next/hatchable.toml"
+      - "next/scripts/check-next.mjs"
+      - ".github/workflows/ruang-kita-next-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-next-quality:
+    name: Static Next source checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate World Engine, animation lifecycle, scene configs, and route access
+        run: node next/scripts/check-next.mjs
