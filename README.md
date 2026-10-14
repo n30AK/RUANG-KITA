@@ -52,6 +52,7 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 Dokumen kerja utama v3.0 mengintegrasikan spesifikasi produk asli dengan interoperabilitas Three.js/Babylon.js/Godot melalui glTF/GLB, simulasi collision dan navigasi, diagnostik rendering, multi-agent world intelligence, serta quality gates dan pelaporan berbasis bukti.
 
 - [RUANG KITA — Master Build Specification v3.0](docs/RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
+- [3D runtime verification report (2026-10-14)](docs/3D_RUNTIME_VERIFICATION_2026-10-14.md)
 - Dunia 3D live: https://ruang-kita.hatchable.site/ruang-3d.html
 
 Catatan: aplikasi Hatchable saat ini berstatus **personal/private**. URL live memerlukan akses owner/kolaborator; akses publik permanen harus diaktifkan pemilik melalui pengaturan visibilitas platform. Preview link hanya untuk verifikasi sementara.
