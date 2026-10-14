@@ -42,7 +42,7 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 - **Pengujian v21:** 11/11 self-test lulus pada ketiga scene; model glTF animasi sintetis berhasil dimuat, diputar, dan dibersihkan; gerak keyboard berhasil diuji; panel tujuh agen World Intelligence aktif; tidak ada error browser pada sesi penerimaan.
 - **Laporan bukti dan batasan:** [RUANG KITA Next Runtime Verification](docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md).
 - **Mirror source code Next:** [next/README.md](next/README.md) — frontend, API handlers, migrations, dan konfigurasi tanpa secret; perubahan GitHub belum otomatis men-deploy ke Hatchable.
-- **CI:** [RUANG KITA Next static quality gate](https://github.com/n30AK/RUANG-KITA/actions/runs/38522860524/job/115716335335) lulus setelah pemeriksaan route access diperbaiki.
+- **CI:** [RUANG KITA Next static quality gate](https://github.com/n30AK/RUANG-KITA/actions/runs/38523448020/job/115718226296) lulus setelah pemeriksaan route access diperbaiki.
 
 RUANG KITA Next adalah target pengembangan aktif. Runtime AI dan collision saat ini mengandalkan logika lokal deterministik; integrasi Babylon.js/Godot dilakukan melalui aset glTF/GLB, bukan penggabungan runtime penuh. Uji aset produksi berlisensi, stress test jangka panjang, perangkat mobile fisik, dan multiplayer masih menjadi pekerjaan lanjutan.
 
