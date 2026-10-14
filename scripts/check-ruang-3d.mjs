@@ -40,6 +40,10 @@ const requiredMarkers = [
   "player-npc-collision",
   "vehicle-player-collision",
   "vehicle-npc-collision",
+  "vehicle-deadlock-recovery",
+  "recoverBlockedVehicle",
+  "vehicleBlockedTooLong",
+  "vehicleRecovery",
   "greetingTarget",
 ];
 for (const marker of requiredMarkers) {
