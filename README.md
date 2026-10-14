@@ -34,7 +34,17 @@ Migration ini adalah rancangan skema awal dan **belum diterapkan** ke database N
 
 Fondasi database dirancang. UI, backend API, auth flow, security tests, dan deployment masih harus dibangun dan diverifikasi.
 
-## Status deployment RUANG KITA (2026-10-14)
+## Status deployment aktif — RUANG KITA Next (2026-10-14)
+
+- **Aplikasi aktif:** https://ruang-kita-next.hatchable.site
+- **Deployment:** Hatchable v20 — live, visibilitas public.
+- **3D engine:** Three.js r164, satu World Engine dengan scene ANGKRINGAN KITA, CAFE KITA, dan PANTAI KITA.
+- **Pengujian v20:** 11/11 self-test lulus pada ketiga scene; model glTF animasi sintetis berhasil dimuat, diputar, dan dibersihkan; gerak keyboard berhasil diuji; tidak ada error browser pada sesi penerimaan.
+- **Laporan bukti dan batasan:** [RUANG KITA Next Runtime Verification](docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md).
+
+RUANG KITA Next adalah target pengembangan aktif. Runtime AI dan collision saat ini mengandalkan logika lokal deterministik; integrasi Babylon.js/Godot dilakukan melalui aset glTF/GLB, bukan penggabungan runtime penuh. Uji aset produksi berlisensi, stress test jangka panjang, perangkat mobile fisik, dan multiplayer masih menjadi pekerjaan lanjutan.
+
+## Status deployment RUANG KITA Legacy — FROZEN (2026-10-14)
 
 - Aplikasi hosted: https://ruang-kita.hatchable.site
 - Ruang 3D: https://ruang-kita.hatchable.site/ruang-3d.html
@@ -43,7 +53,7 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 - Laporan runtime, hasil smoke test, batasan, dan pekerjaan berikutnya: [docs/3d-runtime-status.md](docs/3d-runtime-status.md).
 - Keputusan arsitektur engine 3D: [ADR-0001](docs/adr/0001-3d-engine-interoperability.md).
 
-**Catatan status:** halaman 3D sudah terverifikasi dirender pada browser dan audit anomali lokal melaporkan nol temuan pada pengamatan singkat. Ini bukan klaim bahwa semua collision telah diuji, multiplayer produksi aktif, atau MVP lengkap. Route 3D menyediakan konfigurasi scene Kafe Komunitas, Angkringan Kita, dan Pantai Kita. Pada v69, self-test Kafe lulus 12/12; uji browser tambahan memuat model glTF segitiga sintetis, dan seluruh tiga scene berhasil diaktifkan dengan WebGL. Ini belum membuktikan semua collider, perangkat mobile fisik, aset produksi, atau multiplayer. Source `public/ruang-3d.html` pada GitHub cocok dengan source Hatchable saat audit. Hatchable v69 tetap runtime deployment aktif. Aplikasi masih berstatus personal/private sehingga URL langsung menampilkan sign-in wall kepada pengunjung anonim; pemilik harus mengubah visibilitas di Console Settings untuk akses publik permanen.
+**Catatan legacy:** deployment v69 dipertahankan sebagai proyek lama yang dibekukan dan terpisah dari Next. Aplikasi legacy berstatus personal/private sehingga URL langsung menampilkan sign-in wall kepada pengunjung anonim. Untuk akses publik, gunakan aplikasi aktif RUANG KITA Next di atas.
 
 
 
@@ -52,7 +62,7 @@ Fondasi database dirancang. UI, backend API, auth flow, security tests, dan depl
 Dokumen kerja utama v3.0 mengintegrasikan spesifikasi produk asli dengan interoperabilitas Three.js/Babylon.js/Godot melalui glTF/GLB, simulasi collision dan navigasi, diagnostik rendering, multi-agent world intelligence, serta quality gates dan pelaporan berbasis bukti.
 
 - [RUANG KITA — Master Build Specification v3.0](docs/RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
-- [3D runtime verification report (2026-10-14)](docs/3D_RUNTIME_VERIFICATION_2026-10-14.md)
-- Dunia 3D live: https://ruang-kita.hatchable.site/ruang-3d.html
-
-Catatan: aplikasi Hatchable saat ini berstatus **personal/private**. URL live memerlukan akses owner/kolaborator; akses publik permanen harus diaktifkan pemilik melalui pengaturan visibilitas platform. Preview link hanya untuk verifikasi sementara.
+- [Legacy 3D runtime verification report](docs/3D_RUNTIME_VERIFICATION_2026-10-14.md)
+- [RUANG KITA Next runtime verification](docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md)
+- Dunia aktif: https://ruang-kita-next.hatchable.site
+- Dunia 3D legacy (private/frozen): https://ruang-kita.hatchable.site/ruang-3d.html
