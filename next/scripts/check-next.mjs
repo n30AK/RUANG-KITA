@@ -47,6 +47,10 @@ for (const marker of [
   "mixer.stopAllAction()",
   "mixer.uncacheRoot(root)",
   "asset-animation-registry",
+  "disposedTextures=new Set()",
+  "o.shadow.map.dispose()",
+  "persistent:options.persistent===true",
+  'loadWorldGltf("cafe-avocado"',
   "worldAgentState",
   "setWorldAgentState",
   "getWorldAgentSnapshot",
@@ -66,6 +70,9 @@ for (const id of ["angkringan", "cafe", "pantai"]) {
 check(scenes.includes("local-deterministic-mvp"), "simulation mode is explicitly labeled");
 check(html.includes('id="stage"') && html.includes('id="runtime-status"'), "index includes stage and runtime status UI");
 check(html.includes('id="world-agent-summary"') && html.includes('id="world-agent-list"'), "index exposes the live World Intelligence agent panel");
+
+const assetLicense = await readFile(path.join(root, "public/assets/LICENSES.md"), "utf8");
+check(assetLicense.includes("CC0-1.0") && assetLicense.includes("Avocado.glb") && assetLicense.includes("ccc9c3ce56423720b09399c2351537207cd5a65f859f9e6e2f30922762f3abd4"), "CC0 model license, source, and checksum are documented");
 
 const apiFiles = [
   "api/community/audit.js",
