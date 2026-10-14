@@ -66,7 +66,7 @@ const apiFiles = [
 ];
 for (const relative of apiFiles) {
   const source = await readFile(path.join(root, relative), "utf8");
-  check(/export const access\s*=\s*["'](?:public|member|admin|scheduler)["']/.test(source),
+  check(/export const access\s*=\s*["'](?:public|user|member|admin|scheduler)["']/.test(source),
     relative + " declares an explicit route access policy");
 }
 
