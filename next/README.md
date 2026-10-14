@@ -3,10 +3,11 @@
 This directory mirrors the active Hatchable project `RUANG KITA Next` (project ID `proj_uCY4wAEQsDoi`) separately from the frozen legacy site at the repository root.
 
 - **Live deployment:** https://ruang-kita-next.hatchable.site
-- **Verified deployment:** v20 (2026-10-14), public visibility
+- **Verified deployment:** v21 (2026-10-14), public visibility
 - **Runtime:** Three.js r164; glTF 2.0 / GLB asset interoperability
 - **Scenes:** ANGKRINGAN KITA, CAFE KITA, PANTAI KITA
 - **Latest runtime report:** [../docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md](../docs/RUANG_KITA_NEXT_RUNTIME_STATUS_2026-10-14.md)
+- **CI quality gate:** [GitHub Actions](https://github.com/n30AK/RUANG-KITA/actions/runs/38523448020/job/115718226296)
 - **Master specification:** [../docs/RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md](../docs/RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
 
 ## Directory map
