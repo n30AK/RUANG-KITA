@@ -3,7 +3,7 @@
 ## Deployment snapshot
 
 - Hatchable project: proj_LP8pjixd4YxJ
-- Latest live deployment verified: **v68**
+- Latest live deployment verified: **v69**
 - Route tested: /ruang-3d.html
 - Source mirror: n30AK/RUANG-KITA, default branch main
 - Master specification: [RUANG KITA Master Build Specification v3.0](RUANG_KITA_MASTER_BUILD_SPECIFICATION_v3.0.md)
@@ -22,12 +22,13 @@ Browser checks used the platform's temporary preview access because Hatchable pr
 | Scene children | 335 |
 | Render draw calls | approximately 350 in Kafe |
 | Rendered triangles | approximately 35k in Kafe |
-| Last render duration | 7 ms, then 3 ms in two samples |
-| Last successful frame age | 244–245 ms in two samples |
-| Kafe self-test on v68 | **12/12 passed**, 0 failed, 0 skipped |
+| Last render duration | 23 ms on load, then 4 ms during panel self-test |
+| Last successful frame age | 275 ms on load, then 233 ms during panel self-test |
+| Kafe self-test on v69 | **12/12 passed**, 0 failed, 0 skipped |
 | World switching | Kafe, Angkringan, and Pantai were switched and rendered with WebGL active in browser smoke tests |
 | Keyboard movement | Synthetic W keydown/up changed follow-camera position in a browser smoke test |
 | World selector | Changed to Angkringan and the active world followed |
+| AI Dunia panel | Opened, populated metrics and clean anomaly status, ran self-test, and closed with aria-expanded state reset |
 | Browser console/page errors | 0 captured in the latest clean smoke test |
 
 A visual browser capture showed the café scene, avatar, furniture, and environment rather than an empty canvas. Render duration and page visibility are now exposed in runtime diagnostics. The stale-frame audit avoids treating intentionally throttled hidden tabs as active render failures.
@@ -53,7 +54,7 @@ The Kafe self-test checks:
 - non-destructive vehicle deadlock recovery when a clear retreat path exists
 - current anomaly audit
 
-Result on v68: **12 passed, 0 failed, 0 skipped**. The current anomaly audit reported zero issues at the time of the clean snapshot. NPC greeting logic targets a personal-space offset rather than the player's exact coordinates. Ambient vehicles now track how long they are blocked and only reverse direction when a retreat position is free of collision.
+Result on v69: **12 passed, 0 failed, 0 skipped**. The new AI Dunia panel displayed NORMAL status, runtime metrics, and a clean collision audit; its self-test button returned PASS. The current anomaly audit reported zero issues at the time of the clean snapshot. NPC greeting logic targets a personal-space offset rather than the player's exact coordinates. Ambient vehicles now track how long they are blocked and only reverse direction when a retreat position is free of collision.
 
 This is a predicate/self-test suite and a short browser smoke test, not proof that every collision geometry or every long-duration simulation case is perfect. Dedicated tests for narrow corridors, high-speed swept collision, long stress sessions, mobile hardware, and real multiplayer contention remain outstanding.
 
