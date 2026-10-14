@@ -93,6 +93,7 @@ async function loadWorldGltf(assetKey,url,options={}) {
       const scale=Number(options.scale);
       root.scale.setScalar(Number.isFinite(scale)&&scale>0?scale:1);
       if(Array.isArray(options.rotation))root.rotation.set(...[0,1,2].map(i=>Number.isFinite(Number(options.rotation[i]))?Number(options.rotation[i]):0));
+      if(Number.isFinite(Number(options.groundY))){const bounds=new THREE.Box3().setFromObject(root);if(!bounds.isEmpty())root.position.y+=Number(options.groundY)-bounds.min.y;}
       root.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=true;for(const m of(Array.isArray(node.material)?node.material:node.material?[node.material]:[]))m.needsUpdate=true;}});
       root.visible=assetSceneId===activeSceneId;
       let mixer=null;
@@ -107,7 +108,7 @@ async function loadWorldGltf(assetKey,url,options={}) {
       }
       scene.add(root);
       let safeUrl=String(url);try{const parsed=new URL(url,window.location.href);safeUrl=parsed.origin+parsed.pathname;}catch{}
-      loadedWorldAssets.set(assetKey,{root,sceneId:assetSceneId,gltf,mixer,animationNames:clips.map(c=>String(c.name||"unnamed").slice(0,100)),sourceUrl:safeUrl,license:String(options.license||"unspecified").slice(0,100),attribution:String(options.attribution||"").slice(0,240)});
+      loadedWorldAssets.set(assetKey,{root,sceneId:assetSceneId,persistent:options.persistent===true,gltf,mixer,animationNames:clips.map(c=>String(c.name||"unnamed").slice(0,100)),sourceUrl:safeUrl,license:String(options.license||"unspecified").slice(0,100),attribution:String(options.attribution||"").slice(0,240)});
       for(let i=worldAssetFailures.length-1;i>=0;i--)if(worldAssetFailures[i].assetKey===assetKey)worldAssetFailures.splice(i,1);
       if(worldLastRenderError?.startsWith("Aset "+assetKey+" gagal dimuat:"))worldLastRenderError=null;
       return root;
@@ -422,13 +423,20 @@ function addObject(config) {
   if(kind==="shell")return makeShell(worldGroup,x,z);
 }
 function clearWorld() {
-  for(const [key,entry] of [...loadedWorldAssets])if(entry.sceneId===activeSceneId)removeWorldGltf(key);
+  for(const [key,entry] of [...loadedWorldAssets])if(entry.sceneId===activeSceneId&&!entry.persistent)removeWorldGltf(key);
   if(worldGroup){
     scene.remove(worldGroup);
+    const disposedTextures=new Set();
     worldGroup.traverse(o=>{
       if(o.geometry)o.geometry.dispose();
-      if(o.material&&!Object.values(materials).includes(o.material)){
-        for(const m of(Array.isArray(o.material)?o.material:[o.material]))m.dispose();
+      if(o.isLight&&o.shadow?.map){o.shadow.map.dispose();o.shadow.map=null;}
+      if(o.isLight&&o.shadow?.mapPass){o.shadow.mapPass.dispose();o.shadow.mapPass=null;}
+      if(o.material){
+        for(const m of(Array.isArray(o.material)?o.material:[o.material])){
+          if(Object.values(materials).includes(m))continue;
+          for(const value of Object.values(m))if(value?.isTexture&&!disposedTextures.has(value)){value.dispose();disposedTextures.add(value);}
+          m.dispose();
+        }
       }
     });
   }
@@ -569,10 +577,22 @@ function runWorldSelfTest(){
   const failed=checks.filter(c=>!c.passed);
   return {at:new Date().toISOString(),status:failed.length?"FAIL":"PASS",passed:checks.length-failed.length,failed:failed.length,checks,audit};
 }
+function ensureSceneAssets(sceneId){
+  if(sceneId!=="cafe"||loadedWorldAssets.has("cafe-avocado")||loadingWorldAssets.has("cafe-avocado"))return;
+  setWorldAgentState("sceneBuilder","MEMBANGUN","Memuat prop Avocado CC0 untuk meja kafe.");
+  refreshWorldAgentPanel();
+  loadWorldGltf("cafe-avocado","/assets/avocado.glb",{sceneId:"cafe",persistent:true,position:[0,0,1],scale:.55,groundY:.84,license:"CC0-1.0",attribution:"© 2017 Public; Microsoft for Everything; KhronosGroup glTF-Sample-Assets"}).then(()=>{
+    setWorldAgentState("sceneBuilder","SIAP","Aset Avocado CC0 terpasang di Cafe Kita.");
+    refreshWorldAgentPanel();
+  }).catch(()=>{
+    setWorldAgentState("sceneBuilder","WASPADA","Model Avocado gagal dimuat; scene prosedural tetap aktif.");
+    refreshWorldAgentPanel();
+  });
+}
 function switchScene(sceneId){
   if(!SCENES[sceneId])throw new Error("Scene tidak dikenal: "+sceneId);
   if(sceneId===activeSceneId)return false;
-  buildScene(sceneId);showToast("Memasuki "+SCENES[sceneId].title);return true;
+  buildScene(sceneId);ensureSceneAssets(sceneId);showToast("Memasuki "+SCENES[sceneId].title);return true;
 }
 function bindControls() {
   window.addEventListener("keydown",e=>{
