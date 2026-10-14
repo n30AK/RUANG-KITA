@@ -1,50 +1,58 @@
 # RUANG KITA — 3D Runtime Status
 
 **Last checked:** 2026-10-14  
-**Hosted project:** RUANG KITA on Hatchable  
-**Deployment:** v56 — recorded as live  
+**Hosted project:** RUANG KITA LEGACY — FROZEN on Hatchable  
+**Deployment:** v69 — live  
 **Live URL:** https://ruang-kita.hatchable.site  
-**3D route:** https://ruang-kita.hatchable.site/ruang-3d.html
+**3D route:** https://ruang-kita.hatchable.site/ruang-3d.html  
+**Source mirror:** `n30AK/RUANG-KITA/public/ruang-3d.html`
 
 ## Verified in browser
 
-- The root page loaded with HTTP/browser navigation success and title `RUANG KITA — Silaturahmi Lebih Dekat`.
+- Browser verification used a fresh temporary Hatchable preview URL because the project is personal/private.
 - The 3D route loaded with title `Ruang 3D · RUANG KITA`.
-- The `#world` canvas exists, WebGL is available, renderer and canvas dimensions matched the stage on desktop and mobile viewport checks.
-- The Three.js render loop advanced; a multi-sample run over approximately 4.8 seconds recorded 32 render frames in the managed browser environment.
-- Runtime diagnostics reported no render exception.
-- The on-demand world anomaly audit reported `clear` with zero detected issues across four samples during a short observation window. This is a smoke test, not proof that every collision scenario is correct.
-- A minimal glTF 2.0 empty-scene fixture passed the adapter load/register/remove path without error. This does **not** yet verify rendering of a real GLB model with mesh, texture, rig, or animation.
-- A screenshot captured the 3D cafe scene visibly rendered in the browser. The current scene is primarily procedural Three.js geometry rather than a library of external image textures.
-- At a 390 × 844 viewport, the stage fit the viewport width and the document had no horizontal overflow.
+- WebGL context active; renderer is Three.js r164.
+- Initial stage and drawing buffer matched at 800 × 536 in the managed browser.
+- Render loop advanced; diagnostics reported scene children, draw calls, triangles, and no render exception.
+- Kafe self-test: **12 passed, 0 failed, 0 skipped**.
+- World switching successfully activated Kafe, Angkringan, and Pantai; WebGL remained active and triangles were rendered in all three.
+- AI Dunia panel opened, displayed runtime metrics and NORMAL status, and exposed the self-test.
+- Browser page errors, console errors, and failed network requests: **0 captured** in the latest clean smoke test.
+- A synthetic glTF 2.0 triangle mesh loaded through the adapter, appeared in the asset registry, and was removed; the registry recorded its removal.
+- Prior v69 verification recorded a synthetic animation clip being detected and played, with its mixer cleaned up.
+- The deployed source file and GitHub mirror were byte-for-byte identical during this audit.
 
-## Changes in v53–v56
+## Collision / anomaly coverage
 
-- Added a runtime diagnostics API for WebGL, stage/drawing-buffer dimensions, render frame counter, draw calls, triangles, GPU geometry/texture counts, loaded assets, and render errors.
-- Added an interoperable glTF 2.0 / GLB loader adapter with duplicate in-flight load protection and resource cleanup.
-- Added adaptive rendering quality: default balanced mode uses a lower pixel ratio and disables shadow maps unless the device passes a conservative high-performance check.
-- Fixed NPC social-roaming targets so they are validated against movement blockers and other walkers.
-- Added a short backoff before NPC replanning when repeatedly blocked, avoiding target changes every frame.
-- Added an on-demand and periodic rule-based anomaly audit for vehicle overlap, vehicle/walker overlap, walker overlap, blocked NPC goals, repeated blockage, and stale rendering.
-- Added collision checks against people and remote avatars in the sample home interior.
+The Kafe self-test covers:
+- WebGL, render loop, scene metrics, and adapter availability;
+- player versus table and NPC;
+- NPC target separation;
+- vehicle versus vehicle, player, and NPC;
+- non-destructive vehicle deadlock recovery when a clear retreat path exists;
+- current anomaly audit.
 
-## Known limitations / not yet verified
+A short browser audit returned zero active issues. This is evidence from a bounded observation, not proof that all possible collisions are solved. Narrow corridors, high-speed swept collision, long stress runs, all interior/exterior boundaries, and real-device mobile performance remain to be tested.
 
-- **Only the Cafe Komunitas 3D scene is currently implemented in this route.** ANGKRINGAN KITA and PANTAI KITA still need to be built as separate scene configurations using a shared World Engine.
-- The current anomaly audit is deterministic local logic, not a language model running continuously. Vehicle prediction is a short-horizon heuristic.
-- Full physics-engine integration (for example Rapier) has not been implemented or benchmarked.
-- Babylon.js and Godot are not combined as full runtime engines. The current architecture uses Three.js as the renderer and glTF/GLB as the intended asset interchange path.
-- A real GLB containing visible geometry, textures, rigging, and animation still needs a browser acceptance test.
-- Collision checks have not yet been exhaustively exercised through scripted player/NPC/vehicle scenarios, especially high-speed movement and every interior/exterior boundary.
-- Multiplayer synchronization has not been verified with two or more authenticated browser clients in this test pass.
-- The GitHub repository now contains the 3D HTML source and this status report, but the hosted backend/API handlers and complete deployment configuration are not yet fully mirrored into GitHub. Hatchable v56 remains the active deployed runtime.
-- No production database migrations or destructive data changes were performed as part of this 3D stabilization pass.
+## Architecture and honest limits
 
-## Next execution order
+- Three.js r164 is the only runtime renderer.
+- Babylon.js and Godot are not embedded as full simultaneous runtimes; asset interoperability uses glTF 2.0/GLB.
+- The tested triangle/animation fixtures are synthetic. They do not certify a production asset exported from Babylon.js or Godot.
+- Collision and vehicle prediction are local deterministic logic, not an LLM reasoning every frame.
+- Signed-in paid Pro/Expert avatar AI analysis and multiplayer with multiple authenticated clients were not tested here.
+- The public GitHub scene source matches the hosted source. Backend handlers and the complete hosted deployment configuration are not yet fully mirrored to GitHub.
+- No production database migrations or destructive data changes were performed during this 3D audit.
 
-1. Add and test a real, licensed GLB asset (visible mesh; then texture/animation where applicable).
-2. Build a shared scene registry and implement ANGKRINGAN KITA, CAFE KITA, and PANTAI KITA as distinct configurations, not merely different labels.
-3. Add repeatable collision tests for avatar, NPC, vehicle, furniture, buildings, and interior transitions.
-4. Benchmark draw calls and frame time on a desktop and a low-end mobile profile; consider instancing/static batching where profiling supports it.
-5. Mirror backend handlers, migrations, configuration examples, and test scripts into GitHub without committing secrets.
-6. Test multiplayer with multiple authenticated clients before claiming production realtime.
+## Public access blocker
+
+Hatchable reports project visibility as **personal/private**. The bare live URL shows a platform sign-in wall to non-collaborators. Temporary preview links expire and are only suitable for verification. Permanent public visibility must be enabled by the owner in Hatchable Console Settings; this action is not available through the deployment tool.
+
+## Next priorities
+
+1. Owner enables public visibility if RUANG KITA is intended for anonymous public visitors.
+2. Run repeatable collision tests for narrow corridors, fast vehicles, interior transitions, and longer simulation periods.
+3. Add a real licensed GLB asset test, including textures and animation where applicable.
+4. Benchmark on a physical mid-range/low-end mobile device.
+5. Add repeatable E2E tests to CI and continue mirroring backend/configuration examples without secrets.
+6. Test multiplayer using multiple authenticated browser clients before claiming production realtime.
